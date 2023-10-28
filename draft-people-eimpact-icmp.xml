@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rfc [
+<!ENTITY RFC2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+]>
+<?rfc toc="yes"?>
+<?rfc rfcedstyle="yes"?>
+<?rfc subcompact="no" ?>
+<?rfc symrefs="yes"?>
+<rfc category="info" docName="draft-people-eimpact-icmp-00" ipr="trust200902" submissionType="IETF">
+  <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+  <?rfc toc="yes" ?>
+  <?rfc compact="yes" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc iprnotified="no" ?>
+  <?rfc strict="yes" ?>
+
+  <front>
+    <title abbrev="Peer-Mount">ICMP Extensions for Enronmental Impact</title>
+
+    <author fullname="Carlos Pignataro" initials="C." surname="Pignataro">
+      <organization abbrev="NC State University">North Carolina State University</organization>
+
+      <address>
+        <postal>
+          <country>US</country>
+        </postal>        
+        <email>cpignata@gmail.com</email>
+        <email>cmpignat@ncsu.edu</email>
+      </address>
+    </author>
+
+    <author fullname="Ron Bonica" initials="R." surname="Bonica">
+      <organization>Juniper</organization>
+
+      <address>
+        <postal>
+          <country>US</country>
+        </postal>        
+
+        <email>rbonica@juniper.net</email>
+      </address>
+    </author>
+
+    
+    <date />
+
+    <abstract>
+      <t>
+        Abstract Here...
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>
+        Introduction Here...
+      </t>
+    </section>
+
+      <section title="Definition of Terms">
+        <t>
+          Terms
+        </t>
+      </section>
+
+
+    <section title="ICMP Extensions">
+      <t>TBC.</t>
+    </section>
+
+
+    <section title="Security Considerations">
+      <t>TBC.</t>
+    </section>
+
+    <section title="Acknowledgements">
+      <t>TBC.</t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+
+      &RFC2119;
+            
+    </references>
+    
+    <references title="Informative References">
+
+
+    </references>
+
+
+
+  </back>
+</rfc>
