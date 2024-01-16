@@ -191,7 +191,7 @@
         <front>
             <title>Minutes for the IAB E-Impact Workshop Session 4: Next Steps</title>
             <author initials="" surname="" fullname="IAB"></author>
-            <date month="December"  year="2022"/>
+            <date month="December" day="12" year="2022"/>
         </front>
         <seriesInfo name="eimpactws" value="Session 4" />
     </reference>

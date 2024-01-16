@@ -9,7 +9,7 @@ Expires: 19 July 2024
 
 
                  ICMP Extensions for Enronmental Impact
-                   draft-pignataro  -eimpact-icmp-00
+                    draft-pignataro-eimpact-icmp-00
 
 Abstract
 
@@ -193,7 +193,7 @@ Internet-Draft                 Peer-Mount                   January 2024
 
    [IAB-EIMPACTWS-Minutes]
               "Minutes for the IAB E-Impact Workshop Session 4: Next
-              Steps", eimpactws Session 4, December 2022,
+              Steps", eimpactws Session 4, 12 December 2022,
               <https://datatracker.ietf.org/doc/minutes-interim-2022-
               eimpactws-04-202212121400/>.
 
