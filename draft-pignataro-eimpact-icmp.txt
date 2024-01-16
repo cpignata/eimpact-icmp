@@ -61,14 +61,15 @@ Internet-Draft                 Peer-Mount                   January 2024
      2.1.  Definition of Terms . . . . . . . . . . . . . . . . . . .   2
      2.2.  Requirements Language . . . . . . . . . . . . . . . . . .   2
    3.  Application . . . . . . . . . . . . . . . . . . . . . . . . .   2
-   4.  ICMP Extension  . . . . . . . . . . . . . . . . . . . . . . .   3
-     4.1.  Format  . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   4.  ICMP Environmental Impact Extension . . . . . . . . . . . . .   3
+     4.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   3
+     4.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   4
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
      7.2.  Informative References  . . . . . . . . . . . . . . . . .   5
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   5
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   6
 
 1.  Introduction
 
@@ -103,9 +104,8 @@ Internet-Draft                 Peer-Mount                   January 2024
    traditional Internet tools such as traceroute was highlighted (see
    WebVTT cue identifiers 139 and 140 of [IAB-EIMPACTWS-Minutes].)
 
-   The Environmental Impact ICMP Extensions defined in this document
-   allow for augmenting the traceroute output with environmental metrics
-   from each reported node.
+
+
 
 
 
@@ -114,7 +114,11 @@ Pignataro                 Expires 19 July 2024                  [Page 2]
 Internet-Draft                 Peer-Mount                   January 2024
 
 
-4.  ICMP Extension
+   The Environmental Impact ICMP Extensions defined in this document
+   allow for augmenting the traceroute output with environmental metrics
+   from each reported node.
+
+4.  ICMP Environmental Impact Extension
 
    This section defines the Environmental Impact Object, an ICMP
    extension object with a Class-Num (Object Class Value) of TBA that
@@ -137,7 +141,7 @@ Internet-Draft                 Peer-Mount                   January 2024
    A single instance of the Environmental Impact Object can convey the
    following information from each reporting node: TODO
 
-4.1.  Format
+4.1.  Extension Format
 
    The ICMP Environmental Impact Extension has the following format.
 
@@ -159,16 +163,15 @@ Internet-Draft                 Peer-Mount                   January 2024
       Reserved:
          0 [RFC4884].
 
-      Checksum:
-         The one's complement checksum of the ICMP extension [RFC4884].
-
-
 
 
 Pignataro                 Expires 19 July 2024                  [Page 3]
 
 Internet-Draft                 Peer-Mount                   January 2024
 
+
+      Checksum:
+         The one's complement checksum of the ICMP extension [RFC4884].
 
    (2) Environmental Impact Object
 
@@ -179,7 +182,9 @@ Internet-Draft                 Peer-Mount                   January 2024
          TBA (Environmental Impact)
 
       C-Type:
-         C-Type as explained below.
+         C-Type as explained in Section 4.2.
+
+4.2.  C-Type Definition
 
    TODO: Explain C-Type
 
@@ -204,6 +209,23 @@ Internet-Draft                 Peer-Mount                   January 2024
    IANA is requested to establish a registry for the corresponding class
    sub-type (C-Type) space, as follows:
 
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro                 Expires 19 July 2024                  [Page 4]
+
+Internet-Draft                 Peer-Mount                   January 2024
+
+
       +==============+==============================+===============+
       | C-Type Value | Description                  | Reference     |
       +==============+==============================+===============+
@@ -218,13 +240,6 @@ Internet-Draft                 Peer-Mount                   January 2024
 
    C-Type values are assignable on a first-come-first-serve (FCFS)
    basis.
-
-
-
-Pignataro                 Expires 19 July 2024                  [Page 4]
-
-Internet-Draft                 Peer-Mount                   January 2024
-
 
 7.  References
 
@@ -257,6 +272,16 @@ Internet-Draft                 Peer-Mount                   January 2024
               <https://datatracker.ietf.org/doc/minutes-interim-2022-
               eimpactws-04-202212121400/>.
 
+
+
+
+
+
+Pignataro                 Expires 19 July 2024                  [Page 5]
+
+Internet-Draft                 Peer-Mount                   January 2024
+
+
    [IANA-ICMP-Extended]
               "Internet Control Message Protocol (ICMP) Parameters, ICMP
               Extension Object Classes and Class Sub-types",
@@ -277,4 +302,35 @@ Author's Address
 
 
 
-Pignataro                 Expires 19 July 2024                  [Page 5]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro                 Expires 19 July 2024                  [Page 6]

@@ -104,7 +104,7 @@
       </section>
 
 
-    <section title="ICMP Extension">
+    <section title="ICMP Environmental Impact Extension">
       <t>
            This section defines the Environmental Impact Object, an ICMP
            extension object with a Class-Num (Object Class Value) of TBA that can
@@ -137,7 +137,7 @@
       A single instance of the Environmental Impact Object can convey the following information from each reporting node: TODO
     </t>
 
-    <section title="Format">
+    <section title="Extension Format">
       <t>The ICMP Environmental Impact Extension has the following format.</t>
 
 
@@ -170,16 +170,20 @@
             <list style="hanging">
             <t hangText="Length:"><br />Length of the object, including header and payload, in octets.</t>
             <t hangText="Class-Num:"><br />TBA (Environmental Impact)</t>
-            <t hangText="C-Type:"><br />C-Type as explained below.</t>
+            <t hangText="C-Type:"><br />C-Type as explained in <xref target="ctype" />.</t>
           </list>
     </t>
   </list>
 </t>
-<t>
-  TODO: Explain C-Type
-</t>
 
     </section>
+
+
+<section anchor="ctype" title="C-Type Definition">
+  <t>
+  TODO: Explain C-Type
+  </t>
+</section>
 
 
     </section>
