@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc [
-<!ENTITY RFC2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC.4884 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4884.xml">
 ]>
 <?rfc toc="yes"?>
 <?rfc rfcedstyle="yes"?>
@@ -30,6 +30,8 @@
       </address>
     </author>
 
+
+<!--
     <author fullname="Ron Bonica" initials="R." surname="Bonica">
       <organization>Juniper</organization>
 
@@ -41,6 +43,7 @@
         <email>rbonica@juniper.net</email>
       </address>
     </author>
+-->
 
     
     <date />
@@ -65,9 +68,22 @@
         </t>
       </section>
 
+      <section title="Application">
+        <t>
+          Cite 
+          https://datatracker.ietf.org/doc/minutes-interim-2022-eimpactws-04-202212121400/
+          by
+          WebVTT cue identifier
+        </t>
+      </section>
+
 
     <section title="ICMP Extensions">
-      <t>TBC.</t>
+      <t>
+        Similar to S4 of https://datatracker.ietf.org/doc/rfc5837/
+        And https://www.rfc-editor.org/rfc/rfc8335.html
+        And S3.1 of https://datatracker.ietf.org/doc/rfc8883/
+      </t>
     </section>
 
 
@@ -75,15 +91,23 @@
       <t>TBC.</t>
     </section>
 
+    <section title="IANA Considerations">
+      <t>
+        https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml#icmp-parameters-ext-classes
+      </t>
+    </section>
+
     <section title="Acknowledgements">
-      <t>TBC.</t>
+      <t>
+        TBC.
+      </t>
     </section>
   </middle>
 
   <back>
     <references title="Normative References">
 
-      &RFC2119;
+      &RFC.4884;
             
     </references>
     
