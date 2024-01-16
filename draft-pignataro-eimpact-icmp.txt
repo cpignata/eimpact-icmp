@@ -4,13 +4,12 @@
 
 Network Working Group                                       C. Pignataro
 Internet-Draft                                       NC State University
-Intended status: Experimental                                  R. Bonica
-Expires: 30 April 2024                                           Juniper
-                                                         28 October 2023
+Intended status: Experimental                            16 January 2024
+Expires: 19 July 2024
 
 
                  ICMP Extensions for Enronmental Impact
-                      draft-people-eimpact-icmp-00
+                   draft-pignataro  -eimpact-icmp-00
 
 Abstract
 
@@ -31,11 +30,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 April 2024.
+   This Internet-Draft will expire on 19 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -47,80 +46,171 @@ Copyright Notice
    described in Section 4.e of the Trust Legal Provisions and are
    provided without warranty as described in the Revised BSD License.
 
-
-
-
-
-
-
-Pignataro & Bonica        Expires 30 April 2024                 [Page 1]
-
-Internet-Draft                 Peer-Mount                   October 2023
-
-
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Definition of Terms . . . . . . . . . . . . . . . . . . . . .   2
-   3.  ICMP Extensions . . . . . . . . . . . . . . . . . . . . . . .   2
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   2
-   5.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   2
-   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   2
-     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   2
-     6.2.  Informative References  . . . . . . . . . . . . . . . . .   2
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  Conventions . . . . . . . . . . . . . . . . . . . . . . . . .   2
+
+
+
+Pignataro                 Expires 19 July 2024                  [Page 1]
+
+Internet-Draft                 Peer-Mount                   January 2024
+
+
+     2.1.  Definition of Terms . . . . . . . . . . . . . . . . . . .   2
+     2.2.  Requirements Language . . . . . . . . . . . . . . . . . .   2
+   3.  Application . . . . . . . . . . . . . . . . . . . . . . . . .   2
+   4.  ICMP Extensions . . . . . . . . . . . . . . . . . . . . . . .   3
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   3
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   3
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .   4
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
 
 1.  Introduction
 
    Introduction Here...
 
-2.  Definition of Terms
+2.  Conventions
 
-   Terms
+2.1.  Definition of Terms
 
-3.  ICMP Extensions
+   This document uses the following terms:
+
+   ICMP:
+      Generically referring to ICMPv4 and ICMPv6 messages.
+
+   ICMP Extension:
+      Extended ICMP to support multi-part messages through an ICMP
+      extension structure, as defined in [RFC4884].
+
+2.2.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Application
+
+   The IAB held a workshop on "Environmental Impact of Internet
+   Applications and Systems (eimpactws)" [IAB-EIMPACTWS], in which the
+   need for visibility into environmental impact metrics within
+   traditional Internet tools such as traceroute was highlighted (see
+   WebVTT cue identifiers 139 and 140 of [IAB-EIMPACTWS-Minutes].)
+
+
+
+
+
+
+
+
+Pignataro                 Expires 19 July 2024                  [Page 2]
+
+Internet-Draft                 Peer-Mount                   January 2024
+
+
+4.  ICMP Extensions
+
+   Similar to S4 of https://datatracker.ietf.org/doc/rfc5837/ And
+   https://www.rfc-editor.org/rfc/rfc8335.html And S3.1 of
+   https://datatracker.ietf.org/doc/rfc8883/
+
+5.  Security Considerations
 
    TBC.
 
-4.  Security Considerations
+6.  IANA Considerations
 
-   TBC.
+   IANA is requested to assign the following object Class-num in the
+   ICMP Extension Object Classes and Class Sub-types registry
+   [IANA-ICMP-Extended]:
 
-5.  Acknowledgements
+       +=============+=============================+===============+
+       | Class Value | Class name                  | Reference     |
+       +=============+=============================+===============+
+       | TBA         | Environmental Impact Object | This document |
+       +-------------+-----------------------------+---------------+
 
-   TBC.
+           Table 1: Class-num for Environmental Impact Extensions
 
-6.  References
+   IANA is requested to establish a registry for the corresponding class
+   sub-type (C-Type) space, as follows:
 
-6.1.  Normative References
+      +==============+==============================+===============+
+      | C-Type Value | Description                  | Reference     |
+      +==============+==============================+===============+
+      | 0            | Reserved                     | This document |
+      +--------------+------------------------------+---------------+
+      | 1-246        | Unassigned                   |               |
+      +--------------+------------------------------+---------------+
+      | 247-255      | Reserved for Experimentation | This document |
+      +--------------+------------------------------+---------------+
+
+            Table 2: C-Types for Environmental Impact Extensions
+
+   C-Type values are assignable on a first-come-first-serve (FCFS)
+   basis.
+
+7.  References
+
+7.1.  Normative References
+
+
+
+
+
+
+Pignataro                 Expires 19 July 2024                  [Page 3]
+
+Internet-Draft                 Peer-Mount                   January 2024
+
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
-6.2.  Informative References
+   [RFC4884]  Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
+              "Extended ICMP to Support Multi-Part Messages", RFC 4884,
+              DOI 10.17487/RFC4884, April 2007,
+              <https://www.rfc-editor.org/info/rfc4884>.
 
-Authors' Addresses
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+7.2.  Informative References
+
+   [IAB-EIMPACTWS]
+              "IAB workshop on Environmental Impact of Internet
+              Applications and Systems (eimpactws)", December 2022,
+              <https://datatracker.ietf.org/group/eimpactws/>.
+
+   [IAB-EIMPACTWS-Minutes]
+              "Minutes for the IAB E-Impact Workshop Session 4: Next
+              Steps", eimpactws Session 4, December 2022,
+              <https://datatracker.ietf.org/doc/minutes-interim-2022-
+              eimpactws-04-202212121400/>.
+
+   [IANA-ICMP-Extended]
+              "Internet Control Message Protocol (ICMP) Parameters, ICMP
+              Extension Object Classes and Class Sub-types",
+              <https://www.iana.org/assignments/icmp-parameters/icmp-
+              parameters.xhtml#icmp-parameters-ext-classes>.
+
+Author's Address
 
    Carlos Pignataro
    North Carolina State University
    United States of America
-
-
-
-Pignataro & Bonica        Expires 30 April 2024                 [Page 2]
-
-Internet-Draft                 Peer-Mount                   October 2023
-
-
    Email: cpignata@gmail.com, cmpignat@ncsu.edu
 
 
-   Ron Bonica
-   Juniper
-   United States of America
-   Email: rbonica@juniper.net
 
 
 
@@ -131,38 +221,4 @@ Internet-Draft                 Peer-Mount                   October 2023
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pignataro & Bonica        Expires 30 April 2024                 [Page 3]
+Pignataro                 Expires 19 July 2024                  [Page 4]

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc [
+<!ENTITY nbsp    "&#xa0;">
+<!ENTITY nbhy    "&#x2011;">
+<!ENTITY wj      "&#x2060;">
+<!ENTITY RFC.2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC.4884 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4884.xml">
+<!ENTITY RFC.8174 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
 ]>
 <?rfc toc="yes"?>
 <?rfc rfcedstyle="yes"?>
 <?rfc subcompact="no" ?>
 <?rfc symrefs="yes"?>
-<rfc category="exp" docName="draft-people-eimpact-icmp-00" ipr="trust200902" submissionType="IETF">
+<rfc category="exp" docName="draft-pignataro-eimpact-icmp-00" ipr="trust200902" submissionType="IETF">
   <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
   <?rfc toc="yes" ?>
   <?rfc compact="yes" ?>
@@ -62,18 +67,36 @@
       </t>
     </section>
 
+
+    <section title="Conventions">
       <section title="Definition of Terms">
         <t>
-          Terms
+          This document uses the following terms:
+        </t>
+        <t>
+          <list style="hanging">
+            <t hangText="ICMP:"><br />Generically referring to ICMPv4 and ICMPv6 messages.</t>
+            <t hangText="ICMP Extension:"><br />Extended ICMP to support multi-part messages through an ICMP extension structure, as defined in <xref target="RFC4884" />.</t>
+          </list>
+        </t>
+
+      </section>
+      <section title="Requirements Language">
+        <t>
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 <xref target="RFC2119" /> <xref target="RFC8174" /> when, and only when, they appear in all
+   capitals, as shown here.
         </t>
       </section>
+    </section>
+
+
 
       <section title="Application">
         <t>
-          Cite 
-          https://datatracker.ietf.org/doc/minutes-interim-2022-eimpactws-04-202212121400/
-          by
-          WebVTT cue identifier
+          The IAB held a workshop on "Environmental Impact of Internet Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, in which the need for visibility into environmental impact metrics within traditional Internet tools such as traceroute was highlighted (see WebVTT cue identifiers 139 and 140 of <xref target="IAB-EIMPACTWS-Minutes" />.)
         </t>
       </section>
 
@@ -93,25 +116,94 @@
 
     <section title="IANA Considerations">
       <t>
-        https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml#icmp-parameters-ext-classes
+        IANA is requested to assign the following object Class-num in the ICMP Extension Object Classes and Class Sub-types registry <xref target="IANA-ICMP-Extended" />:
       </t>
+
+        <texttable title="Class-num for Environmental Impact Extensions" suppress-title="true">
+          <ttcol>Class Value</ttcol>
+          <ttcol>Class name</ttcol>
+          <ttcol>Reference</ttcol>
+          <c>TBA</c>
+          <c>Environmental Impact Object</c>
+          <c>This document</c>
+        </texttable>
+        
+      <t>
+        IANA is requested to establish a registry for the corresponding class sub-type
+   (C-Type) space, as follows:
+      </t>
+
+        <texttable title="C-Types for Environmental Impact Extensions" suppress-title="true">
+          <ttcol>C-Type Value</ttcol>
+          <ttcol>Description</ttcol>
+          <ttcol>Reference</ttcol>
+          <c>0</c>
+          <c>Reserved</c>
+          <c>This document</c>
+          <c>1-246</c>
+          <c>Unassigned</c>
+          <c>&nbsp;</c>
+          <c>247-255</c>
+          <c>Reserved for Experimentation</c>
+          <c>This document</c>
+        </texttable>
+
+
+      <t>
+        C-Type values are assignable on a first-come-first-serve (FCFS) basis.
+      </t>
+
     </section>
 
+<!--
     <section title="Acknowledgements">
       <t>
         TBC.
       </t>
     </section>
+-->
+
+
+
   </middle>
 
   <back>
     <references title="Normative References">
 
+      &RFC.2119;
       &RFC.4884;
+      &RFC.8174;
             
     </references>
     
     <references title="Informative References">
+
+
+    <reference anchor="IAB-EIMPACTWS" target="https://datatracker.ietf.org/group/eimpactws/">
+        <front>
+            <title>IAB workshop on Environmental Impact of Internet Applications and Systems (eimpactws)</title>
+            <author initials="" surname="" fullname="IAB"></author>
+            <date month="December"  year="2022"/>
+        </front>
+    </reference>
+
+    <reference anchor="IAB-EIMPACTWS-Minutes" target="https://datatracker.ietf.org/doc/minutes-interim-2022-eimpactws-04-202212121400/">
+        <front>
+            <title>Minutes for the IAB E-Impact Workshop Session 4: Next Steps</title>
+            <author initials="" surname="" fullname="IAB"></author>
+            <date month="December"  year="2022"/>
+        </front>
+        <seriesInfo name="eimpactws" value="Session 4" />
+    </reference>
+
+
+    <reference anchor="IANA-ICMP-Extended" target="https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml#icmp-parameters-ext-classes">
+        <front>
+            <title>Internet Control Message Protocol (ICMP) Parameters, ICMP Extension Object Classes and Class Sub-types</title>
+            <author initials="" surname="" fullname="IANA"></author>
+        </front>
+    </reference>
+
 
 
     </references>
