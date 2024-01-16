@@ -98,15 +98,90 @@
         <t>
           The IAB held a workshop on "Environmental Impact of Internet Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, in which the need for visibility into environmental impact metrics within traditional Internet tools such as traceroute was highlighted (see WebVTT cue identifiers 139 and 140 of <xref target="IAB-EIMPACTWS-Minutes" />.)
         </t>
+        <t>
+          The Environmental Impact ICMP Extensions defined in this document allow for augmenting the traceroute output with environmental metrics from each reported node.
+        </t>
       </section>
 
 
-    <section title="ICMP Extensions">
+    <section title="ICMP Extension">
       <t>
-        Similar to S4 of https://datatracker.ietf.org/doc/rfc5837/
-        And https://www.rfc-editor.org/rfc/rfc8335.html
-        And S3.1 of https://datatracker.ietf.org/doc/rfc8883/
-      </t>
+           This section defines the Environmental Impact Object, an ICMP
+           extension object with a Class-Num (Object Class Value) of TBA that can
+           be appended to the following messages, as per <xref target="RFC4884" />:
+     </t>
+
+
+        <t>
+          <?rfc subcompact="yes" ?>
+          <list style="symbols">
+            <t>ICMPv4 Time Exceeded</t>
+            <t>ICMPv4 Destination Unreachable</t>
+            <t>ICMPv4 Parameter Problem</t>
+            <t>ICMPv6 Time Exceeded</t>
+            <t>ICMPv6 Destination Unreachable</t>
+          </list>
+          <?rfc subcompact="no" ?>
+        </t>
+
+
+    <t>
+      The extension defined in this document MAY be appended to any of the above
+      listed messages based on policy and following security
+      considerations.
+    </t>
+    <t>
+      A single ICMP message can contain exactly zero or one instances of the Environmental Impact Object.  The C-Type further identifies the information fields carried.
+    </t>
+    <t>
+      A single instance of the Environmental Impact Object can convey the following information from each reporting node: TODO
+    </t>
+
+    <section title="Format">
+      <t>The ICMP Environmental Impact Extension has the following format.</t>
+
+
+        <figure anchor="anchor" align="center"
+                title="ICMP Environmental Impact Extension Format">
+          <artwork xml:space="preserve">
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+|Version|       Reserved        |           Checksum            |(1)
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+|             Length            |   Class-Num   |   C-Type      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+(2) 
+~                        Object payload                         ~ 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+          </artwork>
+        </figure>
+
+
+<t>
+  <list style="hanging">
+    <t hangText="(1) ICMP Extension Header"></t>
+    <t hangText="">
+            <list style="hanging">
+            <t hangText="Version:"><br />2 <xref target="RFC4884" />.</t>
+            <t hangText="Reserved:"><br />0 <xref target="RFC4884" />.</t>
+            <t hangText="Checksum:"><br />The one's complement checksum of the ICMP extension <xref target="RFC4884" />.</t>
+            </list>
+    </t>
+    <t hangText="(2) Environmental Impact Object"></t>
+    <t hangText="">
+            <list style="hanging">
+            <t hangText="Length:"><br />Length of the object, including header and payload, in octets.</t>
+            <t hangText="Class-Num:"><br />TBA (Environmental Impact)</t>
+            <t hangText="C-Type:"><br />C-Type as explained below.</t>
+          </list>
+    </t>
+  </list>
+</t>
+<t>
+  TODO: Explain C-Type
+</t>
+
+    </section>
+
+
     </section>
 
 

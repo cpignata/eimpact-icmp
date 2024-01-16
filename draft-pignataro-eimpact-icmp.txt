@@ -61,13 +61,14 @@ Internet-Draft                 Peer-Mount                   January 2024
      2.1.  Definition of Terms . . . . . . . . . . . . . . . . . . .   2
      2.2.  Requirements Language . . . . . . . . . . . . . . . . . .   2
    3.  Application . . . . . . . . . . . . . . . . . . . . . . . . .   2
-   4.  ICMP Extensions . . . . . . . . . . . . . . . . . . . . . . .   3
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   3
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   3
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   4
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
+   4.  ICMP Extension  . . . . . . . . . . . . . . . . . . . . . . .   3
+     4.1.  Format  . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .   5
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   5
 
 1.  Introduction
 
@@ -102,10 +103,9 @@ Internet-Draft                 Peer-Mount                   January 2024
    traditional Internet tools such as traceroute was highlighted (see
    WebVTT cue identifiers 139 and 140 of [IAB-EIMPACTWS-Minutes].)
 
-
-
-
-
+   The Environmental Impact ICMP Extensions defined in this document
+   allow for augmenting the traceroute output with environmental metrics
+   from each reported node.
 
 
 
@@ -114,11 +114,74 @@ Pignataro                 Expires 19 July 2024                  [Page 2]
 Internet-Draft                 Peer-Mount                   January 2024
 
 
-4.  ICMP Extensions
+4.  ICMP Extension
 
-   Similar to S4 of https://datatracker.ietf.org/doc/rfc5837/ And
-   https://www.rfc-editor.org/rfc/rfc8335.html And S3.1 of
-   https://datatracker.ietf.org/doc/rfc8883/
+   This section defines the Environmental Impact Object, an ICMP
+   extension object with a Class-Num (Object Class Value) of TBA that
+   can be appended to the following messages, as per [RFC4884]:
+
+   *  ICMPv4 Time Exceeded
+   *  ICMPv4 Destination Unreachable
+   *  ICMPv4 Parameter Problem
+   *  ICMPv6 Time Exceeded
+   *  ICMPv6 Destination Unreachable
+
+   The extension defined in this document MAY be appended to any of the
+   above listed messages based on policy and following security
+   considerations.
+
+   A single ICMP message can contain exactly zero or one instances of
+   the Environmental Impact Object.  The C-Type further identifies the
+   information fields carried.
+
+   A single instance of the Environmental Impact Object can convey the
+   following information from each reporting node: TODO
+
+4.1.  Format
+
+   The ICMP Environmental Impact Extension has the following format.
+
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+   |Version|       Reserved        |           Checksum            |(1)
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+   |             Length            |   Class-Num   |   C-Type      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+(2)
+   ~                        Object payload                         ~
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+
+            Figure 1: ICMP Environmental Impact Extension Format
+
+   (1) ICMP Extension Header
+
+      Version:
+         2 [RFC4884].
+
+      Reserved:
+         0 [RFC4884].
+
+      Checksum:
+         The one's complement checksum of the ICMP extension [RFC4884].
+
+
+
+
+Pignataro                 Expires 19 July 2024                  [Page 3]
+
+Internet-Draft                 Peer-Mount                   January 2024
+
+
+   (2) Environmental Impact Object
+
+      Length:
+         Length of the object, including header and payload, in octets.
+
+      Class-Num:
+         TBA (Environmental Impact)
+
+      C-Type:
+         C-Type as explained below.
+
+   TODO: Explain C-Type
 
 5.  Security Considerations
 
@@ -156,19 +219,16 @@ Internet-Draft                 Peer-Mount                   January 2024
    C-Type values are assignable on a first-come-first-serve (FCFS)
    basis.
 
-7.  References
-
-7.1.  Normative References
 
 
-
-
-
-
-Pignataro                 Expires 19 July 2024                  [Page 3]
+Pignataro                 Expires 19 July 2024                  [Page 4]
 
 Internet-Draft                 Peer-Mount                   January 2024
 
+
+7.  References
+
+7.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -217,8 +277,4 @@ Author's Address
 
 
 
-
-
-
-
-Pignataro                 Expires 19 July 2024                  [Page 4]
+Pignataro                 Expires 19 July 2024                  [Page 5]
