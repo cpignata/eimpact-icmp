@@ -1,0 +1,101 @@
+4.2.  C-Type Definition
+
+   Based on the C-Type defined in the Section 8 of the [RFC4884], an
+   8-bit C-Type value, can potentially house 256 information elements
+   and pieces of metadata, within this Class-Num, to carry different
+   pieces of information.  This is of paramount importance on this memo,
+   since metrics are usually changing, and in particular, specific
+   useful e-impact metrics are being discussed.  With a new field,
+   particularly multidisciplinary, there's an asymptote of establishing
+   useful metrics, after various are tried and argued.  The techniques
+   herein defined can be used with any specific e-impact metric in use,
+   current or future.  Further, by this paper listing exemplary metrics,
+   it makes no implication of support of one over another.  So, to
+   initiate the discussion, following are some exemplary C-Type values
+   that can appear in an Environmental Impact Object (based on the
+   examples we mentioed in Section 1)
+
+   *  Power Consumption (C-Type=1)
+   *  Electricity Power Provider or Zone (C-Type=2)
+   *  Geolocation Coordinates (C-Type=3)
+   *  Future sustainability metrics (C-Type=TBA)
+
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |             Length            | Class-Num=TBA | C-Type=1-255  |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+              Figure 2: Environmental Impact Extension Header
+
+   (1)Power Consumption Sub-Object
+ 
+       0                   1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |                Power (32-bit unsigned word)                   |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+               Figure 3: Power Consumption Extension Sub-Object
+
+      A Class-Num of TBA and a C-Type of 1 are specified.  The returned
+      power metric is something that may be directly displayed.  Having
+      a traceroute or ping facility that prints a per-hop power metrics
+      is useful and is one of the capabilities that is supported by the
+      techniques presented herein.  It is important to note that there
+      are various metrics that can be used (such as Energy per data
+      transmitted, Average daily Power normalized to (i.e., divided by)
+      maximum switching capacity of the node, Kw / Gbps without
+      including optics, etc.)
+
+   (2)Electricity Power Provider or Zone Sub-Object
+ 
+         octet    0        1                                   63
+              +--------+-----------................-----------------+
+              | length |  Power Provider or Zone name octets 1-63   |
+              +--------+-----------................-----------------+
+
+      Figure 4: Electricity Power Provider or Zone Extention Sub-Object
+
+      A Class-Num of TBA and a C-Type of 2 are specified.  The returned
+      power metric is something that may be directly displayed.  This
+      message type involves encoding an Electrical Power Provider,
+      Geographical Area, or Zone that may be mapped to a power provider
+      or an area.
+
+   (3)Geolocation Coordinates Sub-Object
+
+       0                   1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |             Length            | Class-Num=TBA |N|E| C-Type=3  |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |  Lat Degrees  |            Latitude Milliseconds              |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      | Long Degrees  |            Longitude Milliseconds             |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+            Figure 5: Geolocation Coordinates Extention Sub-Object
+
+      A Class-Num of TBA and a C-Type of 3 (using the binary mask of
+      00111111 with a logical AND, for geolocation) are specified.  It
+      is important to note in the above that two bits are borrowed from
+      the C-Type field, which is in the context of the Class-Num. Thus,
+      C-Type values of binary XX000011 are for geolocation.  The above-
+      described borrowed bits may be used to support two indicators:
+
+      *  An N-bit (which when set indicates that the provided latitude
+         is north relative to the equator and if clear indicates that
+         the latitude is south of the equator)
+      *  An E-bit (which when set indicates that the provided longitude
+         is east of the prime meridian and if clear indicates that the
+         longitude is west of the prime meridian).
+
+   (4)Future sustainability metrics
+
+      Based on how the extension objects are defined, they can be easily
+      extended when new sustainability metrics are added in the future.
+	  
+	 
+	TODO: And discussions about API and out of band

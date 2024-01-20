@@ -3,7 +3,9 @@
 <!ENTITY nbsp    "&#xa0;">
 <!ENTITY nbhy    "&#x2011;">
 <!ENTITY wj      "&#x2060;">
+<!ENTITY RFC.0792 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.0792.xml">
 <!ENTITY RFC.2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC.4443 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4443.xml">
 <!ENTITY RFC.4884 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4884.xml">
 <!ENTITY RFC.8174 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
 ]>
@@ -35,6 +37,17 @@
       </address>
     </author>
 
+    <author fullname="Jainam Parikh" initials="J." surname="Parikh">
+      <organization abbrev="NC State University">North Carolina State University</organization>
+
+      <address>
+        <postal>
+          <country>US</country>
+        </postal>        
+        <email>jainam@parikhgroup.net</email>
+        <email>jparikh@ncsu.edu</email>
+      </address>
+    </author>
 
 <!--
     <author fullname="Ron Bonica" initials="R." surname="Bonica">
@@ -55,15 +68,81 @@
 
     <abstract>
       <t>
-        Abstract Here...
+      This memo defines a data structure that can be appended to selected
+      ICMP messages. The ICMP extension defined herein can be used to
+      gain visibility on "green-metrics" on the Internet by providing
+      per-hop (e.g., per networking topological node) power metrics, estimated
+      greenhouse gas (GHG) emission numbers, and potentially other current
+      or future sustainability metrics. This will help us get environmental
+      and sustainability data and metadata hereby contributing to achieve
+      an objective mentioned in the Internet Engineering Task Force (IETF)
+      E-Impact initiative <xref target="IAB-EIMPACTWS" />.
+      </t>
+      <t>
+      The techniques that is presented in this memo support a combination of 
+      both in-packet (e.g., ICMP extensions) and out-of-band (e.g., external
+      database lookup or application programming interface (API) calls from
+      a host) methods that, together, yield the above-described new metrics.
+      These are useful not only in a transactional setting (e.g., a user-
+      issued traceroute or a ping request) but also in a scheduled automated 
+      setting where they may be run periodically in a mesh across the Internet
+      or across an administrative domain to map out environmental-impact
+      metrics, including energy usage, (normalized) power, and estimated GHG
+      emissions.
       </t>
     </abstract>
   </front>
 
   <middle>
-    <section title="Introduction">
+    <section anchor="intro" title="Introduction">
       <t>
-        Introduction Here...
+      IP devices use the Internet Control Message Protocol ICMPv4
+      <xref target="RFC0792" /> and ICMPv6 <xref target="RFC4443" /> to
+      convey control information to source hosts. In particular, when
+      an IP device receives a datagram that it cannot process, it may
+      send an ICMP message to the datagram's originator or source.
+      Network operators and higher-level protocols use these ICMP
+      messages to detect and diagnose network issues.
+      </t>
+      <t>
+      As the world transitions towards sustainable technology, the focus 
+      is shifting not only on creating modern technologies infused with 
+      sustainability but also on bridging gaps in the tools that are already 
+      available; to enhance visibility, measurement, and quantification of 
+      their impact. Consequently, these tools which have been foundational 
+      for control and management since over decades, now encounter new 
+      requirements including enhancing them to cater to a significantly 
+      increasing demand for tools dedicated to sustainability and environmental 
+      impact. This memo aims to achieve that "enhancement" need by defining 
+      an ICMP extension object that appends sustainability information to ICMP 
+      messages. ICMP messages MUST also include the IP header and leading 
+      payload octets of the original datagram. And selected ICMP messages 
+      SHOULD include the "green-metrics".
+      </t>
+      <t>
+      Using the extension defined herein, a device can explicitly append
+      these exemplary "green-metrics":
+        <?rfc subcompact="yes" ?>
+        <list style="symbols">
+          <t>Power metrics [per-hop (e.g., per networking topological node) or per day]</t>
+          <t>Power Provider or Zone</t>
+          <t>Geolocation</t>
+          <t>future sustainability metrics</t>
+        </list>
+        <?rfc subcompact="no" ?>
+      </t>
+      <t>
+      Some parts of the "green-metrics" will be presented using in-packet (in-
+      the-wire) methods (e.g., ICMP extensions) plus out-of-band (e.g., out 
+      of band database lookup or application programming interface (API) 
+      calls from a host) methods that, together, yield the above-described 
+      new metrics.
+      </t>
+      <t>
+      The ICMP extensions defined in this document must be preceded by an
+      ICMP Extension Structure Header and an ICMP Object Header.  Both are
+      defined in <xref target="RFC4884" />. The same backward compatibility 
+      issues that apply to <xref target="RFC4884" /> apply to this extension.
       </t>
     </section>
 
@@ -190,7 +269,48 @@
 
 
     <section title="Security Considerations">
-      <t>TBC.</t>
+      <t>
+      Upon receipt of an ICMP message, application software must check it
+      for syntactic correctness.  The extension checksum must be verified.
+      Improperly specified length attributes and other syntax problems may
+      result in buffer overruns.
+      </t>
+      <t>
+      This memo does not define the conditions under which a router sends
+      an ICMP message.  Therefore, it does not expose routers to any new
+      denial-of-service attacks.  Routers may need to limit the rate at
+      which ICMP messages are sent.
+      </t>
+      <t>
+      This document defines an extension that allows a router to append 
+      sustainability information to multi-part ICMP messages, and therefore 
+      can provide the user of the TRACEROUTE/PING application with additional 
+      green-metrics. This extension can also provide the user with additional
+      out-of-band sustainability information that is not currently available. 
+      This memo also doesn't address or define the security implications or 
+      flaws of the "out-of-band" methods that the router uses to fetch new
+      sustainability information. The security of that particular transaction 
+      will purely be based on the out-of-band method used in that transaction.
+      </t>
+      <t>
+      One of the sub-objects allow the Geolocation details to be appended with 
+      the ICMP message. This will potentially expose the physical location of the
+      device. But as this data is just transient, and used for fetching out-of-band
+      metrics, it should not potentially be a secrurity issue as at the end all
+      of this data is just used for administrative debugging and troubleshooting.
+      </t>
+      <t>
+      The intended field of use for the extensions defined in this document
+      is administrative debugging and troubleshooting.  The extensions
+      herein defined supply additional information in ICMP responses.
+      These mechanisms are not intended to be used in non-debugging
+      applications.
+      </t>
+      <t>
+      This document does not specify an authentication mechanism for the
+      extension that it defines.  Application developers should be aware
+      that ICMP messages and their contents are easily spoofed.
+      </t>
     </section>
 
     <section title="IANA Considerations">
@@ -249,7 +369,9 @@
   <back>
     <references title="Normative References">
 
+      &RFC.0792;
       &RFC.2119;
+      &RFC.4443;
       &RFC.4884;
       &RFC.8174;
             
