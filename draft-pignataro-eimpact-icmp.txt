@@ -5,7 +5,9 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                                 J. Parikh
 Intended status: Experimental                        NC State University
-Expires: 20 July 2024                                    17 January 2024
+Expires: 23 July 2024                                          R. Bonica
+                                                                 Juniper
+                                                         20 January 2024
 
 
                  ICMP Extensions for Enronmental Impact
@@ -13,26 +15,20 @@ Expires: 20 July 2024                                    17 January 2024
 
 Abstract
 
-   This memo defines a data structure that can be appended to selected
-   ICMP messages.  The ICMP extension defined herein can be used to gain
-   visibility on "green-metrics" on the Internet by providing per-hop
-   (e.g., per networking topological node) power metrics, estimated
-   greenhouse gas (GHG) emission numbers, and potentially other current
-   or future sustainability metrics.  This will help us get
-   environmental and sustainability data and metadata hereby
-   contributing to achieve an objective mentioned in the Internet
-   Engineering Task Force (IETF) E-Impact initiative [IAB-EIMPACTWS].
+   This document defines a data structure that can be appended to
+   selected ICMP messages.  The ICMP extension defined herein can be
+   used to gain visibility on environmental impact metrics (i.e.,
+   "green-metrics") on the Internet by providing per-hop (i.e., per
+   networking topological node) power metrics and other current or
+   future sustainability metrics.  This will help us get environmental
+   and environmental sustainability information hereby contributing to
+   achieve an objective mentioned in the IAB E-Impact workshop.
 
-   The techniques that is presented in this memo support a combination
-   of both in-packet (e.g., ICMP extensions) and out-of-band (e.g.,
-   external database lookup or application programming interface (API)
-   calls from a host) methods that, together, yield the above-described
-   new metrics.  These are useful not only in a transactional setting
-   (e.g., a user- issued traceroute or a ping request) but also in a
-   scheduled automated setting where they may be run periodically in a
-   mesh across the Internet or across an administrative domain to map
-   out environmental-impact metrics, including energy usage,
-   (normalized) power, and estimated GHG emissions.
+   These techniques presented are useful not only in a transactional
+   setting (e.g., a user-issued traceroute or a ping request), but also
+   in a scheduled automated setting where they may be run periodically
+   in a mesh across an administrative domain to map out environmental-
+   impact metrics.
 
 Status of This Memo
 
@@ -49,13 +45,17 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2024.
+   This Internet-Draft will expire on 23 July 2024.
 
 
 
-Pignataro & Parikh        Expires 20 July 2024                  [Page 1]
+
+
+
+
+Pignataro, et al.         Expires 23 July 2024                  [Page 1]
 
-Internet-Draft                 Peer-Mount                   January 2024
+Internet-Draft          ICMP E-Impact Extensions            January 2024
 
 
 Copyright Notice
@@ -78,11 +78,11 @@ Table of Contents
    2.  Conventions . . . . . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Definition of Terms . . . . . . . . . . . . . . . . . . .   3
      2.2.  Requirements Language . . . . . . . . . . . . . . . . . .   3
-   3.  Application . . . . . . . . . . . . . . . . . . . . . . . . .   4
+   3.  Application . . . . . . . . . . . . . . . . . . . . . . . . .   3
    4.  ICMP Environmental Impact Extension . . . . . . . . . . . . .   4
      4.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   4
      4.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   5
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
@@ -98,10 +98,10 @@ Table of Contents
    source.  Network operators and higher-level protocols use these ICMP
    messages to detect and diagnose network issues.
 
-   As the world transitions towards sustainable technology, the focus is
-   shifting not only on creating modern technologies infused with
-   sustainability but also on bridging gaps in the tools that are
-   already available; to enhance visibility, measurement, and
+   As the world transitions towards sustainability in technology, the
+   focus is shifting not only on creating modern technologies infused
+   with sustainability but also on bridging gaps in the tools that are
+   already available, to enhance visibility, measurement, and
    quantification of their impact.  Consequently, these tools which have
    been foundational for control and management since over decades, now
    encounter new requirements including enhancing them to cater to a
@@ -109,37 +109,22 @@ Table of Contents
 
 
 
-Pignataro & Parikh        Expires 20 July 2024                  [Page 2]
+Pignataro, et al.         Expires 23 July 2024                  [Page 2]
 
-Internet-Draft                 Peer-Mount                   January 2024
+Internet-Draft          ICMP E-Impact Extensions            January 2024
 
 
-   and environmental impact.  This memo aims to achieve that
-   "enhancement" need by defining an ICMP extension object that appends
-   sustainability information to ICMP messages.  ICMP messages MUST also
-   include the IP header and leading payload octets of the original
-   datagram.  And selected ICMP messages SHOULD include the "green-
-   metrics".
+   and environmental impact.  This document serves that need by defining
+   an ICMP extension object that appends environmental impact
+   information to ICMP messages.
 
    Using the extension defined herein, a device can explicitly append
-   these exemplary "green-metrics":
+   these exemplary environmental impact metrics:
 
-   *  Power metrics [per-hop (e.g., per networking topological node) or
-      per day]
-   *  Power Provider or Zone
+   *  Power metrics (e.g., time average, min/max)
+   *  Electrical Energy Provider or Zone
    *  Geolocation
-   *  future sustainability metrics
-
-   Some parts of the "green-metrics" will be presented using in-packet
-   (in- the-wire) methods (e.g., ICMP extensions) plus out-of-band
-   (e.g., out of band database lookup or application programming
-   interface (API) calls from a host) methods that, together, yield the
-   above-described new metrics.
-
-   The ICMP extensions defined in this document must be preceded by an
-   ICMP Extension Structure Header and an ICMP Object Header.  Both are
-   defined in [RFC4884].  The same backward compatibility issues that
-   apply to [RFC4884] apply to this extension.
+   *  Future sustainability metrics
 
 2.  Conventions
 
@@ -148,7 +133,8 @@ Internet-Draft                 Peer-Mount                   January 2024
    This document uses the following terms:
 
    ICMP:
-      Generically referring to ICMPv4 and ICMPv6 messages.
+      Generically referring to ICMPv4 [RFC0792] and ICMPv6 [RFC4443]
+      messages.
 
    ICMP Extension:
       Extended ICMP to support multi-part messages through an ICMP
@@ -162,14 +148,6 @@ Internet-Draft                 Peer-Mount                   January 2024
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-
-
-
-Pignataro & Parikh        Expires 20 July 2024                  [Page 3]
-
-Internet-Draft                 Peer-Mount                   January 2024
-
-
 3.  Application
 
    The IAB held a workshop on "Environmental Impact of Internet
@@ -181,6 +159,16 @@ Internet-Draft                 Peer-Mount                   January 2024
    The Environmental Impact ICMP Extensions defined in this document
    allow for augmenting the traceroute output with environmental metrics
    from each reported node.
+
+
+
+
+
+
+Pignataro, et al.         Expires 23 July 2024                  [Page 3]
+
+Internet-Draft          ICMP E-Impact Extensions            January 2024
+
 
 4.  ICMP Environmental Impact Extension
 
@@ -194,21 +182,29 @@ Internet-Draft                 Peer-Mount                   January 2024
    *  ICMPv6 Time Exceeded
    *  ICMPv6 Destination Unreachable
 
-   The extension defined in this document MAY be appended to any of the
-   above listed messages based on policy and following security
+   The ICMP extension defined in this document MAY be appended to any of
+   the above listed messages based on policy and following security
    considerations.
 
-   A single ICMP message can contain exactly zero or one instances of
+   These extensions are preceded by an ICMP Extension Structure Header,
+   and include an ICMP Object Header.  Both are defined in [RFC4884].
+   The same backward compatibility issues that apply to [RFC4884] apply
+   to this extension.
+
+   A single ICMP message can contain zero, one, or multiple instances of
    the Environmental Impact Object.  The C-Type further identifies the
    information fields carried.
 
    A single instance of the Environmental Impact Object can convey the
-   following information from each reporting node: TODO
+   following information from each reporting node: TODO FROM C-TYPE
+   DEFINITION.
 
 4.1.  Extension Format
 
    The ICMP Environmental Impact Extension has the following format.
 
+                        1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
    |Version|       Reserved        |           Checksum            |(1)
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
@@ -219,16 +215,17 @@ Internet-Draft                 Peer-Mount                   January 2024
 
             Figure 1: ICMP Environmental Impact Extension Format
 
-
-
-Pignataro & Parikh        Expires 20 July 2024                  [Page 4]
-
-Internet-Draft                 Peer-Mount                   January 2024
-
-
    (1) ICMP Extension Header
 
       Version:
+
+
+
+Pignataro, et al.         Expires 23 July 2024                  [Page 4]
+
+Internet-Draft          ICMP E-Impact Extensions            January 2024
+
+
          2 [RFC4884].
 
       Reserved:
@@ -250,60 +247,96 @@ Internet-Draft                 Peer-Mount                   January 2024
 
 4.2.  C-Type Definition
 
-   TODO: Explain C-Type
+   The 8-bit C-Type defined in the Section 8 of the [RFC4884] allows to
+   carry different information elements within this Class-Num (TBA).
+   The techniques herein defined can be used with any specific e-impact
+   metric in use, current or future.
+
+   The ICMP Environmental Impact Extension Object header has the
+   following format:
+
+                          1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |             Length            | Class-Num=TBA | C-Type=1-255  |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+           Figure 2: Environmental Impact Extension Object Header
+
+   The following C-Type values are currently defined.
+
+   (1)  Power Consumption Sub-Object
+
+                            1                   2                   3
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |                Power (32-bit unsigned word)                   |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+                     Figure 3: Power Extension Sub-Object
+
+
+
+Pignataro, et al.         Expires 23 July 2024                  [Page 5]
+
+Internet-Draft          ICMP E-Impact Extensions            January 2024
+
+
+        A Class-Num of TBA and a C-Type of 1 are specified.  The
+        returned power metric is a magnitude that may be directly
+        displayed; one of the uses is having a traceroute or ping
+        facility that shows per-hop power metrics.
+
+   (2)  TODO: It is important to note that there are various metrics
+        that can be used (such as Energy per data transmitted, Average
+        daily Power normalized to (i.e., divided by) maximum switching
+        capacity of the node, Kw / Gbps without including optics, etc.)
 
 5.  Security Considerations
 
-   Upon receipt of an ICMP message, application software must check it
-   for syntactic correctness.  The extension checksum must be verified.
-   Improperly specified length attributes and other syntax problems may
-   result in buffer overruns.
+   The security considerations of [RFC4884] apply to these extensions.
 
-   This memo does not define the conditions under which a router sends
-   an ICMP message.  Therefore, it does not expose routers to any new
-   denial-of-service attacks.  Routers may need to limit the rate at
+   Upon receipt of an ICMP message, application software must check it
+   for syntactic correctness.  The extension checksum MUST be verified.
+   Care should be taken, as improperly specified length attributes and
+   other syntax problems may result in buffer overruns.
+
+   This document does not define the conditions under which a router
+   sends an ICMP message.  Therefore, it does not expose routers to any
+   new denial-of-service attacks.  Routers may need to limit the rate at
    which ICMP messages are sent.
 
    This document defines an extension that allows a router to append
-   sustainability information to multi-part ICMP messages, and therefore
-   can provide the user of the TRACEROUTE/PING application with
-   additional green-metrics.  This extension can also provide the user
-   with additional out-of-band sustainability information that is not
-   currently available.  This memo also doesn't address or define the
-   security implications or flaws of the "out-of-band" methods that the
-   router uses to fetch new sustainability information.  The security of
-   that particular transaction will purely be based on the out-of-band
-   method used in that transaction.
-
-
-
-Pignataro & Parikh        Expires 20 July 2024                  [Page 5]
-
-Internet-Draft                 Peer-Mount                   January 2024
-
-
-   One of the sub-objects allow the Geolocation details to be appended
-   with the ICMP message.  This will potentially expose the physical
-   location of the device.  But as this data is just transient, and used
-   for fetching out-of-band metrics, it should not potentially be a
-   secrurity issue as at the end all of this data is just used for
-   administrative debugging and troubleshooting.
+   environmental impact information to multi-part ICMP messages, and
+   therefore can provide the user of the traceroute and ping
+   applications with additional metrics.
 
    The intended field of use for the extensions defined in this document
-   is administrative debugging and troubleshooting.  The extensions
-   herein defined supply additional information in ICMP responses.
-   These mechanisms are not intended to be used in non-debugging
-   applications.
+   is administrative debugging and troubleshooting and operational
+   facilities.  The extensions herein defined supply additional
+   information in ICMP responses.  These mechanisms are not initially
+   intended for other uses.
 
    This document does not specify an authentication mechanism for the
-   extension that it defines.  Application developers should be aware
-   that ICMP messages and their contents are easily spoofed.
+   extension that it defines.  Application developers should be aware of
+   various ICMP attacks [RFC5927].
 
 6.  IANA Considerations
 
    IANA is requested to assign the following object Class-num in the
    ICMP Extension Object Classes and Class Sub-types registry
    [IANA-ICMP-Extended]:
+
+
+
+
+
+
+
+Pignataro, et al.         Expires 23 July 2024                  [Page 6]
+
+Internet-Draft          ICMP E-Impact Extensions            January 2024
+
 
        +=============+=============================+===============+
        | Class Value | Class name                  | Reference     |
@@ -321,7 +354,9 @@ Internet-Draft                 Peer-Mount                   January 2024
       +==============+==============================+===============+
       | 0            | Reserved                     | This document |
       +--------------+------------------------------+---------------+
-      | 1-246        | Unassigned                   |               |
+      | 1            | Power                        | This document |
+      +--------------+------------------------------+---------------+
+      | 2-246        | Unassigned                   |               |
       +--------------+------------------------------+---------------+
       | 247-255      | Reserved for Experimentation | This document |
       +--------------+------------------------------+---------------+
@@ -331,31 +366,14 @@ Internet-Draft                 Peer-Mount                   January 2024
    C-Type values are assignable on a first-come-first-serve (FCFS)
    basis.
 
-
-
-Pignataro & Parikh        Expires 20 July 2024                  [Page 6]
-
-Internet-Draft                 Peer-Mount                   January 2024
-
-
 7.  References
 
 7.1.  Normative References
-
-   [RFC0792]  Postel, J., "Internet Control Message Protocol", STD 5,
-              RFC 792, DOI 10.17487/RFC0792, September 1981,
-              <https://www.rfc-editor.org/info/rfc792>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-   [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
-              Control Message Protocol (ICMPv6) for the Internet
-              Protocol Version 6 (IPv6) Specification", STD 89,
-              RFC 4443, DOI 10.17487/RFC4443, March 2006,
-              <https://www.rfc-editor.org/info/rfc4443>.
 
    [RFC4884]  Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
               "Extended ICMP to Support Multi-Part Messages", RFC 4884,
@@ -367,6 +385,14 @@ Internet-Draft                 Peer-Mount                   January 2024
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
 7.2.  Informative References
+
+
+
+
+Pignataro, et al.         Expires 23 July 2024                  [Page 7]
+
+Internet-Draft          ICMP E-Impact Extensions            January 2024
+
 
    [IAB-EIMPACTWS]
               "IAB workshop on Environmental Impact of Internet
@@ -385,14 +411,19 @@ Internet-Draft                 Peer-Mount                   January 2024
               <https://www.iana.org/assignments/icmp-parameters/icmp-
               parameters.xhtml#icmp-parameters-ext-classes>.
 
+   [RFC0792]  Postel, J., "Internet Control Message Protocol", STD 5,
+              RFC 792, DOI 10.17487/RFC0792, September 1981,
+              <https://www.rfc-editor.org/info/rfc792>.
 
+   [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
+              Control Message Protocol (ICMPv6) for the Internet
+              Protocol Version 6 (IPv6) Specification", STD 89,
+              RFC 4443, DOI 10.17487/RFC4443, March 2006,
+              <https://www.rfc-editor.org/info/rfc4443>.
 
-
-
-Pignataro & Parikh        Expires 20 July 2024                  [Page 7]
-
-Internet-Draft                 Peer-Mount                   January 2024
-
+   [RFC5927]  Gont, F., "ICMP Attacks against TCP", RFC 5927,
+              DOI 10.17487/RFC5927, July 2010,
+              <https://www.rfc-editor.org/info/rfc5927>.
 
 Authors' Addresses
 
@@ -408,6 +439,18 @@ Authors' Addresses
    Email: jainam@parikhgroup.net, jparikh@ncsu.edu
 
 
+   Ron Bonica
+   Juniper
+   United States of America
+
+
+
+Pignataro, et al.         Expires 23 July 2024                  [Page 8]
+
+Internet-Draft          ICMP E-Impact Extensions            January 2024
+
+
+   Email: rbonica@juniper.net
 
 
 
@@ -445,4 +488,17 @@ Authors' Addresses
 
 
 
-Pignataro & Parikh        Expires 20 July 2024                  [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.         Expires 23 July 2024                  [Page 9]

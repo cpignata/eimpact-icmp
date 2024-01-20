@@ -98,4 +98,3 @@
       extended when new sustainability metrics are added in the future.
 	  
 	 
-	TODO: And discussions about API and out of band
