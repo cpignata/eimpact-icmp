@@ -24,7 +24,7 @@
   <?rfc strict="yes" ?>
 
   <front>
-    <title abbrev="ICMP E-Impact Extensions">ICMP Extensions for Enronmental Impact</title>
+    <title abbrev="ICMP E-Impact Extensions">ICMP Extensions for Environmental Impact</title>
 
     <author fullname="Carlos Pignataro" initials="C." surname="Pignataro">
       <organization abbrev="NC State University">North Carolina State University</organization>
@@ -70,16 +70,15 @@
       <t>
       This document defines a data structure that can be appended to selected
       ICMP messages. The ICMP extension defined herein can be used to
-      gain visibility on environmental impact metrics (i.e., "green-metrics") on the Internet by providing
-      per-hop (i.e., per networking topological node) power metrics
+      gain visibility on environmental impact information on the Internet by providing
+      per-hop (i.e., per topological network node) power metrics
       and other current
-      or future sustainability metrics. This will help us get environmental
-      and environmental sustainability information hereby contributing to achieve
+      or future sustainability metrics. This will contribute to achieving
       an objective mentioned in the IAB
       E-Impact workshop.
       </t>
       <t>
-      These techniques presented are useful not only in a transactional setting (e.g., a user-issued traceroute or a ping request), but also in a scheduled automated 
+      The techniques presented are useful not only in a transactional setting (e.g., a user-issued traceroute or a ping request), but also in a scheduled automated 
       setting where they may be run periodically in a mesh across an administrative domain to map out environmental-impact
       metrics.
       </t>
@@ -102,10 +101,10 @@
       is shifting not only on creating modern technologies infused with 
       sustainability but also on bridging gaps in the tools that are already 
       available, to enhance visibility, measurement, and quantification of 
-      their impact. Consequently, these tools which have been foundational 
-      for control and management since over decades, now encounter new 
+      their impact. Consequently, tools which have been foundational 
+      for control and management for decades now encounter new 
       requirements including enhancing them to cater to a significantly 
-      increasing demand for tools dedicated to sustainability and environmental 
+      increasing demand for monitoring the sustainability and environmental 
       impact. This document serves that need by defining 
       an ICMP extension object that appends environmental impact information to ICMP 
       messages.
@@ -247,7 +246,7 @@
 
 <section anchor="ctype" title="C-Type Definition">
   <t>
-   The 8-bit C-Type defined in the Section 8 of the <xref target="RFC4884" /> 
+   The 8-bit C-Type defined in the Section 8 of <xref target="RFC4884" /> 
    allows to carry different information elements within this Class-Num (TBA).
 
    The techniques
