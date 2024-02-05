@@ -80,10 +80,10 @@ Table of Contents
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   7
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
      8.2.  Informative References  . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -270,9 +270,9 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
                       Figure 3: Power Extension Sub-Object
 
        A Class-Num of TBA and a C-Type of 1 are specified.  The returned
-       power metric is a magnitude that may be directly displayed; one
-       of the uses is having a traceroute or ping facility that shows
-       per-hop power metrics.
+       power metric is a magnitude that may be directly displayed, and
+       is expressed in Watts; one of the uses is having a traceroute or
+       ping facility that shows per-hop power metrics.
 
 
 
@@ -285,15 +285,25 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    2.  Other metrics to be provided in subsequent revisions.
 
       |  TODO: It is important to note that there are various metrics
-      |  that can be used (such as Energy per data transmitted, Average
-      |  daily Power normalized to (i.e., divided by) maximum switching
-      |  capacity of the node, Kw / Gbps without including optics, etc.)
+      |  that can be used.  We are starting with node-level metrics, and
+      |  will move to component-level once node-level are somewhat
+      |  stable.
       |  
-      |  Under consideration are
+      |  Under consideration (i.e., we heard these from reviewers or
+      |  list) are
       |  
-      |        power per byte / power per packet
+      |     a.  Energy per data transmitted
       |  
-      |        idle power
+      |     b.  Average daily Power normalized to (i.e., divided by)
+      |         maximum switching capacity of the node
+      |  
+      |     c.  Kw / Gbps without including optics
+      |  
+      |     d.  Power per packet / power per bype
+      |  
+      |     e.  Idle power
+      |  
+      |     f.  Node Capacity
 
 5.  Security Considerations
 
@@ -320,6 +330,14 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    information in ICMP responses.  These mechanisms are not initially
    intended for other uses.
 
+
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 6]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
+
    Some of the additional metrics provided, as e.g., power draw
    information, have privacy considerations.  For example, behavioral
    considerations of the devices, or estimating other node and network
@@ -328,15 +346,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    This document does not specify an authentication mechanism for the
    extension that it defines.  Application developers should be aware of
    various ICMP attacks [RFC5927].
-
-
-
-
-
-Pignataro, et al.         Expires 7 August 2024                 [Page 6]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
 
 6.  IANA Considerations
 
@@ -377,6 +386,14 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    We are very grateful to Michael Welzl for his thorough review and
    most useful set of comments and suggestions.
 
+
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 7]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
+
 8.  References
 
 8.1.  Normative References
@@ -385,14 +402,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-
-Pignataro, et al.         Expires 7 August 2024                 [Page 7]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
 
    [RFC4884]  Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
               "Extended ICMP to Support Multi-Part Messages", RFC 4884,
@@ -432,6 +441,15 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
               RFC 4443, DOI 10.17487/RFC4443, March 2006,
               <https://www.rfc-editor.org/info/rfc4443>.
 
+
+
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 8]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
+
    [RFC5927]  Gont, F., "ICMP Attacks against TCP", RFC 5927,
               DOI 10.17487/RFC5927, July 2010,
               <https://www.rfc-editor.org/info/rfc5927>.
@@ -444,12 +462,6 @@ Authors' Addresses
    Email: cpignata@gmail.com, cmpignat@ncsu.edu
 
 
-
-Pignataro, et al.         Expires 7 August 2024                 [Page 8]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
-
    Jainam Parikh
    North Carolina State University
    United States of America
@@ -460,18 +472,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    Juniper Networks
    United States of America
    Email: rbonica@juniper.net
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
