@@ -9,6 +9,7 @@
 <!ENTITY RFC.5927 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5927.xml">
 <!ENTITY RFC.4884 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4884.xml">
 <!ENTITY RFC.8174 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY RFC.8335 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8335.xml">
 ]>
 <?rfc toc="yes"?>
 <?rfc rfcedstyle="yes"?>
@@ -164,7 +165,7 @@
       <t>
            This section defines the Environmental Impact Object, an ICMP
            extension object with a Class-Num (Object Class Value) of TBA that can
-           be appended to the following messages, as per <xref target="RFC4884" />:
+           be appended to the following messages, as per <xref target="RFC4884" /> and <xref target="RFC8335" />:
      </t>
 
 
@@ -174,8 +175,10 @@
             <t>ICMPv4 Time Exceeded</t>
             <t>ICMPv4 Destination Unreachable</t>
             <t>ICMPv4 Parameter Problem</t>
+            <t>ICMPv4 Extended Echo Reply <xref target="RFC8335" /></t>
             <t>ICMPv6 Time Exceeded</t>
             <t>ICMPv6 Destination Unreachable</t>
+            <t>ICMPv6 Extended Echo Reply <xref target="RFC8335" /></t>
           </list>
           <?rfc subcompact="no" ?>
         </t>
@@ -325,7 +328,7 @@
 
     <section title="Security Considerations">
       <t>
-        The security considerations of <xref target="RFC4884" /> apply to these extensions.
+        The security considerations of <xref target="RFC4884" /> and of <xref target="RFC8335" /> apply to these extensions.
       </t>
       <t>
       Upon receipt of an ICMP message, application software must check it
@@ -423,6 +426,7 @@
       &RFC.2119;
       &RFC.4884;
       &RFC.8174;
+      &RFC.8335;
             
     </references>
     
