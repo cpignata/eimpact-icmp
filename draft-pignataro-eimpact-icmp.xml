@@ -213,8 +213,8 @@
 |Version|       Reserved        |           Checksum            |(1)
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
 |             Length            |   Class-Num   |   C-Type      |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+(2) 
-~                        Object payload                         ~ 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+(2)
+~                        Object payload                         ~
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
           </artwork>
         </figure>
@@ -269,11 +269,11 @@
 
 <t>The following C-Type values are currently defined.</t>
 
-<list style="format (%d)">
+<list style="numbers">
   <t>
     Power Consumption Sub-Object
 
-        <figure anchor="ctype-1" align="center"
+        <figure anchor="ctype-1" 
                 title="Power Extension Sub-Object">
                 <postamble>
 
@@ -282,7 +282,7 @@
       a traceroute or ping facility that shows per-hop power metrics.
 
                 </postamble>
-          <artwork xml:space="preserve">
+          <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -291,13 +291,22 @@
           </artwork>
         </figure>
   </t>
+  
+  <t>
+    Other metrics to be provided in subsequent revisions.
+  </t>
+</list>
+
+
+<aside>
   <t>TODO:        It is important to note that there
       are various metrics that can be used (such as Energy per data
       transmitted, Average daily Power normalized to (i.e., divided by)
       maximum switching capacity of the node, Kw / Gbps without
       including optics, etc.)
   </t>
-</list>
+</aside>
+
 
 </section>
 
@@ -387,13 +396,13 @@
 
     </section>
 
-<!--
+
     <section title="Acknowledgements">
       <t>
-        TBC.
+        We are very grateful to Michael Welzl for his thorough review and most useful set of comments and suggestions.
       </t>
     </section>
--->
+
 
 
 
