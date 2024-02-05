@@ -293,7 +293,7 @@
   </t>
   
   <t>
-    Other metrics to be provided in subsequent revisions.
+    Other metrics to be provided in subsequent revisions. 
   </t>
 </list>
 
@@ -304,6 +304,13 @@
       transmitted, Average daily Power normalized to (i.e., divided by)
       maximum switching capacity of the node, Kw / Gbps without
       including optics, etc.)
+  </t>
+  <t>
+    Under consideration are 
+    <list>
+      <t>power per byte / power per packet</t>
+      <t>idle power</t>
+    </list>
   </t>
 </aside>
 

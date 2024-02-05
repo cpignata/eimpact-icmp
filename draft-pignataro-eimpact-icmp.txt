@@ -78,7 +78,7 @@ Table of Contents
      4.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   4
      4.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   5
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   7
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
@@ -288,6 +288,12 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
       |  that can be used (such as Energy per data transmitted, Average
       |  daily Power normalized to (i.e., divided by) maximum switching
       |  capacity of the node, Kw / Gbps without including optics, etc.)
+      |  
+      |  Under consideration are
+      |  
+      |        power per byte / power per packet
+      |  
+      |        idle power
 
 5.  Security Considerations
 
@@ -323,12 +329,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    extension that it defines.  Application developers should be aware of
    various ICMP attacks [RFC5927].
 
-6.  IANA Considerations
-
-   IANA is requested to assign the following object Class-num in the
-   ICMP Extension Object Classes and Class Sub-types registry
-   [IANA-ICMP-Extended]:
-
 
 
 
@@ -337,6 +337,12 @@ Pignataro, et al.         Expires 7 August 2024                 [Page 6]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
+
+6.  IANA Considerations
+
+   IANA is requested to assign the following object Class-num in the
+   ICMP Extension Object Classes and Class Sub-types registry
+   [IANA-ICMP-Extended]:
 
        +=============+=============================+===============+
        | Class Value | Class name                  | Reference     |
@@ -380,12 +386,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
-   [RFC4884]  Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
-              "Extended ICMP to Support Multi-Part Messages", RFC 4884,
-              DOI 10.17487/RFC4884, April 2007,
-              <https://www.rfc-editor.org/info/rfc4884>.
-
-
 
 
 
@@ -393,6 +393,11 @@ Pignataro, et al.         Expires 7 August 2024                 [Page 7]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
+
+   [RFC4884]  Bonica, R., Gan, D., Tappan, D., and C. Pignataro,
+              "Extended ICMP to Support Multi-Part Messages", RFC 4884,
+              DOI 10.17487/RFC4884, April 2007,
+              <https://www.rfc-editor.org/info/rfc4884>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -439,17 +444,15 @@ Authors' Addresses
    Email: cpignata@gmail.com, cmpignat@ncsu.edu
 
 
-   Jainam Parikh
-   North Carolina State University
-   United States of America
-
-
 
 Pignataro, et al.         Expires 7 August 2024                 [Page 8]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
 
+   Jainam Parikh
+   North Carolina State University
+   United States of America
    Email: jainam@parikhgroup.net, jparikh@ncsu.edu
 
 
@@ -457,9 +460,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    Juniper Networks
    United States of America
    Email: rbonica@juniper.net
-
-
-
 
 
 
