@@ -15,7 +15,7 @@
 <?rfc rfcedstyle="yes"?>
 <?rfc subcompact="no" ?>
 <?rfc symrefs="yes"?>
-<rfc category="exp" docName="draft-pignataro-eimpact-icmp-00" ipr="trust200902" submissionType="IETF">
+<rfc category="exp" docName="draft-pignataro-eimpact-icmp-01" ipr="trust200902" submissionType="IETF">
   <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
   <?rfc toc="yes" ?>
   <?rfc compact="yes" ?>
