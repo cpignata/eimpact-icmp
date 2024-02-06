@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rfc [
+<!ENTITY nbsp    "&#xa0;">
+<!ENTITY nbhy    "&#x2011;">
+<!ENTITY wj      "&#x2060;">
+<!ENTITY RFC.0792 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.0792.xml">
+<!ENTITY RFC.2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC.4443 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4443.xml">
+<!ENTITY RFC.5927 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5927.xml">
+<!ENTITY RFC.4884 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4884.xml">
+<!ENTITY RFC.8174 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY RFC.8335 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8335.xml">
+]>
+<?rfc toc="yes"?>
+<?rfc rfcedstyle="yes"?>
+<?rfc subcompact="no" ?>
+<?rfc symrefs="yes"?>
+<rfc category="exp" docName="draft-pignataro-eimpact-icmp-00" ipr="trust200902" submissionType="IETF">
+  <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+  <?rfc toc="yes" ?>
+  <?rfc compact="yes" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc iprnotified="no" ?>
+  <?rfc strict="yes" ?>
+
+  <front>
+    <title abbrev="ICMP E-Impact Extensions">ICMP Extensions for Environmental Impact</title>
+
+    <author fullname="Carlos Pignataro" initials="C." surname="Pignataro">
+      <organization abbrev="NC State University">North Carolina State University</organization>
+
+      <address>
+        <postal>
+          <country>US</country>
+        </postal>        
+        <email>cpignata@gmail.com</email>
+        <email>cmpignat@ncsu.edu</email>
+      </address>
+    </author>
+
+    <author fullname="Jainam Parikh" initials="J." surname="Parikh">
+      <organization abbrev="NC State University">North Carolina State University</organization>
+
+      <address>
+        <postal>
+          <country>US</country>
+        </postal>        
+        <email>jainam@parikhgroup.net</email>
+        <email>jparikh@ncsu.edu</email>
+      </address>
+    </author>
+
+
+    <author fullname="Ron Bonica" initials="R." surname="Bonica">
+      <organization abbrev="Juniper">Juniper Networks</organization>
+
+      <address>
+        <postal>
+          <country>US</country>
+        </postal>        
+
+        <email>rbonica@juniper.net</email>
+      </address>
+    </author>
+
+    
+    <date />
+
+    <abstract>
+      <t>
+      This document defines a data structure that can be appended to selected
+      ICMP messages. The ICMP extension defined herein can be used to
+      gain visibility on environmental impact information on the Internet by providing
+      per-hop (i.e., per topological network node) power metrics
+      and other current
+      or future sustainability metrics. This will contribute to achieving
+      an objective mentioned in the IAB
+      E-Impact workshop.
+      </t>
+      <t>
+      The techniques presented are useful not only in a transactional setting (e.g., a user-issued traceroute or a ping request), but also in a scheduled automated 
+      setting where they may be run periodically in a mesh across an administrative domain to map out environmental-impact
+      metrics.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>
+      IP devices use the Internet Control Message Protocol ICMPv4
+      <xref target="RFC0792" /> and ICMPv6 <xref target="RFC4443" /> to
+      convey control information to source hosts. In particular, when
+      an IP device receives a datagram that it cannot process, it may
+      send an ICMP message to the datagram's originator or source.
+      Network operators and higher-level protocols use these ICMP
+      messages to detect and diagnose network issues.
+      </t>
+      <t>
+      As the world transitions towards sustainability in technology, the focus 
+      is shifting not only on creating modern technologies infused with 
+      sustainability but also on bridging gaps in the tools that are already 
+      available, to enhance visibility, measurement, and quantification of 
+      their impact. Consequently, tools which have been foundational 
+      for control and management for decades now encounter new 
+      requirements including enhancing them to cater to a significantly 
+      increasing demand for monitoring the sustainability and environmental 
+      impact. This document serves that need by defining 
+      an ICMP extension object that appends environmental impact information to ICMP 
+      messages.
+      </t>
+      <t>
+      Using the extension defined herein, a device can explicitly append
+      these exemplary environmental impact metrics:
+        <?rfc subcompact="yes" ?>
+        <list style="symbols">
+          <t>Power metrics (e.g., time average, min/max)</t>
+          <t>Electrical Energy Provider or Zone</t>
+          <t>Geolocation</t>
+          <t>Future sustainability metrics</t>
+        </list>
+        <?rfc subcompact="no" ?>
+      </t>
+    </section>
+
+
+    <section title="Conventions">
+      <section title="Definition of Terms">
+        <t>
+          This document uses the following terms:
+        </t>
+        <t>
+          <list style="hanging">
+            <t hangText="ICMP:"><br />Generically referring to ICMPv4 <xref target="RFC0792" /> and ICMPv6 <xref target="RFC4443" /> messages.</t>
+            <t hangText="ICMP Extension:"><br />Extended ICMP to support multi-part messages through an ICMP extension structure, as defined in <xref target="RFC4884" />.</t>
+          </list>
+        </t>
+
+      </section>
+      <section title="Requirements Language">
+        <t>
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 <xref target="RFC2119" /> <xref target="RFC8174" /> when, and only when, they appear in all
+   capitals, as shown here.
+        </t>
+      </section>
+    </section>
+
+
+
+      <section title="Application">
+        <t>
+          The IAB held a workshop on "Environmental Impact of Internet Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, in which the need for visibility into environmental impact metrics within traditional Internet tools such as traceroute was highlighted (see WebVTT cue identifiers 139 and 140 of <xref target="IAB-EIMPACTWS-Minutes" />.)
+        </t>
+        <t>
+          The Environmental Impact ICMP Extensions defined in this document allow for augmenting the traceroute output with environmental metrics from each reported node.
+        </t>
+      </section>
+
+
+    <section title="ICMP Environmental Impact Extension">
+      <t>
+           This section defines the Environmental Impact Object, an ICMP
+           extension object with a Class-Num (Object Class Value) of TBA that can
+           be appended to the following messages, as per <xref target="RFC4884" /> and <xref target="RFC8335" />:
+     </t>
+
+
+        <t>
+          <?rfc subcompact="yes" ?>
+          <list style="symbols">
+            <t>ICMPv4 Time Exceeded</t>
+            <t>ICMPv4 Destination Unreachable</t>
+            <t>ICMPv4 Parameter Problem</t>
+            <t>ICMPv4 Extended Echo Reply <xref target="RFC8335" /></t>
+            <t>ICMPv6 Time Exceeded</t>
+            <t>ICMPv6 Destination Unreachable</t>
+            <t>ICMPv6 Extended Echo Reply <xref target="RFC8335" /></t>
+          </list>
+          <?rfc subcompact="no" ?>
+        </t>
+
+
+    <t>
+      The ICMP extension defined in this document MAY be appended to any of the above
+      listed messages based on policy and following security
+      considerations.
+    </t>
+          <t>
+      These extensions are preceded by an
+      ICMP Extension Structure Header, and include an ICMP Object Header.  Both are
+      defined in <xref target="RFC4884" />. The same backward compatibility 
+      issues that apply to <xref target="RFC4884" /> apply to this extension.
+      </t>
+
+    <t>
+      A single ICMP message can contain zero, one, or multiple instances of the Environmental Impact Object.  The C-Type further identifies the information fields carried.
+    </t>
+    <t>
+      A single instance of the Environmental Impact Object can convey the following information from each reporting node: TODO FROM C-TYPE DEFINITION.
+    </t>
+
+    <section title="Extension Format">
+      <t>The ICMP Environmental Impact Extension has the following format.</t>
+
+
+        <figure anchor="format-fig" align="center"
+                title="ICMP Environmental Impact Extension Format">
+          <artwork xml:space="preserve">
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+|Version|       Reserved        |           Checksum            |(1)
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+|             Length            |   Class-Num   |   C-Type      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+(2)
+~                        Object payload                         ~
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...
+          </artwork>
+        </figure>
+
+
+<t>
+  <list style="hanging">
+    <t hangText="(1) ICMP Extension Header"></t>
+    <t hangText="">
+            <list style="hanging">
+            <t hangText="Version:"><br />2 <xref target="RFC4884" />.</t>
+            <t hangText="Reserved:"><br />0 <xref target="RFC4884" />.</t>
+            <t hangText="Checksum:"><br />The one's complement checksum of the ICMP extension <xref target="RFC4884" />.</t>
+            </list>
+    </t>
+    <t hangText="(2) Environmental Impact Object"></t>
+    <t hangText="">
+            <list style="hanging">
+            <t hangText="Length:"><br />Length of the object, including header and payload, in octets.</t>
+            <t hangText="Class-Num:"><br />TBA (Environmental Impact)</t>
+            <t hangText="C-Type:"><br />C-Type as explained in <xref target="ctype" />.</t>
+          </list>
+    </t>
+  </list>
+</t>
+
+    </section>
+
+
+<section anchor="ctype" title="C-Type Definition">
+  <t>
+   The 8-bit C-Type defined in the Section 8 of <xref target="RFC4884" /> 
+   allows to carry different information elements within this Class-Num (TBA).
+
+   The techniques
+   herein defined can be used with any specific e-impact metric in use,
+   current or future.
+ </t>
+
+
+        <figure anchor="ctype-fig" align="center"
+                title="Environmental Impact Extension Object Header">
+                <preamble>The ICMP Environmental Impact Extension Object header has the following format:</preamble>
+          <artwork xml:space="preserve">
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Length            | Class-Num=TBA | C-Type=1-255  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+          </artwork>
+        </figure>
+
+<t>The following C-Type values are currently defined.</t>
+
+<list style="numbers">
+  <t>
+    Power Consumption Sub-Object
+
+        <figure anchor="ctype-1" 
+                title="Power Extension Sub-Object">
+                <postamble>
+
+                  A Class-Num of TBA and a C-Type of 1 are specified.  The returned
+      power metric is a magnitude that may be directly displayed, and is expressed in Watts; one of the uses is having
+      a traceroute or ping facility that shows per-hop power metrics.
+
+                </postamble>
+          <artwork xml:space="preserve" >
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                Power (32-bit unsigned word)                   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+          </artwork>
+        </figure>
+  </t>
+  
+  <t>
+    Other metrics to be provided in subsequent revisions. 
+  </t>
+</list>
+
+
+<aside>
+  <t>TODO:  It is important to note that there
+      are various metrics that can be used. We are starting with node-level metrics, and will move to component-level once node-level are somewhat stable.
+  </t>
+  <t>
+    Under consideration (i.e., we heard these from reviewers or list) are 
+    <list style="letters">
+      <t>Energy per data transmitted</t>
+      <t>Average daily Power normalized to (i.e., divided by)
+      maximum switching capacity of the node</t>
+      <t>Kw / Gbps without including optics</t>
+      <t>Power per packet / power per bype</t>
+      <t>Idle power</t>
+      <t>Node Capacity</t>
+    </list>
+  </t>
+</aside>
+
+
+</section>
+
+
+    </section>
+
+
+    <section title="Security Considerations">
+      <t>
+        The security considerations of <xref target="RFC4884" /> and of <xref target="RFC8335" /> apply to these extensions.
+      </t>
+      <t>
+      Upon receipt of an ICMP message, application software must check it
+      for syntactic correctness.  The extension checksum MUST be verified.
+      Care should be taken, as improperly specified length attributes and other syntax problems may result in buffer overruns.
+      </t>
+      <t>
+      This document does not define the conditions under which a router sends
+      an ICMP message.  Therefore, it does not expose routers to any new
+      denial-of-service attacks.  Routers may need to limit the rate at
+      which ICMP messages are sent.
+      </t>
+      <t>
+      This document defines an extension that allows a router to append 
+      environmental impact information to multi-part ICMP messages, and therefore 
+      can provide the user of the traceroute and ping applications with additional 
+      metrics.  
+      </t>
+      <t>
+      The intended field of use for the extensions defined in this document
+      is administrative debugging and troubleshooting and operational facilities.
+      The extensions
+      herein defined supply additional information in ICMP responses.
+      These mechanisms are not initially intended for other uses.
+      </t>
+      <t>
+        Some of the additional metrics provided, as e.g., power draw information, have privacy considerations. For example, behavioral considerations of the devices, or estimating other node and network attributes from the power or energy data. 
+      </t>
+      <t>
+      This document does not specify an authentication mechanism for the
+      extension that it defines.  Application developers should be aware
+      of various ICMP attacks <xref target="RFC5927" />.
+      </t>
+    </section>
+
+    <section title="IANA Considerations">
+      <t>
+        IANA is requested to assign the following object Class-num in the ICMP Extension Object Classes and Class Sub-types registry <xref target="IANA-ICMP-Extended" />:
+      </t>
+
+        <texttable title="Class-num for Environmental Impact Extensions" suppress-title="true">
+          <ttcol>Class Value</ttcol>
+          <ttcol>Class name</ttcol>
+          <ttcol>Reference</ttcol>
+          <c>TBA</c>
+          <c>Environmental Impact Object</c>
+          <c>This document</c>
+        </texttable>
+        
+      <t>
+        IANA is requested to establish a registry for the corresponding class sub-type
+   (C-Type) space, as follows:
+      </t>
+
+        <texttable title="C-Types for Environmental Impact Extensions" suppress-title="true">
+          <ttcol>C-Type Value</ttcol>
+          <ttcol>Description</ttcol>
+          <ttcol>Reference</ttcol>
+          <c>0</c>
+          <c>Reserved</c>
+          <c>This document</c>
+          <c>1</c>
+          <c>Power</c>
+          <c>This document</c>
+          <c>2-246</c>
+          <c>Unassigned</c>
+          <c>&nbsp;</c>
+          <c>247-255</c>
+          <c>Reserved for Experimentation</c>
+          <c>This document</c>
+        </texttable>
+
+
+      <t>
+        C-Type values are assignable on a first-come-first-serve (FCFS) basis.
+      </t>
+
+    </section>
+
+
+    <section title="Acknowledgements">
+      <t>
+        We are very grateful to Michael Welzl for his thorough review and most useful set of comments and suggestions.
+      </t>
+    </section>
+
+
+
+
+  </middle>
+
+  <back>
+    <references title="Normative References">
+
+      &RFC.2119;
+      &RFC.4884;
+      &RFC.8174;
+      &RFC.8335;
+            
+    </references>
+    
+    <references title="Informative References">
+
+      &RFC.5927;
+      &RFC.0792;
+      &RFC.4443;
+
+    <reference anchor="IAB-EIMPACTWS" target="https://datatracker.ietf.org/group/eimpactws/">
+        <front>
+            <title>IAB workshop on Environmental Impact of Internet Applications and Systems (eimpactws)</title>
+            <author initials="" surname="" fullname="IAB"></author>
+            <date month="December"  year="2022"/>
+        </front>
+    </reference>
+
+    <reference anchor="IAB-EIMPACTWS-Minutes" target="https://datatracker.ietf.org/doc/minutes-interim-2022-eimpactws-04-202212121400/">
+        <front>
+            <title>Minutes for the IAB E-Impact Workshop Session 4: Next Steps</title>
+            <author initials="" surname="" fullname="IAB"></author>
+            <date month="December" day="12" year="2022"/>
+        </front>
+        <seriesInfo name="eimpactws" value="Session 4" />
+    </reference>
+
+
+    <reference anchor="IANA-ICMP-Extended" target="https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml#icmp-parameters-ext-classes">
+        <front>
+            <title>Internet Control Message Protocol (ICMP) Parameters, ICMP Extension Object Classes and Class Sub-types</title>
+            <author initials="" surname="" fullname="IANA"></author>
+        </front>
+    </reference>
+
+
+
+    </references>
+
+
+
+  </back>
+</rfc>
