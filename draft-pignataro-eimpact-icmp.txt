@@ -5,9 +5,9 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                                 J. Parikh
 Intended status: Experimental                        NC State University
-Expires: 8 August 2024                                         R. Bonica
+Expires: 27 August 2024                                        R. Bonica
                                                                  Juniper
-                                                         5 February 2024
+                                                        24 February 2024
 
 
                 ICMP Extensions for Environmental Impact
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 August 2024.
+   This Internet-Draft will expire on 27 August 2024.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Pignataro, et al.         Expires 8 August 2024                 [Page 1]
+Pignataro, et al.        Expires 27 August 2024                 [Page 1]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
@@ -74,16 +74,17 @@ Table of Contents
      2.1.  Definition of Terms . . . . . . . . . . . . . . . . . . .   3
      2.2.  Requirements Language . . . . . . . . . . . . . . . . . .   3
    3.  Application . . . . . . . . . . . . . . . . . . . . . . . . .   3
-   4.  ICMP Environmental Impact Extension . . . . . . . . . . . . .   3
-     4.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   4
-     4.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   5
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   7
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
+   4.  Transport options for sustainability information  . . . . . .   4
+   5.  ICMP Environmental Impact Extension . . . . . . . . . . . . .   4
+     5.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   5
+     5.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   6
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .   9
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
 
@@ -108,14 +109,14 @@ Table of Contents
 
 
 
-
-Pignataro, et al.         Expires 8 August 2024                 [Page 2]
+Pignataro, et al.        Expires 27 August 2024                 [Page 2]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
 
    Using the extension defined herein, a device can explicitly append
-   these exemplary environmental impact metrics:
+   these exemplary environmental impact metrics across an administrative
+   domain:
 
    *  Power metrics (e.g., time average, min/max)
    *  Electrical Energy Provider or Zone
@@ -156,19 +157,57 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    allow for augmenting the traceroute output with environmental metrics
    from each reported node.
 
-4.  ICMP Environmental Impact Extension
-
-   This section defines the Environmental Impact Object, an ICMP
-   extension object with a Class-Num (Object Class Value) of TBA that
-   can be appended to the following messages, as per [RFC4884] and
-   [RFC8335]:
 
 
 
-Pignataro, et al.         Expires 8 August 2024                 [Page 3]
+
+
+
+
+
+Pignataro, et al.        Expires 27 August 2024                 [Page 3]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
+
+4.  Transport options for sustainability information
+
+   To achieve the goal of transporting useful sustainability information
+   across the network, the first task on our hand was not to find out
+   how to retrive those sustainability metrics from the nodes, but to
+   decide on how to get the sustainability metrics/information from one
+   node to another. i.e., how will we be able to transport them from one
+   node to another.  And the second thing was how much data should be
+   transported and in what format.
+
+   For the first task, there were a lot of options available, like
+   sending all/some of the data over Layer 3, i.e. IP Layer (like ICMP),
+   or using a method based on Layer 5, i.e. Application Layer (like
+   SNMP) to transport the data or just create a new protocol for this
+   purpose.  Similarly, there were also a couple of options available to
+   achieve the second task, sending all data at once and letting the end
+   node process the required data or sending only the relevant
+   information and letting the end node process/calculate the actual/
+   derived metrics respectively, all while following a data framework
+   (like YANG).
+
+   Out of all the options, the first criteria of evaluating the
+   potential option was to choose such a course of action which is
+   standard, modular, backward compatible and can be easily scaled, if
+   needed.  So, upon research, we came across [RFC4884] "Extended ICMP
+   to Support Multi-Part Messages", which described a clever way to
+   retrofit the ICMP protocol such that it can piggypack all kinds of
+   information.  This implementation did seem to fulfill all of our
+   evaluation criterias.  So, based on this, we decided to define an
+   "ICMP Environmental Information Extension Object" to transport
+   sustainability information.
+
+5.  ICMP Environmental Impact Extension
+
+   This section defines the Environmental Information Object, an ICMP
+   extension object with a Class-Num (Object Class Value) of TBA that
+   can be appended to the following messages, as per [RFC4884] and
+   [RFC8335]:
 
    *  ICMPv4 Time Exceeded
    *  ICMPv4 Destination Unreachable
@@ -177,6 +216,15 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    *  ICMPv6 Time Exceeded
    *  ICMPv6 Destination Unreachable
    *  ICMPv6 Extended Echo Reply [RFC8335]
+
+
+
+
+
+Pignataro, et al.        Expires 27 August 2024                 [Page 4]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
 
    The ICMP extension defined in this document MAY be appended to any of
    the above listed messages based on policy and following security
@@ -188,14 +236,14 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    to this extension.
 
    A single ICMP message can contain zero, one, or multiple instances of
-   the Environmental Impact Object.  The C-Type further identifies the
-   information fields carried.
+   the Environmental Information Object.  The C-Type further identifies
+   the information fields carried.
 
-   A single instance of the Environmental Impact Object can convey the
-   following information from each reporting node: TODO FROM C-TYPE
-   DEFINITION.
+   A single instance of the Environmental Information Object can convey
+   the following information from each reporting node in an
+   administrative domain: As explained in Section 5.2.
 
-4.1.  Extension Format
+5.1.  Extension Format
 
    The ICMP Environmental Impact Extension has the following format.
 
@@ -219,28 +267,28 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
       Reserved:
          0 [RFC4884].
 
-
-
-Pignataro, et al.         Expires 8 August 2024                 [Page 4]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
-
       Checksum:
          The one's complement checksum of the ICMP extension [RFC4884].
 
-   (2) Environmental Impact Object
+   (2) Environmental Information Object
 
       Length:
          Length of the object, including header and payload, in octets.
+
+
+
+Pignataro, et al.        Expires 27 August 2024                 [Page 5]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
 
       Class-Num:
          TBA (Environmental Impact)
 
       C-Type:
-         C-Type as explained in Section 4.2.
+         C-Type as explained in Section 5.2.
 
-4.2.  C-Type Definition
+5.2.  C-Type Definition
 
    The 8-bit C-Type defined in the Section 8 of [RFC4884] allows to
    carry different information elements within this Class-Num (TBA).
@@ -260,7 +308,8 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
 
    The following C-Type values are currently defined.
 
-   1.  Power Consumption Sub-Object
+   1.  Power Consumption Sub-Object: {i}Watts ({i} can be anything from
+       K,M,G,T,P,E)
 
                             1                   2                   3
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -271,18 +320,23 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
                       Figure 3: Power Extension Sub-Object
 
        A Class-Num of TBA and a C-Type of 1 are specified.  The returned
-       power metric is a magnitude that may be directly displayed, and
-       is expressed in Watts; one of the uses is having a traceroute or
-       ping facility that shows per-hop power metrics.
+       metric is a node-level power metric from the current
+       administrative domain, which is a magnitude that may be directly
+       displayed, and is expressed in Watts; one of the uses is having a
+       traceroute or ping facility that shows per-hop power metrics.
+
+   2.  Other metrics to be provided in subsequent revisions.
 
 
 
-Pignataro, et al.         Expires 8 August 2024                 [Page 5]
+
+
+
+
+Pignataro, et al.        Expires 27 August 2024                 [Page 6]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
-
-   2.  Other metrics to be provided in subsequent revisions.
 
       |  TODO: It is important to note that there are various metrics
       |  that can be used.  We are starting with node-level metrics, and
@@ -292,20 +346,32 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
       |  Under consideration (i.e., we heard these from reviewers or
       |  list) are
       |  
-      |     a.  Energy per data transmitted
+      |     a.  Energy per data transmission speed: {i}Watts/{i}bps ({i}
+      |         can be anything from K,M,G,T,P,E)
       |  
-      |     b.  Average daily Power normalized to (i.e., divided by)
-      |         maximum switching capacity of the node
+      |         *  Excluding Optics
+      |         *  Including Optics
       |  
-      |     c.  Kw / Gbps without including optics
+      |     b.  Energy per packet: {i}Watts/packet ({i} can be anything
+      |         from K,M,G,T,P,E)
       |  
-      |     d.  Power per packet / power per bype
+      |     c.  Energy per byte: {i}Watts/{i}B ({i} can be anything from
+      |         K,M,G,T,P,E)
       |  
-      |     e.  Idle power
+      |     d.  Node Switching Capacity: {i}bps ({i} can be anything
+      |         from K,M,G,T,P,E)
       |  
-      |     f.  Node Capacity
+      |     e.  Average daily Power normalized to (i.e., divided by)
+      |         maximum switching capacity of the node: {i}Wh/{i}bps
+      |         ({i} can be anything from K,M,G,T,P,E)
+      |  
+      |     f.  Idle power: {i}Watts ({i} can be anything from
+      |         K,M,G,T,P,E)
+      |  
+      |         *  When the device is not serving any traffic
+      |         *  Or _______
 
-5.  Security Considerations
+6.  Security Considerations
 
    The security considerations of [RFC4884] and of [RFC8335] apply to
    these extensions.
@@ -320,6 +386,14 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    new denial-of-service attacks.  Routers may need to limit the rate at
    which ICMP messages are sent.
 
+
+
+
+Pignataro, et al.        Expires 27 August 2024                 [Page 7]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
+
    This document defines an extension that allows a router to append
    environmental impact information to multi-part ICMP messages, and
    therefore can provide the user of the traceroute and ping
@@ -331,13 +405,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    information in ICMP responses.  These mechanisms are not initially
    intended for other uses.
 
-
-
-Pignataro, et al.         Expires 8 August 2024                 [Page 6]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
-
    Some of the additional metrics provided, as e.g., power draw
    information, have privacy considerations.  For example, behavioral
    considerations of the devices, or estimating other node and network
@@ -347,7 +414,7 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    extension that it defines.  Application developers should be aware of
    various ICMP attacks [RFC5927].
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    IANA is requested to assign the following object Class-num in the
    ICMP Extension Object Classes and Class Sub-types registry
@@ -363,6 +430,25 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
 
    IANA is requested to establish a registry for the corresponding class
    sub-type (C-Type) space, as follows:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 27 August 2024                 [Page 8]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
 
       +==============+==============================+===============+
       | C-Type Value | Description                  | Reference     |
@@ -381,22 +467,14 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    C-Type values are assignable on a first-come-first-serve (FCFS)
    basis.
 
-7.  Acknowledgements
+8.  Acknowledgements
 
-   We are very grateful to Michael Welzl for his thorough review and
-   most useful set of comments and suggestions.
+   We are very grateful to Michael Welzl and Jari Arkko for their
+   thorough review and most useful set of comments and suggestions.
 
+9.  References
 
-
-
-Pignataro, et al.         Expires 8 August 2024                 [Page 7]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
-
-8.  References
-
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -417,7 +495,16 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
               RFC 8335, DOI 10.17487/RFC8335, February 2018,
               <https://www.rfc-editor.org/info/rfc8335>.
 
-8.2.  Informative References
+9.2.  Informative References
+
+
+
+
+
+Pignataro, et al.        Expires 27 August 2024                 [Page 9]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
 
    [IAB-EIMPACTWS]
               "IAB workshop on Environmental Impact of Internet
@@ -439,16 +526,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    [RFC0792]  Postel, J., "Internet Control Message Protocol", STD 5,
               RFC 792, DOI 10.17487/RFC0792, September 1981,
               <https://www.rfc-editor.org/info/rfc792>.
-
-
-
-
-
-
-Pignataro, et al.         Expires 8 August 2024                 [Page 8]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
 
    [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
               Control Message Protocol (ICMPv6) for the Internet
@@ -477,6 +554,14 @@ Authors' Addresses
    Ron Bonica
    Juniper Networks
    United States of America
+
+
+
+Pignataro, et al.        Expires 27 August 2024                [Page 10]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
+
    Email: rbonica@juniper.net
 
 
@@ -501,4 +586,31 @@ Authors' Addresses
 
 
 
-Pignataro, et al.         Expires 8 August 2024                 [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 27 August 2024                [Page 11]

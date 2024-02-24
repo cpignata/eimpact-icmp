@@ -51,7 +51,6 @@
       </address>
     </author>
 
-
     <author fullname="Ron Bonica" initials="R." surname="Bonica">
       <organization abbrev="Juniper">Juniper Networks</organization>
 
@@ -63,7 +62,6 @@
         <email>rbonica@juniper.net</email>
       </address>
     </author>
-
     
     <date />
 
@@ -112,7 +110,7 @@
       </t>
       <t>
       Using the extension defined herein, a device can explicitly append
-      these exemplary environmental impact metrics:
+      these exemplary environmental impact metrics across an administrative domain:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
           <t>Power metrics (e.g., time average, min/max)</t>
@@ -123,7 +121,6 @@
         <?rfc subcompact="no" ?>
       </t>
     </section>
-
 
     <section title="Conventions">
       <section title="Definition of Terms">
@@ -140,73 +137,84 @@
       </section>
       <section title="Requirements Language">
         <t>
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 <xref target="RFC2119" /> <xref target="RFC8174" /> when, and only when, they appear in all
-   capitals, as shown here.
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+        "OPTIONAL" in this document are to be interpreted as described in
+        BCP 14 <xref target="RFC2119" /> <xref target="RFC8174" /> when, and only when, they appear in all
+        capitals, as shown here.
         </t>
       </section>
     </section>
 
-
-
-      <section title="Application">
+    <section title="Application">
         <t>
           The IAB held a workshop on "Environmental Impact of Internet Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, in which the need for visibility into environmental impact metrics within traditional Internet tools such as traceroute was highlighted (see WebVTT cue identifiers 139 and 140 of <xref target="IAB-EIMPACTWS-Minutes" />.)
         </t>
         <t>
           The Environmental Impact ICMP Extensions defined in this document allow for augmenting the traceroute output with environmental metrics from each reported node.
         </t>
-      </section>
+    </section>
 
+    <section title="Transport options for sustainability information">
+      <t>
+        To achieve the goal of transporting useful sustainability information across the network, the first task on our hand was not to find out how to retrive those sustainability metrics from the nodes,
+        but to decide on how to get the sustainability metrics/information from one node to another. i.e., how will we be able to transport them from one node to another. And the second thing was how much 
+        data should be transported and in what format.
+      </t>
+      <t>
+        For the first task, there were a lot of options available, like sending all/some of the data over Layer 3, i.e. IP Layer (like ICMP), or using a method based on Layer 5, i.e. Application Layer (like SNMP) to transport
+        the data or just create a new protocol for this purpose. Similarly, there were also a couple of options available to achieve the second task, sending all data at once and letting the end node process the required data 
+        or sending only the relevant information and letting the end node process/calculate the actual/derived metrics respectively, all while following a data framework (like YANG).
+      </t>
+      <t>
+        Out of all the options, the first criteria of evaluating the potential option was to choose such a course of action which is standard, modular, backward compatible and can be easily scaled, if needed. So, upon research, we came across 
+        <xref target="RFC4884" /> "Extended ICMP to Support Multi-Part Messages", which described a clever way to retrofit the ICMP protocol such that it can piggypack all kinds of information. This implementation did seem to 
+        fulfill all of our evaluation criterias. So, based on this, we decided to define an "ICMP Environmental Information Extension Object" to transport sustainability information.
+      </t>
+    </section>
 
     <section title="ICMP Environmental Impact Extension">
       <t>
-           This section defines the Environmental Impact Object, an ICMP
+           This section defines the Environmental Information Object, an ICMP
            extension object with a Class-Num (Object Class Value) of TBA that can
            be appended to the following messages, as per <xref target="RFC4884" /> and <xref target="RFC8335" />:
-     </t>
-
-
-        <t>
-          <?rfc subcompact="yes" ?>
-          <list style="symbols">
-            <t>ICMPv4 Time Exceeded</t>
-            <t>ICMPv4 Destination Unreachable</t>
-            <t>ICMPv4 Parameter Problem</t>
-            <t>ICMPv4 Extended Echo Reply <xref target="RFC8335" /></t>
-            <t>ICMPv6 Time Exceeded</t>
-            <t>ICMPv6 Destination Unreachable</t>
-            <t>ICMPv6 Extended Echo Reply <xref target="RFC8335" /></t>
-          </list>
-          <?rfc subcompact="no" ?>
-        </t>
-
-
-    <t>
-      The ICMP extension defined in this document MAY be appended to any of the above
-      listed messages based on policy and following security
-      considerations.
-    </t>
-          <t>
-      These extensions are preceded by an
-      ICMP Extension Structure Header, and include an ICMP Object Header.  Both are
-      defined in <xref target="RFC4884" />. The same backward compatibility 
-      issues that apply to <xref target="RFC4884" /> apply to this extension.
       </t>
 
-    <t>
-      A single ICMP message can contain zero, one, or multiple instances of the Environmental Impact Object.  The C-Type further identifies the information fields carried.
-    </t>
-    <t>
-      A single instance of the Environmental Impact Object can convey the following information from each reporting node: TODO FROM C-TYPE DEFINITION.
-    </t>
+      <t>
+        <?rfc subcompact="yes" ?>
+        <list style="symbols">
+          <t>ICMPv4 Time Exceeded</t>
+          <t>ICMPv4 Destination Unreachable</t>
+          <t>ICMPv4 Parameter Problem</t>
+          <t>ICMPv4 Extended Echo Reply <xref target="RFC8335" /></t>
+          <t>ICMPv6 Time Exceeded</t>
+          <t>ICMPv6 Destination Unreachable</t>
+          <t>ICMPv6 Extended Echo Reply <xref target="RFC8335" /></t>
+        </list>
+        <?rfc subcompact="no" ?>
+      </t>
 
-    <section title="Extension Format">
-      <t>The ICMP Environmental Impact Extension has the following format.</t>
+      <t>
+        The ICMP extension defined in this document MAY be appended to any of the above
+        listed messages based on policy and following security
+        considerations.
+      </t>
+      <t>
+        These extensions are preceded by an
+        ICMP Extension Structure Header, and include an ICMP Object Header.  Both are
+        defined in <xref target="RFC4884" />. The same backward compatibility 
+        issues that apply to <xref target="RFC4884" /> apply to this extension.
+      </t>
 
+      <t>
+        A single ICMP message can contain zero, one, or multiple instances of the Environmental Information Object.  The C-Type further identifies the information fields carried.
+      </t>
+      <t>
+        A single instance of the Environmental Information Object can convey the following information from each reporting node in an administrative domain: As explained in <xref target="ctype" />.
+      </t>
 
+      <section title="Extension Format">
+        <t>The ICMP Environmental Impact Extension has the following format.</t>
         <figure anchor="format-fig" align="center"
                 title="ICMP Environmental Impact Extension Format">
           <artwork xml:space="preserve">
@@ -223,28 +231,27 @@
         </figure>
 
 
-<t>
-  <list style="hanging">
-    <t hangText="(1) ICMP Extension Header"></t>
-    <t hangText="">
-            <list style="hanging">
-            <t hangText="Version:"><br />2 <xref target="RFC4884" />.</t>
-            <t hangText="Reserved:"><br />0 <xref target="RFC4884" />.</t>
-            <t hangText="Checksum:"><br />The one's complement checksum of the ICMP extension <xref target="RFC4884" />.</t>
-            </list>
-    </t>
-    <t hangText="(2) Environmental Impact Object"></t>
-    <t hangText="">
-            <list style="hanging">
-            <t hangText="Length:"><br />Length of the object, including header and payload, in octets.</t>
-            <t hangText="Class-Num:"><br />TBA (Environmental Impact)</t>
-            <t hangText="C-Type:"><br />C-Type as explained in <xref target="ctype" />.</t>
+        <t>
+          <list style="hanging">
+            <t hangText="(1) ICMP Extension Header"></t>
+            <t hangText="">
+                    <list style="hanging">
+                    <t hangText="Version:"><br />2 <xref target="RFC4884" />.</t>
+                    <t hangText="Reserved:"><br />0 <xref target="RFC4884" />.</t>
+                    <t hangText="Checksum:"><br />The one's complement checksum of the ICMP extension <xref target="RFC4884" />.</t>
+                    </list>
+            </t>
+            <t hangText="(2) Environmental Information Object"></t>
+            <t hangText="">
+                    <list style="hanging">
+                    <t hangText="Length:"><br />Length of the object, including header and payload, in octets.</t>
+                    <t hangText="Class-Num:"><br />TBA (Environmental Impact)</t>
+                    <t hangText="C-Type:"><br />C-Type as explained in <xref target="ctype" />.</t>
+                  </list>
+            </t>
           </list>
-    </t>
-  </list>
-</t>
-
-    </section>
+        </t>
+      </section>
 
 
 <section anchor="ctype" title="C-Type Definition">
@@ -274,14 +281,14 @@
 
 <list style="numbers">
   <t>
-    Power Consumption Sub-Object
+    Power Consumption Sub-Object: {i}Watts ({i} can be anything from K,M,G,T,P,E)
 
         <figure anchor="ctype-1" 
                 title="Power Extension Sub-Object">
                 <postamble>
 
                   A Class-Num of TBA and a C-Type of 1 are specified.  The returned
-      power metric is a magnitude that may be directly displayed, and is expressed in Watts; one of the uses is having
+      metric is a node-level power metric from the current administrative domain, which is a magnitude that may be directly displayed, and is expressed in Watts; one of the uses is having
       a traceroute or ping facility that shows per-hop power metrics.
 
                 </postamble>
@@ -308,13 +315,28 @@
   <t>
     Under consideration (i.e., we heard these from reviewers or list) are 
     <list style="letters">
-      <t>Energy per data transmitted</t>
-      <t>Average daily Power normalized to (i.e., divided by)
-      maximum switching capacity of the node</t>
-      <t>Kw / Gbps without including optics</t>
-      <t>Power per packet / power per bype</t>
-      <t>Idle power</t>
-      <t>Node Capacity</t>
+      <t>
+        Energy per data transmission speed: {i}Watts/{i}bps ({i} can be anything from K,M,G,T,P,E)
+        <?rfc subcompact="yes" ?>
+          <list style="symbols">
+            <t>Excluding Optics</t>
+            <t>Including Optics</t>
+          </list>
+        <?rfc subcompact="no" ?>
+      </t>
+      <t>Energy per packet: {i}Watts/packet ({i} can be anything from K,M,G,T,P,E)</t>
+      <t>Energy per byte: {i}Watts/{i}B ({i} can be anything from K,M,G,T,P,E)</t>
+      <t>Node Switching Capacity: {i}bps ({i} can be anything from K,M,G,T,P,E)</t>
+      <t>Average daily Power normalized to (i.e., divided by) maximum switching capacity of the node: {i}Wh/{i}bps ({i} can be anything from K,M,G,T,P,E)</t>
+      <t>
+        Idle power: {i}Watts ({i} can be anything from K,M,G,T,P,E)
+        <?rfc subcompact="yes" ?>
+          <list style="symbols">
+            <t>When the device is not serving any traffic</t>
+            <t>Or _______ </t>
+          </list>
+        <?rfc subcompact="no" ?>
+      </t>
     </list>
   </t>
 </aside>
@@ -411,7 +433,7 @@
 
     <section title="Acknowledgements">
       <t>
-        We are very grateful to Michael Welzl for his thorough review and most useful set of comments and suggestions.
+        We are very grateful to Michael Welzl and Jari Arkko for their thorough review and most useful set of comments and suggestions.
       </t>
     </section>
 
