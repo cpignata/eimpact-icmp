@@ -146,7 +146,7 @@
       </section>
     </section>
 
-    <section title="Application">
+    <section anchor="application" title="Application">
         <t>
           The IAB held a workshop on "Environmental Impact of Internet Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, in which the need for visibility into environmental impact metrics within traditional Internet tools such as traceroute was highlighted (see WebVTT cue identifiers 139 and 140 of <xref target="IAB-EIMPACTWS-Minutes" />.)
         </t>
@@ -157,19 +157,22 @@
 
     <section title="Transport options for sustainability information">
       <t>
-        To achieve the goal of transporting useful sustainability information across the network, the first task on our hand was not to find out how to retrive those sustainability metrics from the nodes,
-        but to decide on how to get the sustainability metrics/information from one node to another. i.e., how will we be able to transport them from one node to another. And the second thing was how much 
-        data should be transported and in what format.
+        To achieve the goal of transporting useful sustainability information across the network, the are two key considerations. 
+        First, what information is useful to convery and in what format, and second, how to transport that sustainability information.
       </t>
       <t>
-        For the first task, there were a lot of options available, like sending all/some of the data over Layer 3, i.e. IP Layer (like ICMP), or using a method based on Layer 5, i.e. Application Layer (like SNMP) to transport
-        the data or just create a new protocol for this purpose. Similarly, there were also a couple of options available to achieve the second task, sending all data at once and letting the end node process the required data 
-        or sending only the relevant information and letting the end node process/calculate the actual/derived metrics respectively, all while following a data framework (like YANG).
+        For the first task, it is critical to normalize and agree upon the information to convey and format, across potentially multiple transports.
       </t>
       <t>
-        Out of all the options, the first criteria of evaluating the potential option was to choose such a course of action which is standard, modular, backward compatible and can be easily scaled, if needed. So, upon research, we came across 
-        <xref target="RFC4884" /> "Extended ICMP to Support Multi-Part Messages", which described a clever way to retrofit the ICMP protocol such that it can piggypack all kinds of information. This implementation did seem to 
-        fulfill all of our evaluation criterias. So, based on this, we decided to define an "ICMP Environmental Information Extension Object" to transport sustainability information.
+        For the second task, there is a variety of options available depending on use cases. 
+        These can be chategorized based on whether the approach is distributed (i.e., any endpoint or node can request and/or receive the sustainbility information) 
+        or centralized (i.e., a single 'controller' compiles and consolidates the information.) They can also be chategorized based on the networking layer used 
+        (e.g., IP, like ICMP, or application, like SNMP). Further, an existing protocol can be extended, or a brand new protocol can potentially be created for this purpose.
+      </t>
+      <t>
+        Considering the application at hand <xargs target="application" />, out of all these options, this document concerns itself with extending a standardized, modular,
+        backwards-compatible, and scale-proven "Extended ICMP to Support Multi-Part Messages" <xref target="RFC4884" />. This evaluation and decision does not preclude the
+        definition of other methods to transport sustainability information, more fitting to other use-cases.
       </t>
     </section>
 
