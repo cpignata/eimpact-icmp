@@ -213,7 +213,7 @@
         A single ICMP message can contain zero, one, or multiple instances of the Environmental Information Object.  The C-Type further identifies the information fields carried.
       </t>
       <t>
-        A single instance of the Environmental Information Object can convey the following information from each reporting node in an administrative domain: As explained in <xref target="ctype" />.
+        A single instance of the Environmental Information Object can convey one of the information elements defined in <xref target="ctype" /> from each reporting node in an administrative domain. 
       </t>
 
       <section title="Extension Format">
