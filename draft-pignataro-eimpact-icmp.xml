@@ -10,6 +10,7 @@
 <!ENTITY RFC.4884 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4884.xml">
 <!ENTITY RFC.8174 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC.8335 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8335.xml">
+<!ENTITY RFC.8799 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8799.xml">
 ]>
 <?rfc toc="yes"?>
 <?rfc rfcedstyle="yes"?>
@@ -146,7 +147,7 @@
       </section>
     </section>
 
-    <section anchor="application" title="Application">
+    <section title="Application" anchor="application">
         <t>
           The IAB held a workshop on "Environmental Impact of Internet Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, in which the need for visibility into environmental impact metrics within traditional Internet tools such as traceroute was highlighted (see WebVTT cue identifiers 139 and 140 of <xref target="IAB-EIMPACTWS-Minutes" />.)
         </t>
@@ -155,7 +156,7 @@
         </t>
     </section>
 
-    <section title="Transport options for sustainability information">
+    <section title="Transport Options for Sustainability Information">
       <t>
         To achieve the goal of transporting useful sustainability information across the network, the are two key considerations. 
         First, what information is useful to convery and in what format, and second, how to transport that sustainability information.
@@ -170,7 +171,7 @@
         (e.g., IP, like ICMP, or application, like SNMP). Further, an existing protocol can be extended, or a brand new protocol can potentially be created for this purpose.
       </t>
       <t>
-        Considering the application at hand <xargs target="application" />, out of all these options, this document concerns itself with extending a standardized, modular,
+        Considering the application at hand <xref target="application" />, out of all these options, this document concerns itself with extending a standardized, modular,
         backwards-compatible, and scale-proven "Extended ICMP to Support Multi-Part Messages" <xref target="RFC4884" />. This evaluation and decision does not preclude the
         definition of other methods to transport sustainability information, more fitting to other use-cases.
       </t>
@@ -284,14 +285,14 @@
 
 <list style="numbers">
   <t>
-    Power Consumption Sub-Object: {i}Watts ({i} can be anything from K,M,G,T,P,E)
+    Node Power Drawn Sub-Object
 
         <figure anchor="ctype-1" 
                 title="Power Extension Sub-Object">
                 <postamble>
 
                   A Class-Num of TBA and a C-Type of 1 are specified.  The returned
-      metric is a node-level power metric from the current administrative domain, which is a magnitude that may be directly displayed, and is expressed in Watts; one of the uses is having
+      metric is a node-level power metric from the current administrative domain, which is a magnitude that may be directly displayed, and is expressed in Kilo Watts (KW); one of the uses is having
       a traceroute or ping facility that shows per-hop power metrics.
 
                 </postamble>
@@ -319,7 +320,7 @@
     Under consideration (i.e., we heard these from reviewers or list) are 
     <list style="letters">
       <t>
-        Energy per data transmission speed: {i}Watts/{i}bps ({i} can be anything from K,M,G,T,P,E)
+        Energy per data transmission speed: KWatts/Mbps
         <?rfc subcompact="yes" ?>
           <list style="symbols">
             <t>Excluding Optics</t>
@@ -327,12 +328,12 @@
           </list>
         <?rfc subcompact="no" ?>
       </t>
-      <t>Energy per packet: {i}Watts/packet ({i} can be anything from K,M,G,T,P,E)</t>
-      <t>Energy per byte: {i}Watts/{i}B ({i} can be anything from K,M,G,T,P,E)</t>
-      <t>Node Switching Capacity: {i}bps ({i} can be anything from K,M,G,T,P,E)</t>
-      <t>Average daily Power normalized to (i.e., divided by) maximum switching capacity of the node: {i}Wh/{i}bps ({i} can be anything from K,M,G,T,P,E)</t>
+      <t>Energy per packet: KWatts/packet</t>
+      <t>Energy per byte: KWatts/MB</t>
+      <t>Node Switching Capacity: Gbps</t>
+      <t>Average daily Power normalized to (i.e., divided by) maximum switching capacity of the node: KWh/Gbps</t>
       <t>
-        Idle power: {i}Watts ({i} can be anything from K,M,G,T,P,E)
+        Idle power: KWatts
         <?rfc subcompact="yes" ?>
           <list style="symbols">
             <t>When the device is not serving any traffic</t>
@@ -368,19 +369,30 @@
       </t>
       <t>
       This document defines an extension that allows a router to append 
-      environmental impact information to multi-part ICMP messages, and therefore 
+      environmental impact information to multi-part ICMP messages in a single administrative domain, and therefore 
       can provide the user of the traceroute and ping applications with additional 
       metrics.  
       </t>
       <t>
       The intended field of use for the extensions defined in this document
       is administrative debugging and troubleshooting and operational facilities.
-      The extensions
-      herein defined supply additional information in ICMP responses.
+      The extensions herein defined supply additional information in ICMP responses.
       These mechanisms are not initially intended for other uses.
       </t>
       <t>
-        Some of the additional metrics provided, as e.g., power draw information, have privacy considerations. For example, behavioral considerations of the devices, or estimating other node and network attributes from the power or energy data. 
+      Some of the additional metrics provided, as e.g., power draw information, have privacy considerations. For example, behavioral considerations of the devices, or estimating other node and network attributes from the power or energy data. 
+      Other things like identification of the node, deducing node usage patterns are some more privacy concerns that can be related to the metrics. 
+      </t>
+      <t>
+      Keeping these considerations in mind, we decided to keep the scope of the transportation of the sustainability metrics to be limited to a single administrative domain. 
+      But, based on what we undertsand and based on <xref target="RFC8799" />, limiting a protocols functionality doesn't mean that it can be secure.
+      So, this particular document, which defines "a modified ICMP message with sustainability metrics", can be classified as a FAIL-OPEN (ref: draft-wkumari-intarea-safe-limited-domains) protocol.
+      i.e., the interfaces of administrative domain border nodes, facing towards the open internet, can be configured such that they can stop leaking of messages with extensions containing sustainability metrics, out of the AD.
+      But, we do want to allow general ICMP messages. So, we can configure those outward facing interfaces to not block/drop the entire message but only strip off the extension objects and only let the ICMP message go, if an ICMP message with extensions is 
+      destined to go out of the AD.
+      </t>
+      <t>
+      And as the metrics will be limited to the same AD, it can be considered that they can be generated from a valid source and will have integrity.
       </t>
       <t>
       This document does not specify an authentication mechanism for the
@@ -460,6 +472,7 @@
       &RFC.5927;
       &RFC.0792;
       &RFC.4443;
+      &RFC.8799;
 
     <reference anchor="IAB-EIMPACTWS" target="https://datatracker.ietf.org/group/eimpactws/">
         <front>
