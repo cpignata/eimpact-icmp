@@ -64,6 +64,16 @@
       </address>
     </author>
 
+    <author fullname="Michael Welzl" initials="M." surname="Welzl">
+      <organization abbrev="University of Oslo">University of Oslo</organization>
+
+      <address>
+        <postal>
+          <country>Norway</country>
+        </postal>        
+        <email>michawe@ifi.uio.no</email>
+      </address>
+    </author>
     
     <date />
 
