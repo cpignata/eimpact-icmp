@@ -167,7 +167,7 @@
       <t>
         For the second task, there is a variety of options available depending on use cases. 
         These can be categorized based on whether the approach is distributed (i.e., any endpoint or node can request and/or receive the sustainability information) 
-        or centralized (i.e., a single 'controller' compiles and consolidates the information.) They can also be chategorized based on the networking layer used 
+        or centralized (i.e., a single 'controller' compiles and consolidates the information.) They can also be categorized based on the networking layer used 
         (e.g., IP, like ICMP, or application, like SNMP). Further, an existing protocol can be extended, or a brand new protocol can potentially be created for this purpose.
       </t>
       <t>
