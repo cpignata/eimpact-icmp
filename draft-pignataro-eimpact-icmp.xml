@@ -177,7 +177,7 @@
       </t>
     </section>
 
-    <section title="ICMP Environmental Impact Extension">
+    <section title="ICMP Environmental Information Extension">
       <t>
            This section defines the Environmental Information Object, an ICMP
            extension object with a Class-Num (Object Class Value) of TBA that can
