@@ -111,7 +111,7 @@
       </t>
       <t>
       Using the extension defined herein, a device can explicitly append
-      these exemplary environmental impact metrics across an administrative domain:
+      these exemplary environmental impact metrics for transmission across an administrative domain:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
           <t>Power metrics (e.g., time average, min/max)</t>
