@@ -292,7 +292,7 @@
                 <postamble>
 
                   A Class-Num of TBA and a C-Type of 1 are specified.  The returned
-      metric is a node-level power metric from the current administrative domain, which is a magnitude that may be directly displayed, and is expressed in Kilo Watts (KW); one of the uses is having
+      metric is a node-level power metric from the current administrative domain, which is a magnitude that may be directly displayed, and is expressed in Watts (W); one of the uses is having
       a traceroute or ping facility that shows per-hop power metrics.
 
                 </postamble>
@@ -320,7 +320,7 @@
     Under consideration (i.e., we heard these from reviewers or list) are 
     <list style="letters">
       <t>
-        Energy per data transmission speed: KWatts/Mbps
+        Energy per data transmission speed: Watts/Mbps
         <?rfc subcompact="yes" ?>
           <list style="symbols">
             <t>Excluding Optics</t>
@@ -328,12 +328,12 @@
           </list>
         <?rfc subcompact="no" ?>
       </t>
-      <t>Energy per packet: KWatts/packet</t>
-      <t>Energy per byte: KWatts/MB</t>
+      <t>Energy per packet: Watts/packet</t>
+      <t>Energy per byte: Watts/MB</t>
       <t>Node Switching Capacity: Gbps</t>
       <t>Average daily Power normalized to (i.e., divided by) maximum switching capacity of the node: KWh/Gbps</t>
       <t>
-        Idle power: KWatts
+        Idle power: Watts
         <?rfc subcompact="yes" ?>
           <list style="symbols">
             <t>When the device is not serving any traffic</t>
@@ -384,15 +384,15 @@
       Other things like identification of the node, deducing node usage patterns are some more privacy concerns that can be related to the metrics. 
       </t>
       <t>
-      Keeping these considerations in mind, we decided to keep the scope of the transportation of the sustainability metrics to be limited to a single administrative domain. 
-      But, based on what we undertsand and based on <xref target="RFC8799" />, limiting a protocols functionality doesn't mean that it can be secure.
+      Keeping these considerations in mind, we limited the scope of the transportation of the sustainability metrics to a single administrative domain. 
+      But, based on <xref target="RFC8799" />, limiting a protocols functionality doesn't mean that it will be secure.
       So, this particular document, which defines "a modified ICMP message with sustainability metrics", can be classified as a FAIL-OPEN (ref: draft-wkumari-intarea-safe-limited-domains) protocol.
-      i.e., the interfaces of administrative domain border nodes, facing towards the open internet, can be configured such that they can stop leaking of messages with extensions containing sustainability metrics, out of the AD.
-      But, we do want to allow general ICMP messages. So, we can configure those outward facing interfaces to not block/drop the entire message but only strip off the extension objects and only let the ICMP message go, if an ICMP message with extensions is 
+      That is, the interfaces of administrative domain border nodes, facing towards the open internet, can be configured such that they avoid leaking messages with extensions containing sustainability metrics, out of the AD.
+      To allow general ICMP messages, an administrator can configure those outward facing interfaces to not block/drop the entire message but only strip off the extension objects and only forward the ICMP message if it is 
       destined to go out of the AD.
       </t>
       <t>
-      And as the metrics will be limited to the same AD, it can be considered that they can be generated from a valid source and will have integrity.
+      When metrics are limited to the same AD, it can be considered that they can be generated from a valid source and will have integrity.
       </t>
       <t>
       This document does not specify an authentication mechanism for the
