@@ -171,7 +171,7 @@
         (e.g., IP, like ICMP, or application, like SNMP). Further, an existing protocol can be extended, or a brand new protocol can potentially be created for this purpose.
       </t>
       <t>
-        Considering the application at hand <xref target="application" />, out of all these options, this document concerns itself with extending a standardized, modular,
+        This document builds upon a standardized, modular,
         backwards-compatible, and scale-proven "Extended ICMP to Support Multi-Part Messages" <xref target="RFC4884" />. This evaluation and decision does not preclude the
         definition of other methods to transport sustainability information, more fitting to other use-cases.
       </t>
