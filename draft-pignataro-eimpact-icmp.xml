@@ -172,7 +172,7 @@
       </t>
       <t>
         This document builds upon a standardized, modular,
-        backwards-compatible, and scale-proven "Extended ICMP to Support Multi-Part Messages" <xref target="RFC4884" />. This evaluation and decision does not preclude the
+        backwards-compatible, and scale-proven ICMP extension <xref target="RFC4884" />. This does not preclude the
         definition of other methods to transport sustainability information, more fitting to other use-cases.
       </t>
     </section>
