@@ -296,30 +296,27 @@
   </t>
   
   <t>
-    Environmentally Relevant Certification Sub-Object
+    Ecolabels and Environmentally Relevant Certification (EERC) Sub-Object
 
         <figure anchor="ctype-2" 
-                title="Environmental Certification Sub-Object">
-                <postamble>
-
-                  A Class-Num of TBA and a C-Type of 2 are specified.  The returned
-      value references an environmentally relevant certification number.
-
-                </postamble>
+                title="EERC Sub-Object">
           <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|     Certificate number        |0 0 0 0|          Year         |
+|         EERC number           |0 0 0 0|          Year         |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
           </artwork>
         </figure>
 
-The following environmentally relevant certification numbers are defined by the present specification:
-    <list style="letters">
-      <t>0: ISO 14001:2015 </t>
-      <t>1: TCO Certified </t>
-      <t>2: Energy-efficient ethernet</t>
+A Class-Num of TBA and a C-Type of 2 are specified.  The returned
+value references an Ecolabels and Environmentally Relevant Certification (EERC) number.
+
+The following EERC numbers are defined by the present specification:
+    <list style="numbers">
+      <t>ISO 14001:2015 </t>
+      <t>TCO Certified </t>
+      <t>Energy-efficient ethernet</t>
     </list>
 The "Year" field must contain the year in which the certificate was issued, or 0 to indicate "unknown" or "not specified".
 </t>
@@ -436,20 +433,23 @@ The "Year" field must contain the year in which the certificate was issued, or 0
       </t>
 
       <t>
-        IANA is requested to establish a registry for certificate numbers of environmentally relevant certifications (C-Type 2), as follows:
+        IANA is requested to establish a registry for Ecolabels and Environmentally Relevant Certification (EERC) numbers (C-Type 2), as follows:
       </t>
 
-        <texttable title="Environmentally Relevant Certification: certificate numbers" suppress-title="true">
+        <texttable title="EERC numbers" suppress-title="true">
           <ttcol>Number</ttcol>
           <ttcol>Name</ttcol>
           <ttcol>Reference</ttcol>
           <c>0</c>
+          <c>Unspecified</c>
+          <c>&nbsp;</c>
+          <c>1</c>
           <c>ISO 14001:2015</c>
           <c>This document</c>
-          <c>1</c>
+          <c>2</c>
           <c>TCO Certified</c>
           <c>This document</c>
-          <c>2</c>
+          <c>3</c>
           <c>Energy-efficient ethernet</c>
           <c>This document</c>
           <c>2-65535</c>
@@ -459,7 +459,7 @@ The "Year" field must contain the year in which the certificate was issued, or 0
 
 
       <t>
-        Certificate numbers of environmentally relevant certifications are assignable on a first-come-first-serve (FCFS) basis.
+        EERC numbers are assignable on a first-come-first-serve (FCFS) basis.
       </t>
 
     </section>
