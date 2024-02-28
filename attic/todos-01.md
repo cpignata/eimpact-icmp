@@ -8,8 +8,8 @@
 ## Final TODOs
 1. [ ] Ask Ron what elements from the -ivy- draft he would want in.
 2. [ ] Find for a way to identify a component, and then the power of it. (like in ivy-power's S2.a). This can be another C-Type
-3. [ ] Add the discussions about the validity and integrity of the data sent from one node to another.
-4. [ ] Check about ADs (check the applicability of https://datatracker.ietf.org/doc/draft-wkumari-intarea-safe-limited-domains/)
+3. [x] Add the discussions about the validity and integrity of the data sent from one node to another.
+4. [x] Check about ADs (check the applicability of https://datatracker.ietf.org/doc/draft-wkumari-intarea-safe-limited-domains/)
 5. [ ] Mention something about what transports are being used to convey the metrics? (YANG was preferred in the interim). [Directly mention 'ICMP carrying the metrics based on a YANG model' and discuss different choices of transport]
 
 ## Potential Use cases (for future):
