@@ -5,11 +5,11 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                                 J. Parikh
 Intended status: Experimental                        NC State University
-Expires: 31 August 2024                                        R. Bonica
+Expires: 1 September 2024                                      R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                        28 February 2024
+                                                        29 February 2024
 
 
                 ICMP Extensions for Environmental Impact
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 August 2024.
+   This Internet-Draft will expire on 1 September 2024.
 
 
 
 
 
 
-Pignataro, et al.        Expires 31 August 2024                 [Page 1]
+Pignataro, et al.       Expires 1 September 2024                [Page 1]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
@@ -83,13 +83,13 @@ Table of Contents
    5.  ICMP Environmental Information Extension  . . . . . . . . . .   4
      5.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   5
      5.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   6
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
-   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .   9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  10
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 31 August 2024                 [Page 2]
+Pignataro, et al.       Expires 1 September 2024                [Page 2]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
 
 
 
-Pignataro, et al.        Expires 31 August 2024                 [Page 3]
+Pignataro, et al.       Expires 1 September 2024                [Page 3]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
 
 
 
-Pignataro, et al.        Expires 31 August 2024                 [Page 4]
+Pignataro, et al.       Expires 1 September 2024                [Page 4]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
 
 
 
-Pignataro, et al.        Expires 31 August 2024                 [Page 5]
+Pignataro, et al.       Expires 1 September 2024                [Page 5]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
@@ -322,22 +322,45 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
        having a traceroute or ping facility that shows per-hop power
        metrics.
 
-   2.  Other metrics to be provided in subsequent revisions.
+   2.  Ecolabels and Environmentally Relevant Certification (EERC) Sub-
+       Object
+
+                            1                   2                   3
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |         EERC number           |0 0 0 0|          Year         |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+
+Pignataro, et al.       Expires 1 September 2024                [Page 6]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
+
+                           Figure 4: EERC Sub-Object
+
+       A Class-Num of TBA and a C-Type of 2 are specified.  The returned
+       value references an Ecolabels and Environmentally Relevant
+       Certification (EERC) number.  The following EERC numbers are
+       defined by the present specification:
+
+       1.  ISO 14001:2015
+
+       2.  TCO Certified
+
+       3.  Energy-efficient ethernet
+
+       The "Year" field must contain the year in which the certificate
+       was issued, or 0 to indicate "unknown" or "not specified".
+
+   3.  Other metrics to be provided in subsequent revisions.
 
       |  TODO: It is important to note that there are various metrics
       |  that can be used.  We are starting with node-level metrics, and
       |  will move to component-level once node-level are somewhat
       |  stable.
       |  
-
-
-
-
-Pignataro, et al.        Expires 31 August 2024                 [Page 6]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
-
       |  Under consideration (i.e., we heard these from reviewers or
       |  list) are
       |  
@@ -359,6 +382,17 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
       |  
       |         *  When the device is not serving any traffic
       |         *  Or _______
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 1 September 2024                [Page 7]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
 
 6.  Security Considerations
 
@@ -386,14 +420,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    information in ICMP responses.  These mechanisms are not initially
    intended for other uses.
 
-
-
-
-Pignataro, et al.        Expires 31 August 2024                 [Page 7]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
-
    Some of the additional metrics provided, as e.g., power draw
    information, have privacy considerations.  For example, behavioral
    considerations of the devices, or estimating other node and network
@@ -415,6 +441,14 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    outward facing interfaces to not block/drop the entire message but
    only strip off the extension objects and only forward the ICMP
    message if it is destined to go out of the AD.
+
+
+
+
+Pignataro, et al.       Expires 1 September 2024                [Page 8]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
 
    When metrics are limited to the same AD, it can be considered that
    they can be generated from a valid source and will have integrity.
@@ -440,16 +474,6 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
    IANA is requested to establish a registry for the corresponding class
    sub-type (C-Type) space, as follows:
 
-
-
-
-
-
-Pignataro, et al.        Expires 31 August 2024                 [Page 8]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
-
-
       +==============+==============================+===============+
       | C-Type Value | Description                  | Reference     |
       +==============+==============================+===============+
@@ -466,6 +490,41 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
 
    C-Type values are assignable on a first-come-first-serve (FCFS)
    basis.
+
+   IANA is requested to establish a registry for Ecolabels and
+   Environmentally Relevant Certification (EERC) numbers (C-Type 2), as
+   follows:
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 1 September 2024                [Page 9]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
+
+      +=============+==============================+===============+
+      | Number      | Name                         | Reference     |
+      +=============+==============================+===============+
+      | 0           | Reserved                     |               |
+      +-------------+------------------------------+---------------+
+      | 1           | ISO 14001:2015               | This document |
+      +-------------+------------------------------+---------------+
+      | 2           | TCO Certified                | This document |
+      +-------------+------------------------------+---------------+
+      | 3           | Energy-efficient ethernet    | This document |
+      +-------------+------------------------------+---------------+
+      | 4-65527     | Unassigned                   |               |
+      +-------------+------------------------------+---------------+
+      | 65528-65535 | Reserved for Experimentation | This document |
+      +-------------+------------------------------+---------------+
+
+                          Table 3: EERC numbers
+
+   EERC numbers are assignable on a first-come-first-serve (FCFS) basis.
 
 8.  Acknowledgements
 
@@ -495,16 +554,15 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
               RFC 8335, DOI 10.17487/RFC8335, February 2018,
               <https://www.rfc-editor.org/info/rfc8335>.
 
-9.2.  Informative References
 
 
 
-
-
-Pignataro, et al.        Expires 31 August 2024                 [Page 9]
+Pignataro, et al.       Expires 1 September 2024               [Page 10]
 
 Internet-Draft          ICMP E-Impact Extensions           February 2024
 
+
+9.2.  Informative References
 
    [I-D.wkumari-intarea-safe-limited-domains]
               Kumari, W. A., Alston, A., Vyncke, E., and S. Krishnan,
@@ -550,16 +608,20 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
 
 Authors' Addresses
 
+
+
+
+
+
+Pignataro, et al.       Expires 1 September 2024               [Page 11]
+
+Internet-Draft          ICMP E-Impact Extensions           February 2024
+
+
    Carlos Pignataro
    North Carolina State University
    United States of America
    Email: cpignata@gmail.com, cmpignat@ncsu.edu
-
-
-
-Pignataro, et al.        Expires 31 August 2024                [Page 10]
-
-Internet-Draft          ICMP E-Impact Extensions           February 2024
 
 
    Jainam Parikh
@@ -607,10 +669,4 @@ Internet-Draft          ICMP E-Impact Extensions           February 2024
 
 
 
-
-
-
-
-
-
-Pignataro, et al.        Expires 31 August 2024                [Page 11]
+Pignataro, et al.       Expires 1 September 2024               [Page 12]

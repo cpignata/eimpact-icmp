@@ -490,7 +490,7 @@ The "Year" field must contain the year in which the certificate was issued, or 0
           <ttcol>Name</ttcol>
           <ttcol>Reference</ttcol>
           <c>0</c>
-          <c>Unspecified</c>
+          <c>Reserved</c>
           <c>&nbsp;</c>
           <c>1</c>
           <c>ISO 14001:2015</c>
@@ -501,9 +501,12 @@ The "Year" field must contain the year in which the certificate was issued, or 0
           <c>3</c>
           <c>Energy-efficient ethernet</c>
           <c>This document</c>
-          <c>2-65535</c>
+          <c>4-65527</c>
           <c>Unassigned</c>
           <c>&nbsp;</c>
+          <c>65528-65535</c>
+          <c>Reserved for Experimentation</c>
+          <c>This document</c>
         </texttable>
 
 
