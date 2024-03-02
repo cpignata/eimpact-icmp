@@ -412,12 +412,9 @@ The "Year" field must contain the year in which the certificate was issued, or 0
 
 
 
-
-  <t>
-    Other metrics to be provided in subsequent revisions. 
-  </t>
 </list>
 
+<!--
 <aside>
   <t>TODO:  It is important to note that there
       are various metrics that can be used. We are starting with node-level metrics, and will move to component-level once node-level are somewhat stable.
@@ -450,12 +447,21 @@ The "Year" field must contain the year in which the certificate was issued, or 0
     </list>
   </t>
 </aside>
+-->
 
-
-</section>
+      </section>
 
 
     </section>
+
+
+
+    <section title="Sample Use Case">
+      <t>
+        This section explains a typical use case of the extensions.
+      </t>
+    </section>
+
 
 
     <section title="Security Considerations">

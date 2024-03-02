@@ -83,13 +83,14 @@ Table of Contents
    5.  ICMP Environmental Information Extension  . . . . . . . . . .   4
      5.1.  Extension Format  . . . . . . . . . . . . . . . . . . . .   5
      5.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   6
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  12
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  12
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  12
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .  12
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  13
+   6.  Sample Use Case . . . . . . . . . . . . . . . . . . . . . . .   8
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  11
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  11
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  12
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
@@ -105,7 +106,6 @@ Table of Contents
    with sustainability but also on bridging gaps in the tools that are
    already available, to enhance visibility, measurement, and
    quantification of their impact.  Consequently, tools which have been
-   foundational for control and management for decades now encounter new
 
 
 
@@ -114,6 +114,7 @@ Pignataro, et al.       Expires 3 September 2024                [Page 2]
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
+   foundational for control and management for decades now encounter new
    requirements including enhancing them to cater to a significantly
    increasing demand for monitoring the sustainability and environmental
    impact.  This document serves that need by defining an ICMP extension
@@ -159,9 +160,8 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
    traditional Internet tools such as traceroute was highlighted (see
    WebVTT cue identifiers 139 and 140 of [IAB-EIMPACTWS-Minutes].)
 
-   The Environmental Information ICMP Extensions defined in this
-   document allow for augmenting the traceroute output with
-   environmental metrics from each reported node.
+
+
 
 
 
@@ -169,6 +169,10 @@ Pignataro, et al.       Expires 3 September 2024                [Page 3]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
+
+   The Environmental Information ICMP Extensions defined in this
+   document allow for augmenting the traceroute output with
+   environmental metrics from each reported node.
 
 4.  Transport Options for Sustainability Information
 
@@ -214,10 +218,6 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
    The ICMP extension defined in this document MAY be appended to any of
    the above listed messages based on policy and following security
    considerations.
-
-
-
-
 
 
 
@@ -420,45 +420,11 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
        uniquely indentifying the component, and the actual power being
        drawn by said component expressed in Watts (W)
 
-   5.  Other metrics to be provided in subsequent revisions.
+6.  Sample Use Case
 
-      |  TODO: It is important to note that there are various metrics
-      |  that can be used.  We are starting with node-level metrics, and
-      |  will move to component-level once node-level are somewhat
-      |  stable.
-      |  
-      |  Under consideration (i.e., we heard these from reviewers or
-      |  list) are
-      |  
-      |     a.  Energy per data transmission speed: Watts/Mbps
-      |  
-      |         *  Excluding Optics
-      |         *  Including Optics
-      |  
-      |     b.  Energy per packet: Watts/packet
-      |  
-      |     c.  Energy per byte: Watts/MB
-      |  
-      |     d.  Node Switching Capacity: Gbps
-      |  
+   This section explains a typical use case of the extensions.
 
-
-
-
-Pignataro, et al.       Expires 3 September 2024                [Page 8]
-
-Internet-Draft          ICMP E-Impact Extensions              March 2024
-
-
-      |     e.  Average daily Power normalized to (i.e., divided by)
-      |         maximum switching capacity of the node: KWh/Gbps
-      |  
-      |     f.  Idle power: Watts
-      |  
-      |         *  When the device is not serving any traffic
-      |         *  Or _______
-
-6.  Security Considerations
+7.  Security Considerations
 
    The security considerations of [RFC4884] and of [RFC8335] apply to
    these extensions.
@@ -472,6 +438,17 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
    sends an ICMP message.  Therefore, it does not expose routers to any
    new denial-of-service attacks.  Routers may need to limit the rate at
    which ICMP messages are sent.
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 3 September 2024                [Page 8]
+
+Internet-Draft          ICMP E-Impact Extensions              March 2024
+
 
    This document defines an extension that allows a router to append
    environmental impact information to multi-part ICMP messages in a
@@ -498,14 +475,6 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
    particular document, which defines "a modified ICMP message with
    sustainability metrics", can be classified as a FAIL-OPEN protocol
    [I-D.wkumari-intarea-safe-limited-domains].  That is, the interfaces
-
-
-
-Pignataro, et al.       Expires 3 September 2024                [Page 9]
-
-Internet-Draft          ICMP E-Impact Extensions              March 2024
-
-
    of administrative domain border nodes, facing towards the open
    internet, can be configured such that they avoid leaking messages
    with extensions containing sustainability metrics, out of the AD.  To
@@ -521,11 +490,21 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
    extension that it defines.  Application developers should be aware of
    various ICMP attacks [RFC5927].
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    IANA is requested to assign the following object Class-num in the
    ICMP Extension Object Classes and Class Sub-types registry
    [IANA-ICMP-Extended]:
+
+
+
+
+
+
+Pignataro, et al.       Expires 3 September 2024                [Page 9]
+
+Internet-Draft          ICMP E-Impact Extensions              March 2024
+
 
     +=============+==================================+===============+
     | Class Value | Class name                       | Reference     |
@@ -537,30 +516,6 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
    IANA is requested to establish a registry for the corresponding class
    sub-type (C-Type) space, as follows:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pignataro, et al.       Expires 3 September 2024               [Page 10]
-
-Internet-Draft          ICMP E-Impact Extensions              March 2024
-
 
      +==============+===============================+===============+
      | C-Type Value | Description                   | Reference     |
@@ -590,6 +545,23 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
    Environmentally Relevant Certification (EERC) numbers (C-Type 2), as
    follows:
 
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 3 September 2024               [Page 10]
+
+Internet-Draft          ICMP E-Impact Extensions              March 2024
+
+
       +=============+==============================+===============+
       | Number      | Name                         | Reference     |
       +=============+==============================+===============+
@@ -610,22 +582,14 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
    EERC numbers are assignable on a first-come-first-serve (FCFS) basis.
 
-
-
-
-Pignataro, et al.       Expires 3 September 2024               [Page 11]
-
-Internet-Draft          ICMP E-Impact Extensions              March 2024
-
-
-8.  Acknowledgements
+9.  Acknowledgements
 
    We are very grateful to Jari Arkko for his thorough review and most
    useful set of comments and suggestions.
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -646,7 +610,15 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
               RFC 8335, DOI 10.17487/RFC8335, February 2018,
               <https://www.rfc-editor.org/info/rfc8335>.
 
-9.2.  Informative References
+
+
+
+Pignataro, et al.       Expires 3 September 2024               [Page 11]
+
+Internet-Draft          ICMP E-Impact Extensions              March 2024
+
+
+10.2.  Informative References
 
    [I-D.wkumari-intarea-safe-limited-domains]
               Kumari, W. A., Alston, A., Vyncke, E., and S. Krishnan,
@@ -665,14 +637,6 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
               Steps", eimpactws Session 4, 12 December 2022,
               <https://datatracker.ietf.org/doc/minutes-interim-2022-
               eimpactws-04-202212121400/>.
-
-
-
-
-Pignataro, et al.       Expires 3 September 2024               [Page 12]
-
-Internet-Draft          ICMP E-Impact Extensions              March 2024
-
 
    [IANA-ICMP-Extended]
               "Internet Control Message Protocol (ICMP) Parameters, ICMP
@@ -700,6 +664,16 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 Authors' Addresses
 
+
+
+
+
+
+Pignataro, et al.       Expires 3 September 2024               [Page 12]
+
+Internet-Draft          ICMP E-Impact Extensions              March 2024
+
+
    Carlos Pignataro
    North Carolina State University
    United States of America
@@ -722,6 +696,32 @@ Authors' Addresses
    University of Oslo
    Norway
    Email: michawe@ifi.uio.no
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
