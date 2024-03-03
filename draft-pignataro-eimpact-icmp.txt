@@ -177,7 +177,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 4.  Transport Options for Sustainability Information
 
    To achieve the goal of transporting useful sustainability information
-   across the network, the are two key considerations.  First, what
+   across the network, there are two key considerations.  First, what
    information is useful to convey and in what format, and second, how
    to transport that sustainability information.
 
