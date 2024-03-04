@@ -27,7 +27,7 @@
   <?rfc strict="yes" ?>
 
   <front>
-    <title abbrev="ICMP E-Impact Extensions">ICMP Extensions for Environmental Impact</title>
+    <title abbrev="ICMP E-Impact Extensions">ICMP Extensions for Environmental Information</title>
 
     <author fullname="Carlos Pignataro" initials="C." surname="Pignataro">
       <organization abbrev="NC State University">North Carolina State University</organization>
@@ -164,13 +164,13 @@
           The IAB held a workshop on "Environmental Impact of Internet Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, in which the need for visibility into environmental impact metrics within traditional Internet tools such as traceroute was highlighted (see WebVTT cue identifiers 139 and 140 of <xref target="IAB-EIMPACTWS-Minutes" />.)
         </t>
         <t>
-          The Environmental Impact ICMP Extensions defined in this document allow for augmenting the traceroute output with environmental metrics from each reported node.
+          The Environmental Information ICMP Extensions defined in this document allow for augmenting the traceroute output with environmental metrics from each reported node.
         </t>
     </section>
 
     <section title="Transport Options for Sustainability Information">
       <t>
-        To achieve the goal of transporting useful sustainability information across the network, the are two key considerations. 
+        To achieve the goal of transporting useful sustainability information across the network, there are two key considerations. 
         First, what information is useful to convey and in what format, and second, how to transport that sustainability information.
       </t>
       <t>
@@ -223,16 +223,16 @@
       </t>
 
       <t>
-        A single ICMP message can contain zero, one, or multiple instances of the Environmental Information Object.  The C-Type further identifies the information fields carried.
+        A single ICMP message can contain zero, one, or multiple instances of  Environmental Information Objects.  The C-Type further identifies the information fields carried.
       </t>
       <t>
         A single instance of the Environmental Information Object can convey one of the information elements defined in <xref target="ctype" /> from each reporting node in an administrative domain. 
       </t>
 
       <section title="Extension Format">
-        <t>The ICMP Environmental Impact Extension has the following format.</t>
+        <t>The ICMP Environmental Information Extension has the following format.</t>
         <figure anchor="format-fig" align="center"
-                title="ICMP Environmental Impact Extension Format">
+                title="ICMP Environmental Information Extension Format">
           <artwork xml:space="preserve">
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -261,11 +261,15 @@
             <t hangText="">
                     <list style="hanging">
                     <t hangText="Length:"><br />Length of the object, including header and payload, in octets.</t>
-                    <t hangText="Class-Num:"><br />TBA (Environmental Impact)</t>
+                    <t hangText="Class-Num:"><br />TBA (Environmental Information)</t>
                     <t hangText="C-Type:"><br />C-Type as explained in <xref target="ctype" />.</t>
+                    <t hangText="Object Payload:"><br />As defined by each C-Type.</t>
                   </list>
             </t>
           </list>
+        </t>
+        <t>
+          While there is a single ICMP Extension Header, there could be multiple Environmental Information Objects.
         </t>
       </section>
 
@@ -282,8 +286,8 @@
 
 
         <figure anchor="ctype-fig" align="center"
-                title="Environmental Impact Extension Object Header">
-                <preamble>The ICMP Environmental Impact Extension Object header has the following format:</preamble>
+                title="Environmental Information Extension Object Header">
+                <preamble>The ICMP Environmental Information Extension Object header has the following format:</preamble>
           <artwork xml:space="preserve">
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -296,18 +300,12 @@
 <t>The following C-Type values are currently defined.</t>
 
 <list style="numbers">
+
   <t>
-    Node Power Drawn Sub-Object
+    Node Power Draw Sub-Object
 
         <figure anchor="ctype-1" 
-                title="Power Extension Sub-Object">
-                <postamble>
-
-                  A Class-Num of TBA and a C-Type of 1 are specified.  The returned
-      metric is a node-level power metric from the current administrative domain, which is a magnitude that may be directly displayed, and is expressed in Watts (W); one of the uses is having
-      a traceroute or ping facility that shows per-hop power metrics.
-
-                </postamble>
+                title="Node Power Draw Sub-Object">
           <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -316,12 +314,43 @@
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
           </artwork>
         </figure>
+                  A Class-Num of TBA and a C-Type of 1 are specified.  
+                  <vspace blankLines="1" />
+                  The Length is always 8.
+                  <vspace blankLines="1" />
+                  The returned
+      value is the node-level current power being drawn, which is a magnitude that may be directly displayed, and is expressed in Watts (W).
   </t>
   
+
+  <t>
+    Node Throughput Sub-Object
+
+        <figure anchor="ctype-2" 
+                title="Node Throughput Sub-Object">
+          <artwork xml:space="preserve" >
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|              Throughput (32-bit unsigned word)                |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+          </artwork>
+        </figure>
+                  A Class-Num of TBA and a C-Type of 2 are specified.  
+                  <vspace blankLines="1" />
+                  The Length is always 8.
+                  <vspace blankLines="1" />
+                  The returned
+      value is the node-level current throughput, which is a magnitude that may be directly displayed, and is expressed in bits-per-second (BPS). This allows the recipient of the ICMP message to determine a relationship between power and traffic load.
+  </t>
+  
+
+
+
   <t>
     Ecolabels and Environmentally Relevant Certification (EERC) Sub-Object
 
-        <figure anchor="ctype-2" 
+        <figure anchor="ctype-3" 
                 title="EERC Sub-Object">
           <artwork xml:space="preserve" >
                      1                   2                   3
@@ -332,7 +361,11 @@
           </artwork>
         </figure>
 
-A Class-Num of TBA and a C-Type of 2 are specified.  The returned
+A Class-Num of TBA and a C-Type of 3 are specified.  
+                  <vspace blankLines="1" />
+                  The Length is always 8.
+                  <vspace blankLines="1" />
+The returned
 value references an Ecolabels and Environmentally Relevant Certification (EERC) number.
 
 The following EERC numbers are defined by the present specification:
@@ -345,11 +378,43 @@ The "Year" field must contain the year in which the certificate was issued, or 0
 </t>
 
 
+
   <t>
-    Other metrics to be provided in subsequent revisions. 
+    Component-level Power Draw Sub-Object
+
+        <figure anchor="ctype-4" 
+                title="Component-level Power Draw Element">
+          <artwork xml:space="preserve" >
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 1                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 2                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 3                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 4                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                Component Power (32-bit word)                  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+          </artwork>
+        </figure>
+                  A Class-Num of TBA and a C-Type of 4 are specified.  
+                  <vspace blankLines="1" />
+                  The Length is always 4 plus 20 times the number of elements included.
+                  <vspace blankLines="1" />
+                  The returned
+      value is one or more instances of component-level power drawn metrics. 
+      Each instance is a set comprised by a UUID uniquely indentifying the component, and the actual power being drawn by said component expressed in Watts (W).
   </t>
+  
+
+
+
 </list>
 
+<!--
 <aside>
   <t>TODO:  It is important to note that there
       are various metrics that can be used. We are starting with node-level metrics, and will move to component-level once node-level are somewhat stable.
@@ -382,12 +447,21 @@ The "Year" field must contain the year in which the certificate was issued, or 0
     </list>
   </t>
 </aside>
+-->
 
-
-</section>
+      </section>
 
 
     </section>
+
+
+
+    <section title="Sample Use Case">
+      <t>
+        This section explains a typical use case of the extensions.
+      </t>
+    </section>
+
 
 
     <section title="Security Considerations">
@@ -444,12 +518,12 @@ The "Year" field must contain the year in which the certificate was issued, or 0
         IANA is requested to assign the following object Class-num in the ICMP Extension Object Classes and Class Sub-types registry <xref target="IANA-ICMP-Extended" />:
       </t>
 
-        <texttable title="Class-num for Environmental Impact Extensions" suppress-title="true">
+        <texttable title="Class-num for Environmental Information Extensions" suppress-title="true">
           <ttcol>Class Value</ttcol>
           <ttcol>Class name</ttcol>
           <ttcol>Reference</ttcol>
           <c>TBA</c>
-          <c>Environmental Impact Object</c>
+          <c>Environmental Information Object</c>
           <c>This document</c>
         </texttable>
         
@@ -458,7 +532,7 @@ The "Year" field must contain the year in which the certificate was issued, or 0
    (C-Type) space, as follows:
       </t>
 
-        <texttable title="C-Types for Environmental Impact Extensions" suppress-title="true">
+        <texttable title="C-Types for Environmental Information Extensions" suppress-title="true">
           <ttcol>C-Type Value</ttcol>
           <ttcol>Description</ttcol>
           <ttcol>Reference</ttcol>
@@ -466,8 +540,19 @@ The "Year" field must contain the year in which the certificate was issued, or 0
           <c>Reserved</c>
           <c>This document</c>
           <c>1</c>
-          <c>Power</c>
+          <c>Node Power Draw</c>
           <c>This document</c>
+          <c>2</c>
+          <c>Node Throughput</c>
+          <c>This document</c>
+          <c>3</c>
+          <c>Ecolabels and Environmentally Relevant Certification (EERC)</c>
+          <c>This document</c>
+          <c>4</c>
+          <c>Component-level Power Draw</c>
+          <c>This document</c>
+
+
           <c>2-246</c>
           <c>Unassigned</c>
           <c>&nbsp;</c>
