@@ -5,11 +5,11 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                                 J. Parikh
 Intended status: Experimental                        NC State University
-Expires: 3 September 2024                                      R. Bonica
+Expires: 5 September 2024                                      R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                            2 March 2024
+                                                            4 March 2024
 
 
              ICMP Extensions for Environmental Information
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 September 2024.
+   This Internet-Draft will expire on 5 September 2024.
 
 
 
 
 
 
-Pignataro, et al.       Expires 3 September 2024                [Page 1]
+Pignataro, et al.       Expires 5 September 2024                [Page 1]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.       Expires 3 September 2024                [Page 2]
+Pignataro, et al.       Expires 5 September 2024                [Page 2]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-Pignataro, et al.       Expires 3 September 2024                [Page 3]
+Pignataro, et al.       Expires 5 September 2024                [Page 3]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-Pignataro, et al.       Expires 3 September 2024                [Page 4]
+Pignataro, et al.       Expires 5 September 2024                [Page 4]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-Pignataro, et al.       Expires 3 September 2024                [Page 5]
+Pignataro, et al.       Expires 5 September 2024                [Page 5]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -289,7 +289,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
          As defined by each C-Type.
 
    While there is a single ICMP Extension Header, there could be
-   multiple Environmental Information Objects
+   multiple Environmental Information Objects.
 
 5.2.  C-Type Definition
 
@@ -325,15 +325,15 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
        The Length is always 8.
 
-       The returned value is the node-level actual power being drawn,
+       The returned value is the node-level current power being drawn,
        which is a magnitude that may be directly displayed, and is
-       expressed in Watts (W)
+       expressed in Watts (W).
 
    2.  Node Throughput Sub-Object
 
 
 
-Pignataro, et al.       Expires 3 September 2024                [Page 6]
+Pignataro, et al.       Expires 5 September 2024                [Page 6]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -350,9 +350,11 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
        The Length is always 8.
 
-       The returned value is the node-level actual throughput, which is
+       The returned value is the node-level current throughput, which is
        a magnitude that may be directly displayed, and is expressed in
-       bits-per-second (BPS)
+       bits-per-second (BPS).  This allows the recipient of the ICMP
+       message to determine a relationship between power and traffic
+       load.
 
    3.  Ecolabels and Environmentally Relevant Certification (EERC) Sub-
        Object
@@ -387,9 +389,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-
-
-Pignataro, et al.       Expires 3 September 2024                [Page 7]
+Pignataro, et al.       Expires 5 September 2024                [Page 7]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -418,7 +418,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
        The returned value is one or more instances of component-level
        power drawn metrics.  Each instance is a set comprised by a UUID
        uniquely indentifying the component, and the actual power being
-       drawn by said component expressed in Watts (W)
+       drawn by said component expressed in Watts (W).
 
 6.  Sample Use Case
 
@@ -445,7 +445,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-Pignataro, et al.       Expires 3 September 2024                [Page 8]
+Pignataro, et al.       Expires 5 September 2024                [Page 8]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -501,7 +501,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-Pignataro, et al.       Expires 3 September 2024                [Page 9]
+Pignataro, et al.       Expires 5 September 2024                [Page 9]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -557,7 +557,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-Pignataro, et al.       Expires 3 September 2024               [Page 10]
+Pignataro, et al.       Expires 5 September 2024               [Page 10]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -613,7 +613,7 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-Pignataro, et al.       Expires 3 September 2024               [Page 11]
+Pignataro, et al.       Expires 5 September 2024               [Page 11]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -669,7 +669,7 @@ Authors' Addresses
 
 
 
-Pignataro, et al.       Expires 3 September 2024               [Page 12]
+Pignataro, et al.       Expires 5 September 2024               [Page 12]
 
 Internet-Draft          ICMP E-Impact Extensions              March 2024
 
@@ -725,4 +725,4 @@ Internet-Draft          ICMP E-Impact Extensions              March 2024
 
 
 
-Pignataro, et al.       Expires 3 September 2024               [Page 13]
+Pignataro, et al.       Expires 5 September 2024               [Page 13]
