@@ -269,7 +269,7 @@
           </list>
         </t>
         <t>
-          While there is a single ICMP Extension Header, there could be multiple Environmental Information Objects
+          While there is a single ICMP Extension Header, there could be multiple Environmental Information Objects.
         </t>
       </section>
 
@@ -319,7 +319,7 @@
                   The Length is always 8.
                   <vspace blankLines="1" />
                   The returned
-      value is the node-level actual power being drawn, which is a magnitude that may be directly displayed, and is expressed in Watts (W)
+      value is the node-level current power being drawn, which is a magnitude that may be directly displayed, and is expressed in Watts (W).
   </t>
   
 
@@ -341,7 +341,7 @@
                   The Length is always 8.
                   <vspace blankLines="1" />
                   The returned
-      value is the node-level actual throughput, which is a magnitude that may be directly displayed, and is expressed in bits-per-second (BPS)
+      value is the node-level current throughput, which is a magnitude that may be directly displayed, and is expressed in bits-per-second (BPS). This allows the recipient of the ICMP message to determine a relationship between power and traffic load.
   </t>
   
 
@@ -406,7 +406,7 @@ The "Year" field must contain the year in which the certificate was issued, or 0
                   <vspace blankLines="1" />
                   The returned
       value is one or more instances of component-level power drawn metrics. 
-      Each instance is a set comprised by a UUID uniquely indentifying the component, and the actual power being drawn by said component expressed in Watts (W)
+      Each instance is a set comprised by a UUID uniquely indentifying the component, and the actual power being drawn by said component expressed in Watts (W).
   </t>
   
 
