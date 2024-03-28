@@ -466,7 +466,7 @@ The "Year" field must contain the year in which the certificate was issued, or 0
       </t>
       <t>  
         The flavor of traceroute that has been shown here does support the ICMP extensions and is
-        capable of deliverintg the metrics in the extensions to the end user along with the nodes that 
+        capable of delivering the metrics in the extensions to the end user along with the nodes that 
         the original datagram visited on it's way to the destination. And, it also is backwards-compatible,
         i.e., it can also work well with those nodes which doesn't support ICMP extensions.
       </t>
