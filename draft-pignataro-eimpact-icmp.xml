@@ -472,7 +472,7 @@ The "Year" field must contain the year in which the certificate was issued, or 0
       </t>
       <t>
         Host A executes a traceroute to 192.168.2.1 and the <xref target="use-case-1" /> shows how the user
-        of Host A will be presented with the metrics:
+        will be presented with the metrics:
         <figure anchor="use-case-1" title="Sustainability Metrics infused Traceroute">
           <artwork xml:space="preserve" >
 > traceroute 192.168.2.1
