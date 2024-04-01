@@ -471,7 +471,7 @@ The "Year" field must contain the year in which the certificate was issued, or 0
         i.e., it can also work well with those nodes which doesn't support ICMP extensions.
       </t>
       <t>
-        Host A executes a traceroute to 192.168.2.1 and the <xref target="use-case-1" /> shows how the user
+        A user at a host with IP address 192.168.120.126 executes a traceroute to 192.168.2.1 and the <xref target="use-case-1" /> shows how the user
         will be presented with the metrics:
         <figure anchor="use-case-1" title="Sustainability Metrics infused Traceroute">
           <artwork xml:space="preserve" >
