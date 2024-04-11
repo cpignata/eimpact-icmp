@@ -296,7 +296,10 @@
               <list style="hanging">
                 <t hangText="Length:">
                   <br />Length of the object, including header and payload, 
-                  in octets.
+                  in octets. If there is no payload, the value of Length is 4.
+                  This is used to convey that the object is unavailable (e.g.,
+                  because the requested information is not applicable for the
+                  type of component that is being queried).
                 </t>
                 <t hangText="Class-Num:">
                   <br />TBA (Environmental Information)
@@ -359,7 +362,8 @@
             </figure>
             A Class-Num of TBA and a C-Type of 1 are specified.  
             <vspace blankLines="1" />
-            The Length is always 8.
+            The Length is 8 if the object contains this payload.
+            A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
             The returned value is the node-level current power being drawn, 
             which is a magnitude that may be directly displayed, and is 
@@ -381,7 +385,8 @@
             </figure>
             A Class-Num of TBA and a C-Type of 2 are specified.  
             <vspace blankLines="1" />
-            The Length is always 8.
+            The Length is 8 if the object contains this payload.
+            A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
             The returned value is the node-level current throughput, 
             which is a magnitude that may be directly displayed, and 
@@ -405,7 +410,8 @@
 
             A Class-Num of TBA and a C-Type of 3 are specified.  
             <vspace blankLines="1" />
-            The Length is always 8.
+            The Length is 8 if the object contains this payload.
+            A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
             The returned value references an Ecolabels and 
             Environmentally Relevant Certification (EERC) number.
@@ -443,14 +449,49 @@
             </figure>
             A Class-Num of TBA and a C-Type of 4 are specified.  
             <vspace blankLines="1" />
-            The Length is always 4 plus 20 times the number of 
-            elements included.
+            The Length is 4 plus 20 times the number of 
+            elements included. A Length value of 4 indicates that
+            this object is unavailable.
             <vspace blankLines="1" />
             The returned value is one or more instances of component-level 
             power drawn metrics. Each instance is a set comprised by a 
             UUID uniquely identifying the component, and the actual power 
             being drawn by said component expressed in Watts (W).
           </t>
+
+          <t>
+            Component-level Throughput Sub-Object
+            <figure anchor="ctype-5" 
+                    title="Component-level Throughput Element">
+              <artwork xml:space="preserve" >
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 1                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 2                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 3                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 4                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|              Component Throughput (32-bit word)               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+              </artwork>
+            </figure>
+            A Class-Num of TBA and a C-Type of 5 are specified.  
+            <vspace blankLines="1" />
+            The Length is 4 plus 20 times the number of 
+            elements included. A Length value of 4 indicates that
+            this object is unavailable.
+            <vspace blankLines="1" />
+            The returned value is one or more instances of component-level 
+            throughput. Each instance is a set comprised
+            by a UUID uniquely identifying the component, and the actual
+            throughput of said component in bits-per-second (BPS).
+            This allows the recipient of the ICMP message to determine a
+            relationship between power and traffic load.
+          </t>          
         </list>
 
 <!--
@@ -646,6 +687,9 @@ Trace complete.
           <c>This document</c>
           <c>4</c>
           <c>Component-level Power Draw</c>
+          <c>This document</c>
+          <c>5</c>
+          <c>Component-level Throughput</c>
           <c>This document</c>
           <c>2-246</c>
           <c>Unassigned</c>
