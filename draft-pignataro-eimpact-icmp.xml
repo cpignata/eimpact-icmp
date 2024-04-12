@@ -11,6 +11,7 @@
 <!ENTITY RFC.8174 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC.8335 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8335.xml">
 <!ENTITY RFC.8799 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8799.xml">
+<!ENTITY RFC.4122 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4122.xml">
 <!ENTITY I-D.wkumari-intarea-safe-limited-domains SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-wkumari-intarea-safe-limited-domains-00.xml">
 ]>
 <?rfc toc="yes"?>
@@ -455,7 +456,7 @@
             <vspace blankLines="1" />
             The returned value is one or more instances of component-level 
             power drawn metrics. Each instance is a set comprised by a 
-            UUID uniquely identifying the component, and the actual power 
+            UUID <xref target="RFC4122" /> uniquely identifying the component, and the actual power 
             being drawn by said component expressed in Watts (W).
           </t>
 
@@ -759,6 +760,7 @@ Trace complete.
     
     <references title="Informative References">
 
+      &RFC.4122;
       &RFC.5927;
       &RFC.0792;
       &RFC.4443;
