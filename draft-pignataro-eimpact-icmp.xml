@@ -357,7 +357,9 @@
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                Power (32-bit unsigned word)                   |
+|            Present Power (32-bit unsigned word)               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Idle Power (32-bit unsigned word)                 |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
               </artwork>
             </figure>
@@ -366,9 +368,12 @@
             The Length is 8 if the object contains this payload.
             A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
-            The returned value is the node-level current power being drawn, 
+            The Present Power is the node-level power being presently drawn, 
             which is a magnitude that may be directly displayed, and is 
-            expressed in Watts (W).
+            expressed in Watts (W). A value of 0 indicates that the
+            Present Power is not available. The Idle Power is the
+            node-level power when the node is idle. A value of 0 indicates
+            that the Idle Power is not available.
           </t>
 
           <t>
@@ -444,7 +449,9 @@
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                      UUID 32-bit Word 4                       |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                Component Power (32-bit word)                  |
+|       Present Component Power (32-bit unsigned word)          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|        Idle Component Power (32-bit unsigned word)            |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
               </artwork>
             </figure>
@@ -456,8 +463,14 @@
             <vspace blankLines="1" />
             The returned value is one or more instances of component-level 
             power drawn metrics. Each instance is a set comprised by a 
-            UUID <xref target="RFC4122" /> uniquely identifying the component, and the actual power 
-            being drawn by said component expressed in Watts (W).
+            UUID <xref target="RFC4122" /> uniquely identifying the component, and
+            the Present Component Power and Idle Component Power fields.
+            The Present Component Power is the component-level power being
+            presently drawn, which is a magnitude that may be directly displayed,
+            and is expressed in Watts (W). A value of 0 indicates that the
+            Present Component Power is not available. The Idle Component Power
+            is the component-level power when the component is idle. A value
+            of 0 indicates that the Idle Component Power is not available.
           </t>
 
           <t>
@@ -560,19 +573,20 @@
 Tracing route to 192.0.2.1 over a maximum of 30 hops
 
   1     3 ms     1 ms     2 ms  203.0.113.118
-       Power(Node=160W,Fan=7W,Chassis=10W)
+       Present Power(Node=160W,Fan=7W)
+       Idle Power(Node=152W,Fan=7W,Chassis=10W)
        Throughput(53687091200bps)
        EERC(ISO 14001:2015, Energy-efficient ethernet)
 
   2    12 ms     9 ms     9 ms  192.0.2.9
-       Power(Node=163W,Fan=8W,Chassis=11W)
+       Present Power(Node=163W,Fan=8W,Chassis=11W)
        Throughput(55834574848bps)
        EERC(ISO 14001:2015)
 
   3    12 ms     9 ms     9 ms  192.0.2.17
 
   4     7 ms     4 ms     7 ms  192.0.2.122
-       Power(Node=150W,Fan=6W,Chassis=9W)
+       Idle Power(Node=150W,Chassis=9W)
        Throughput(51539607552bps)
        EERC(ISO 14001:2015, Energy-efficient ethernet)
 
