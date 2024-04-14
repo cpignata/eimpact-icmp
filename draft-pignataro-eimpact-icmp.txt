@@ -5,11 +5,11 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                                 J. Parikh
 Intended status: Experimental                        NC State University
-Expires: 13 October 2024                                       R. Bonica
+Expires: 16 October 2024                                       R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                           11 April 2024
+                                                           14 April 2024
 
 
              ICMP Extensions for Environmental Information
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 October 2024.
+   This Internet-Draft will expire on 16 October 2024.
 
 
 
 
 
 
-Pignataro, et al.        Expires 13 October 2024                [Page 1]
+Pignataro, et al.        Expires 16 October 2024                [Page 1]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -85,7 +85,7 @@ Table of Contents
      5.2.  C-Type Definition . . . . . . . . . . . . . . . . . . . .   6
    6.  Sample Use Case . . . . . . . . . . . . . . . . . . . . . . .   9
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
    9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  13
    10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
      10.1.  Normative References . . . . . . . . . . . . . . . . . .  13
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 13 October 2024                [Page 2]
+Pignataro, et al.        Expires 16 October 2024                [Page 2]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 13 October 2024                [Page 3]
+Pignataro, et al.        Expires 16 October 2024                [Page 3]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 13 October 2024                [Page 4]
+Pignataro, et al.        Expires 16 October 2024                [Page 4]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 13 October 2024                [Page 5]
+Pignataro, et al.        Expires 16 October 2024                [Page 5]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -325,27 +325,32 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
                             1                   2                   3
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                Power (32-bit unsigned word)                   |
+       |            Present Power (32-bit unsigned word)               |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |             Idle Power (32-bit unsigned word)                 |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-                      Figure 3: Node Power Draw Sub-Object
 
 
 
-
-Pignataro, et al.        Expires 13 October 2024                [Page 6]
+Pignataro, et al.        Expires 16 October 2024                [Page 6]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
+
+                      Figure 3: Node Power Draw Sub-Object
 
        A Class-Num of TBA and a C-Type of 1 are specified.
 
        The Length is 8 if the object contains this payload.  A Length
        value of 4 indicates that it is unavailable.
 
-       The returned value is the node-level current power being drawn,
+       The Present Power is the node-level power being presently drawn,
        which is a magnitude that may be directly displayed, and is
-       expressed in Watts (W).
+       expressed in Watts (W).  A value of 0 indicates that the Present
+       Power is not available.  The Idle Power is the node-level power
+       when the node is idle.  A value of 0 indicates that the Idle
+       Power is not available.
 
    2.  Node Throughput Sub-Object
 
@@ -381,18 +386,16 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
        A Class-Num of TBA and a C-Type of 3 are specified.
 
-       The Length is 8 if the object contains this payload.  A Length
-       value of 4 indicates that it is unavailable.
 
 
 
-
-
-
-Pignataro, et al.        Expires 13 October 2024                [Page 7]
+Pignataro, et al.        Expires 16 October 2024                [Page 7]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
+
+       The Length is 8 if the object contains this payload.  A Length
+       value of 4 indicates that it is unavailable.
 
        The returned value references an Ecolabels and Environmentally
        Relevant Certification (EERC) number.  The following EERC numbers
@@ -420,7 +423,9 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
        |                      UUID 32-bit Word 4                       |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                Component Power (32-bit word)                  |
+       |       Present Component Power (32-bit unsigned word)          |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |        Idle Component Power (32-bit unsigned word)            |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
                   Figure 6: Component-level Power Draw Element
@@ -432,23 +437,25 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
        The returned value is one or more instances of component-level
        power drawn metrics.  Each instance is a set comprised by a UUID
-       [RFC4122] uniquely identifying the component, and the actual
-       power being drawn by said component expressed in Watts (W).
-
-   5.  Component-level Throughput Sub-Object
-
-
-
+       [RFC4122] uniquely identifying the component, and the Present
+       Component Power and Idle Component Power fields.  The Present
+       Component Power is the component-level power being presently
+       drawn, which is a magnitude that may be directly displayed, and
+       is expressed in Watts (W).  A value of 0 indicates that the
 
 
 
-
-
-
-Pignataro, et al.        Expires 13 October 2024                [Page 8]
+Pignataro, et al.        Expires 16 October 2024                [Page 8]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
+
+       Present Component Power is not available.  The Idle Component
+       Power is the component-level power when the component is idle.  A
+       value of 0 indicates that the Idle Component Power is not
+       available.
+
+   5.  Component-level Throughput Sub-Object
 
                             1                   2                   3
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -487,6 +494,18 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
    metrics could be displayed to a user.  Since both traceroute and ping
    utilities are based on ICMP, we will use traceroute as an example.
 
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 16 October 2024                [Page 9]
+
+Internet-Draft          ICMP E-Impact Extensions              April 2024
+
+
    The flavor of traceroute that has been shown here supports the ICMP
    extensions and is capable of conveying to the end user the
    sustainability metrics in the extensions, along with the nodes that
@@ -498,31 +517,24 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
    traceroute to 192.0.2.1 and the Figure 8 shows how the user can be
    presented with these metrics:
 
-
-
-
-Pignataro, et al.        Expires 13 October 2024                [Page 9]
-
-Internet-Draft          ICMP E-Impact Extensions              April 2024
-
-
    > traceroute 192.0.2.1
    Tracing route to 192.0.2.1 over a maximum of 30 hops
 
      1     3 ms     1 ms     2 ms  203.0.113.118
-          Power(Node=160W,Fan=7W,Chassis=10W)
+          Present Power(Node=160W,Fan=7W)
+          Idle Power(Node=152W,Fan=7W,Chassis=10W)
           Throughput(53687091200bps)
           EERC(ISO 14001:2015, Energy-efficient ethernet)
 
      2    12 ms     9 ms     9 ms  192.0.2.9
-          Power(Node=163W,Fan=8W,Chassis=11W)
+          Present Power(Node=163W,Fan=8W,Chassis=11W)
           Throughput(55834574848bps)
           EERC(ISO 14001:2015)
 
      3    12 ms     9 ms     9 ms  192.0.2.17
 
      4     7 ms     4 ms     7 ms  192.0.2.122
-          Power(Node=150W,Fan=6W,Chassis=9W)
+          Idle Power(Node=150W,Chassis=9W)
           Throughput(51539607552bps)
           EERC(ISO 14001:2015, Energy-efficient ethernet)
 
@@ -542,6 +554,14 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
    Care should be taken, as improperly specified length attributes and
    other syntax problems may result in buffer overruns.
 
+
+
+
+Pignataro, et al.        Expires 16 October 2024               [Page 10]
+
+Internet-Draft          ICMP E-Impact Extensions              April 2024
+
+
    This document does not define the conditions under which a router
    sends an ICMP message.  Therefore, it does not expose routers to any
    new denial-of-service attacks.  Routers may need to limit the rate at
@@ -551,16 +571,6 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
    environmental impact information to multi-part ICMP messages in a
    single administrative domain, and therefore can provide the user of
    the traceroute and ping applications with additional metrics.
-
-
-
-
-
-
-Pignataro, et al.        Expires 13 October 2024               [Page 10]
-
-Internet-Draft          ICMP E-Impact Extensions              April 2024
-
 
    The intended field of use for the extensions defined in this document
    is administrative debugging and troubleshooting and operational
@@ -597,6 +607,17 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
    extension that it defines.  Application developers should be aware of
    various ICMP attacks [RFC5927].
 
+
+
+
+
+
+
+Pignataro, et al.        Expires 16 October 2024               [Page 11]
+
+Internet-Draft          ICMP E-Impact Extensions              April 2024
+
+
 8.  IANA Considerations
 
    IANA is requested to assign the following object Class-num in the
@@ -610,13 +631,6 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
     +-------------+----------------------------------+---------------+
 
        Table 1: Class-num for Environmental Information Extensions
-
-
-
-Pignataro, et al.        Expires 13 October 2024               [Page 11]
-
-Internet-Draft          ICMP E-Impact Extensions              April 2024
-
 
    IANA is requested to establish a registry for the corresponding class
    sub-type (C-Type) space, as follows:
@@ -655,21 +669,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 13 October 2024               [Page 12]
+Pignataro, et al.        Expires 16 October 2024               [Page 12]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -725,7 +725,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 13 October 2024               [Page 13]
+Pignataro, et al.        Expires 16 October 2024               [Page 13]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -781,7 +781,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 13 October 2024               [Page 14]
+Pignataro, et al.        Expires 16 October 2024               [Page 14]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -837,4 +837,4 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 13 October 2024               [Page 15]
+Pignataro, et al.        Expires 16 October 2024               [Page 15]
