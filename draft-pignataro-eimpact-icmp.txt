@@ -13,7 +13,7 @@ Expires: 16 October 2024                                       R. Bonica
 
 
              ICMP Extensions for Environmental Information
-                    draft-pignataro-eimpact-icmp-02
+                    draft-pignataro-eimpact-icmp-03
 
 Abstract
 
