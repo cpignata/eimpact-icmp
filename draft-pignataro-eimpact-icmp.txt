@@ -5,11 +5,11 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                                 J. Parikh
 Intended status: Experimental                        NC State University
-Expires: 16 October 2024                                       R. Bonica
+Expires: 25 October 2024                                       R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                           14 April 2024
+                                                           23 April 2024
 
 
              ICMP Extensions for Environmental Information
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 October 2024.
+   This Internet-Draft will expire on 25 October 2024.
 
 
 
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 1]
+Pignataro, et al.        Expires 25 October 2024                [Page 1]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 2]
+Pignataro, et al.        Expires 25 October 2024                [Page 2]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 3]
+Pignataro, et al.        Expires 25 October 2024                [Page 3]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 4]
+Pignataro, et al.        Expires 25 October 2024                [Page 4]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 5]
+Pignataro, et al.        Expires 25 October 2024                [Page 5]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -333,7 +333,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 6]
+Pignataro, et al.        Expires 25 October 2024                [Page 6]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -389,7 +389,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 7]
+Pignataro, et al.        Expires 25 October 2024                [Page 7]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -445,7 +445,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 8]
+Pignataro, et al.        Expires 25 October 2024                [Page 8]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -501,7 +501,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024                [Page 9]
+Pignataro, et al.        Expires 25 October 2024                [Page 9]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -557,7 +557,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024               [Page 10]
+Pignataro, et al.        Expires 25 October 2024               [Page 10]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -613,7 +613,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024               [Page 11]
+Pignataro, et al.        Expires 25 October 2024               [Page 11]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -651,7 +651,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
      +--------------+-------------------------------+---------------+
      | 5            | Component-level Throughput    | This document |
      +--------------+-------------------------------+---------------+
-     | 2-246        | Unassigned                    |               |
+     | 6-246        | Unassigned                    |               |
      +--------------+-------------------------------+---------------+
      | 247-255      | Reserved for Experimentation  | This document |
      +--------------+-------------------------------+---------------+
@@ -669,7 +669,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024               [Page 12]
+Pignataro, et al.        Expires 25 October 2024               [Page 12]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -725,7 +725,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024               [Page 13]
+Pignataro, et al.        Expires 25 October 2024               [Page 13]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -781,7 +781,7 @@ Internet-Draft          ICMP E-Impact Extensions              April 2024
 
 
 
-Pignataro, et al.        Expires 16 October 2024               [Page 14]
+Pignataro, et al.        Expires 25 October 2024               [Page 14]
 
 Internet-Draft          ICMP E-Impact Extensions              April 2024
 
@@ -837,4 +837,4 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 16 October 2024               [Page 15]
+Pignataro, et al.        Expires 25 October 2024               [Page 15]
