@@ -122,10 +122,18 @@
         administrative domain:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
-          <t>Power metrics (e.g., time average, min/max)</t>
+          <t>Present and idle power (node level, component level)</t>
+          <t>Throughput (node level, component level): this allows to determine a relationship between power and traffic load</t>
+          <t>Ecolabels and Environmentally Relevant Certifications (EERCs)</t>
+        </list>
+        <?rfc subcompact="no" ?>
+      </t>
+      <t>
+        Future versions of this document may also specify:
+        <?rfc subcompact="yes" ?>
+        <list style="symbols">
           <t>Electrical Energy Provider or Zone</t>
           <t>Geolocation</t>
-          <t>Future sustainability metrics</t>
         </list>
         <?rfc subcompact="no" ?>
       </t>
@@ -163,7 +171,7 @@
       </section>
     </section>
 
-    <section title="Application" anchor="application">
+    <section title="Motivation" anchor="motivation">
         <t>
           The IAB held a workshop on "Environmental Impact of Internet 
           Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, 
