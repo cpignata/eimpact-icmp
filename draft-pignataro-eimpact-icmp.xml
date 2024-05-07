@@ -425,9 +425,9 @@
             The following EERC numbers are defined by the present 
             specification:
             <list style="numbers">
-              <t>ISO 14001:2015 <xref target="ISO14001:2015" /></t>
-              <t>TCO Certified <xref target="TCO" /></t>
-              <t>Energy-efficient ethernet <xref target="EEE" /></t>
+              <t>ISO 14001:2015 <xref target="EERC-ISO14001:2015" /></t>
+              <t>TCO Certified <xref target="EERC-TCO" /></t>
+              <t>Energy-efficient ethernet <xref target="EERC-EEE" /></t>
             </list>
             The "Year" field must contain the year in which the certificate 
             was issued, or 0 to indicate "unknown" or "not specified".
@@ -805,7 +805,7 @@ Trace complete.
         </front>
       </reference>
 
-      <reference anchor="ISO14001:2015" target="https://www.iso.org/standard/60857.html">
+      <reference anchor="EERC-ISO14001:2015" target="https://www.iso.org/standard/60857.html">
         <front>
           <title>ISO 14001:2015 Environmental management systems. Requirements with guidance for use</title>
           <author initials="" surname="" fullname="International Organisation for Standardisation"></author>
@@ -813,14 +813,14 @@ Trace complete.
         </front>
       </reference>
 
-      <reference anchor="TCO" target="https://tcocertified.com/">
+      <reference anchor="EERC-TCO" target="https://tcocertified.com/">
         <front>
           <title>TCO Certified</title>
           <author initials="" surname="" fullname="Swedish Confederation of Professional Employees (TCO)"></author>
         </front>
       </reference>
 
-      <reference anchor="EEE" target="https://standards.ieee.org/ieee/802.3az/4270/">
+      <reference anchor="EERC-EEE" target="https://standards.ieee.org/ieee/802.3az/4270/">
         <front>
           <title>IEEE Standard for Information technology-- Local and metropolitan area networks-- Specific requirements-- Part 3: CSMA/CD Access Method and Physical Layer Specifications Amendment 5: Media Access Control Parameters, Physical Layers, and Management Parameters for Energy-Efficient Ethernet</title>
           <author initials="" surname="" fullname="International Organisation for Standardisation"></author>
