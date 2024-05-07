@@ -118,14 +118,22 @@
       </t>
       <t>
         Using the extension defined herein, a device can explicitly append
-        these exemplary environmental impact metrics for transmission across an 
+        these environmental impact metrics for transmission across an 
         administrative domain:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
-          <t>Power metrics (e.g., time average, min/max)</t>
+          <t>Present and idle power (node level, component level)</t>
+          <t>Throughput (node level, component level)</t>
+          <t>Ecolabels and Environmentally Relevant Certifications (EERCs)</t>
+        </list>
+        <?rfc subcompact="no" ?>
+      </t>
+      <t>
+        Additional environmental impact metrics, such as the following, for example, may also be specified in the future:
+        <?rfc subcompact="yes" ?>
+        <list style="symbols">
           <t>Electrical Energy Provider or Zone</t>
           <t>Geolocation</t>
-          <t>Future sustainability metrics</t>
         </list>
         <?rfc subcompact="no" ?>
       </t>
@@ -163,7 +171,7 @@
       </section>
     </section>
 
-    <section title="Application" anchor="application">
+    <section title="Motivation" anchor="motivation">
         <t>
           The IAB held a workshop on "Environmental Impact of Internet 
           Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, 
@@ -550,7 +558,7 @@
       <t>
         The ICMP extension defined in this memo can be used to get sustainability 
         metrics, either via a "transactional" or a "scheduled automated" fashion, 
-        inside an administrative domain. Mentioned in this section is a sample 
+        inside an administrative domain. This section presents a sample 
         "transactional" use case of how these metrics could be displayed to a user. 
         Since both traceroute and ping utilities are based on ICMP, we will use 
         traceroute as an example.
@@ -595,6 +603,11 @@ Tracing route to 192.0.2.1 over a maximum of 30 hops
 Trace complete.
           </artwork>
         </figure>
+      </t>
+      <t>
+      Many use cases are possible on the basis of the ICMP extensions defined in this memo; it is up to
+      the user to decide how frequently queries are issued, when and how these metrics are reported,
+      or which policy will guide such decisions.
       </t>
     </section>
 
