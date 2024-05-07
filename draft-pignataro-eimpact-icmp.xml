@@ -123,7 +123,7 @@
         <?rfc subcompact="yes" ?>
         <list style="symbols">
           <t>Present and idle power (node level, component level)</t>
-          <t>Throughput (node level, component level): this allows to determine a relationship between power and traffic load</t>
+          <t>Throughput (node level, component level)</t>
           <t>Ecolabels and Environmentally Relevant Certifications (EERCs)</t>
         </list>
         <?rfc subcompact="no" ?>
