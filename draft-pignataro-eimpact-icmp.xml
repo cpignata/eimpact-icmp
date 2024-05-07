@@ -558,7 +558,7 @@
       <t>
         The ICMP extension defined in this memo can be used to get sustainability 
         metrics, either via a "transactional" or a "scheduled automated" fashion, 
-        inside an administrative domain. Mentioned in this section is a sample 
+        inside an administrative domain. This section presents a sample 
         "transactional" use case of how these metrics could be displayed to a user. 
         Since both traceroute and ping utilities are based on ICMP, we will use 
         traceroute as an example.
@@ -603,6 +603,11 @@ Tracing route to 192.0.2.1 over a maximum of 30 hops
 Trace complete.
           </artwork>
         </figure>
+      </t>
+      <t>
+      Many use cases are possible on the basis of the ICMP extensions defined in this memo; it is up to
+      the user to decide how frequently queries are issued, when and how these metrics are reported,
+      or which policy will guide such decisions.
       </t>
     </section>
 
