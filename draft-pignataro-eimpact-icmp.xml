@@ -129,7 +129,7 @@
         <?rfc subcompact="no" ?>
       </t>
       <t>
-        Future versions of this document may also specify:
+        Additional environmental impact metrics, such as the following, for example, may also be specified in the future:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
           <t>Electrical Energy Provider or Zone</t>
