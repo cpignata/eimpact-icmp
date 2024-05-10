@@ -78,7 +78,7 @@
       <t>
         This document defines a data structure that can be appended to selected
         ICMP messages. The ICMP extension defined herein can be used to
-        gain visibility on environmental impact information on the Internet by 
+        gain visibility on environmental sustainability information on the Internet by 
         providing per-hop (i.e., per topological network node) power metrics
         and other current or future sustainability metrics. This will contribute 
         to achieving an objective mentioned in the IAB E-Impact workshop.
@@ -87,7 +87,7 @@
         The techniques presented are useful not only in a transactional setting 
         (e.g., a user-issued traceroute or a ping request), but also in a scheduled 
         automated setting where they may be run periodically in a mesh across an 
-        administrative domain to map out environmental-impact metrics.
+        administrative domain to map out environmental sustainability metrics.
       </t>
     </abstract>
   </front>
@@ -105,20 +105,20 @@
       </t>
       <t>
         As the world transitions towards sustainability in technology, the focus 
-        is shifting not only on creating modern technologies infused with 
-        sustainability but also on bridging gaps in the tools that are already 
-        available, to enhance visibility, measurement, and quantification of 
-        their impact. Consequently, tools which have been foundational 
-        for control and management for decades now encounter new 
-        requirements including enhancing them to cater to a significantly 
+        is shifting not only on creating modern technologies infused with
+        environmental sustainability but also on bridging gaps in the tools 
+        that are already available, to enhance visibility, measurement, and 
+        quantification of their environmental impact. Consequently, tools which 
+        have been foundational for control and management for decades now encounter 
+        new requirements including enhancing them to cater to a significantly 
         increasing demand for monitoring the sustainability and environmental 
-        impact. This document serves that need by defining 
-        an ICMP extension object that appends environmental impact information to 
+        impact. This document serves that need by defining an ICMP extension 
+        object that appends environmental sustainability information to 
         ICMP messages.
       </t>
       <t>
         Using the extension defined herein, a device can explicitly append
-        these environmental impact metrics for transmission across an 
+        these environmental sustainability metrics for transmission across an 
         administrative domain:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
@@ -129,7 +129,8 @@
         <?rfc subcompact="no" ?>
       </t>
       <t>
-        Additional environmental impact metrics, such as the following, for example, may also be specified in the future:
+        Additional environmental sustainability metrics, such as the following, for 
+        example, may also be specified in the future:
         <?rfc subcompact="yes" ?>
         <list style="symbols">
           <t>Electrical Energy Provider or Zone</t>
@@ -175,9 +176,9 @@
         <t>
           The IAB held a workshop on "Environmental Impact of Internet 
           Applications and Systems (eimpactws)" <xref target="IAB-EIMPACTWS" />, 
-          in which the need for visibility into environmental impact metrics 
-          within traditional Internet tools such as traceroute was highlighted 
-          (see WebVTT cue identifiers 139 and 140 of 
+          in which the need for visibility into environmental sustainability 
+          metrics within traditional Internet tools such as traceroute was 
+          highlighted (see WebVTT cue identifiers 139 and 140 of 
           <xref target="IAB-EIMPACTWS-Minutes" />.)
         </t>
         <t>
@@ -334,11 +335,9 @@
       <section anchor="ctype" title="C-Type Definition">
         <t>
           The 8-bit C-Type defined in the Section 8 of <xref target="RFC4884" /> 
-          allows to carry different information elements within this Class-Num (TBA).
-
-          The techniques
-          herein defined can be used with any specific e-impact metric in use,
-          current or future.
+          allows to carry different information elements within this Class-Num 
+          (TBA). The techniques herein defined can be used with any specific 
+          environmental sustainability metric in use, current or future.
         </t>
 
         <figure anchor="ctype-fig" align="center"
@@ -630,7 +629,7 @@ Trace complete.
       </t>
       <t>
         This document defines an extension that allows a router to append 
-        environmental impact information to multi-part ICMP messages in a 
+        environmental sustainability information to multi-part ICMP messages in a 
         single administrative domain, and therefore can provide the user of the 
         traceroute and ping applications with additional metrics.  
       </t>
