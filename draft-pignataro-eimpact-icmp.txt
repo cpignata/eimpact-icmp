@@ -5,11 +5,11 @@
 Network Working Group                                       C. Pignataro
 Internet-Draft                                                 J. Parikh
 Intended status: Experimental                        NC State University
-Expires: 9 November 2024                                       R. Bonica
+Expires: 23 November 2024                                      R. Bonica
                                                                  Juniper
                                                                 M. Welzl
                                                       University of Oslo
-                                                              8 May 2024
+                                                             22 May 2024
 
 
              ICMP Extensions for Environmental Information
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 November 2024.
+   This Internet-Draft will expire on 23 November 2024.
 
 
 
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 1]
+Pignataro, et al.       Expires 23 November 2024                [Page 1]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 2]
+Pignataro, et al.       Expires 23 November 2024                [Page 2]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 3]
+Pignataro, et al.       Expires 23 November 2024                [Page 3]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 4]
+Pignataro, et al.       Expires 23 November 2024                [Page 4]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 5]
+Pignataro, et al.       Expires 23 November 2024                [Page 5]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -333,7 +333,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 6]
+Pignataro, et al.       Expires 23 November 2024                [Page 6]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -389,7 +389,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 7]
+Pignataro, et al.       Expires 23 November 2024                [Page 7]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -445,7 +445,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 8]
+Pignataro, et al.       Expires 23 November 2024                [Page 8]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -501,7 +501,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024                [Page 9]
+Pignataro, et al.       Expires 23 November 2024                [Page 9]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -557,7 +557,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024               [Page 10]
+Pignataro, et al.       Expires 23 November 2024               [Page 10]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -582,10 +582,10 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
    new denial-of-service attacks.  Routers may need to limit the rate at
    which ICMP messages are sent.
 
-   This document defines an extension that allows a router to append
-   environmental sustainability information to multi-part ICMP messages
-   in a single administrative domain, and therefore can provide the user
-   of the traceroute and ping applications with additional metrics.
+   The extensions defined in this document allows a router to append
+   environmental sustainability information to multi-part ICMP messages,
+   and therefore can provide the user of the traceroute and ping
+   applications with additional metrics.
 
    The intended field of use for the extensions defined in this document
    is administrative debugging and troubleshooting and operational
@@ -602,9 +602,9 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
    Keeping these considerations in mind, we limited the scope of the
    transportation of the sustainability metrics to a single
-   administrative domain.  But, based on [RFC8799], limiting a protocols
-   functionality doesn't mean that it will be secure.  So, this
-   particular document, which defines "a modified ICMP message with
+   administrative domain (AD).  But, based on [RFC8799], limiting a
+   protocols functionality doesn't mean that it will be secure.  So,
+   this particular document, which defines "a modified ICMP message with
    sustainability metrics", can be classified as a FAIL-OPEN protocol
    [I-D.wkumari-intarea-safe-limited-domains].  That is, the interfaces
    of administrative domain border nodes, facing towards the open
@@ -613,7 +613,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024               [Page 11]
+Pignataro, et al.       Expires 23 November 2024               [Page 11]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -626,9 +626,22 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
    When metrics are limited to the same AD, it can be considered that
    they can be generated from a valid source and will have integrity.
 
-   This document does not specify an authentication mechanism for the
-   extension that it defines.  Application developers should be aware of
-   various ICMP attacks [RFC5927].
+   High-fidelity reporting of power draw for the targeted node's memory,
+   cache, hardware security module, or other sensitive component could
+   allow an attacker to perform a remote side-channel attack (i.e.,
+   using differential power analysis) during cryptographic operations.
+   This attack would allow the adversary to extract the network node's
+   secret key(s) or other sensitive data.  There are a couple of ways of
+   mitigating this type of attack; exclude power metrics for components
+   that process sensitive data or provide countermeasures that introduce
+   noise in the reported power metrics (e.g., software that demarcates
+   sensitive data which signals the processing hardware to treat this
+   data with algorithmic noise).  The latter technique is an area of
+   ongoing research at the time of this writing.
+
+   Finally, this document does not specify an authentication mechanism
+   for the extension that it defines.  Application developers should be
+   aware of various ICMP attacks [RFC5927].
 
 8.  IANA Considerations
 
@@ -656,20 +669,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 9 November 2024               [Page 12]
+Pignataro, et al.       Expires 23 November 2024               [Page 12]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -725,7 +725,7 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
 
 
 
-Pignataro, et al.        Expires 9 November 2024               [Page 13]
+Pignataro, et al.       Expires 23 November 2024               [Page 13]
 
 Internet-Draft          ICMP E-Impact Extensions                May 2024
 
@@ -739,6 +739,8 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
    useful set of comments and suggestions.  We are also appreciative of
    the feedback, input, and interest from participants of the eimpact
    2024 Interim meeting.
+
+   Shawn Emery provided very useful feedback and suggestions.
 
 10.  References
 
@@ -774,17 +776,20 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
               802.3-2008), 27 October 2010,
               <https://standards.ieee.org/ieee/802.3az/4270/>.
 
+
+
+
+
+
+Pignataro, et al.       Expires 23 November 2024               [Page 14]
+
+Internet-Draft          ICMP E-Impact Extensions                May 2024
+
+
    [EERC-ISO14001_2015]
               "ISO 14001:2015 Environmental management systems.
               Requirements with guidance for use", September 2015,
               <https://www.iso.org/standard/60857.html>.
-
-
-
-Pignataro, et al.        Expires 9 November 2024               [Page 14]
-
-Internet-Draft          ICMP E-Impact Extensions                May 2024
-
 
    [EERC-TCO] "TCO Certified", <https://tcocertified.com/>.
 
@@ -827,6 +832,16 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
               RFC 4443, DOI 10.17487/RFC4443, March 2006,
               <https://www.rfc-editor.org/info/rfc4443>.
 
+
+
+
+
+
+Pignataro, et al.       Expires 23 November 2024               [Page 15]
+
+Internet-Draft          ICMP E-Impact Extensions                May 2024
+
+
    [RFC5927]  Gont, F., "ICMP Attacks against TCP", RFC 5927,
               DOI 10.17487/RFC5927, July 2010,
               <https://www.rfc-editor.org/info/rfc5927>.
@@ -834,13 +849,6 @@ Internet-Draft          ICMP E-Impact Extensions                May 2024
    [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
               Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
               <https://www.rfc-editor.org/info/rfc8799>.
-
-
-
-Pignataro, et al.        Expires 9 November 2024               [Page 15]
-
-Internet-Draft          ICMP E-Impact Extensions                May 2024
-
 
 Authors' Addresses
 
@@ -885,12 +893,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 9 November 2024               [Page 16]
+Pignataro, et al.       Expires 23 November 2024               [Page 16]

@@ -628,9 +628,8 @@ Trace complete.
         which ICMP messages are sent.
       </t>
       <t>
-        This document defines an extension that allows a router to append 
-        environmental sustainability information to multi-part ICMP messages in a 
-        single administrative domain, and therefore can provide the user of the 
+        The extensions defined in this document allows a router to append 
+        environmental sustainability information to multi-part ICMP messages, and therefore can provide the user of the 
         traceroute and ping applications with additional metrics.  
       </t>
       <t>
@@ -646,12 +645,12 @@ Trace complete.
         devices, or estimating other node and network attributes from the power or 
         energy data. Other things like identification of the node, deducing node 
         usage patterns are some more privacy concerns that can be related to the 
-        metrics. 
+        metrics.
       </t>
       <t>
         Keeping these considerations in mind, we limited the scope of the 
         transportation of the sustainability metrics to a single administrative 
-        domain. But, based on <xref target="RFC8799" />, limiting a protocols 
+        domain (AD). But, based on <xref target="RFC8799" />, limiting a protocols 
         functionality doesn't mean that it will be secure. So, this particular 
         document, which defines "a modified ICMP message with sustainability 
         metrics", can be classified as a FAIL-OPEN protocol 
@@ -669,7 +668,10 @@ Trace complete.
         can be generated from a valid source and will have integrity.
       </t>
       <t>
-        This document does not specify an authentication mechanism for the
+        High-fidelity reporting of power draw for the targeted node's memory, cache, hardware security module, or other sensitive component could allow an attacker to perform a remote side-channel attack (i.e., using differential power analysis) during cryptographic operations.  This attack would allow the adversary to extract the network node's secret key(s) or other sensitive data.  There are a couple of ways of mitigating this type of attack; exclude power metrics for components that process sensitive data or provide countermeasures that introduce noise in the reported power metrics (e.g., software that demarcates sensitive data which signals the processing hardware to treat this data with algorithmic noise).  The latter technique is an area of ongoing research at the time of this writing.
+      </t>
+      <t>
+        Finally, this document does not specify an authentication mechanism for the
         extension that it defines.  Application developers should be aware
         of various ICMP attacks <xref target="RFC5927" />.
       </t>
@@ -770,6 +772,9 @@ Trace complete.
         useful set of comments and suggestions. We are also appreciative of the 
         feedback, input, and interest from participants of the eimpact 2024 Interim 
         meeting.
+      </t>
+      <t>
+        Shawn Emery provided very useful feedback and suggestions.
       </t>
     </section>
   </middle>
