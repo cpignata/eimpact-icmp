@@ -114,7 +114,11 @@
         increasing demand for monitoring the sustainability and environmental 
         impact. This document serves that need by defining an ICMP extension 
         object that appends environmental sustainability information to 
-        ICMP messages.
+        ICMP messages. Using ICMP as a medium to deliver environmental 
+        sustainability information is very apt as ICMP is one of the most used
+        protocols for administration and troubleshooting and it works very nicely
+        in not only an automated setting, but also in an on-demand setting for 
+        different purposes and use cases.
       </t>
       <t>
         Using the extension defined herein, a device can explicitly append
