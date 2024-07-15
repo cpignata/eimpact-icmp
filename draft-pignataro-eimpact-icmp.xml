@@ -116,8 +116,8 @@
         object that appends environmental sustainability information to 
         ICMP messages. Using ICMP as a medium to deliver environmental 
         sustainability information is very apt as ICMP is one of the most used
-        protocols for administration and troubleshooting and it works very nicely
-        in not only an automated setting, but also in an on-demand setting for 
+        protocols for administration and troubleshooting and it works effectively
+        not only in an automated setting, but also in an on-demand setting for 
         different purposes and use cases.
       </t>
       <t>
