@@ -677,6 +677,19 @@ Trace complete.
       </t>
     </section>
 
+    <section title="Limitations">
+      <t>
+        Section 7 of <xref target="RFC4884" /> defines the ICMP Extension Structure. 
+        As per RFC 4884, the Extension Structure contains exactly one Extension
+        Header followed by one or more objects.  When applied to the ICMP Extended 
+        Echo Request message, the ICMP Extension Structure MUST contain exactly 
+        one instance of the Interface Identification Object (Section 2.1 of 
+        <xref target="RFC8335" />). So, due to the limitation of not being able to
+        append more than one extension obect to an Extended Echo, the extension 
+        objects defined herein cannot be appended to an Extended Echo Message.
+      </t>
+    </section>
+
     <section title="IANA Considerations">
       <t>
         IANA is requested to assign the following object Class-num in the ICMP 
@@ -786,7 +799,7 @@ Trace complete.
       &RFC.4884;
       &RFC.8174;
       &RFC.8335;
-            
+
     </references>
     
     <references title="Informative References">
