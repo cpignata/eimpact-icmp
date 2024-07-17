@@ -425,7 +425,7 @@
             </figure>
             A Class-Num of TBA and a C-Type of 3 are specified.  
             <vspace blankLines="1" />
-            The Length is 16 if the object contains this payload.
+            The Length is 12 if the object contains this payload.
             A Length value of 4 indicates that it is unavailable.
             <vspace blankLines="1" />
             The returned value is the node-level present throughput, 
