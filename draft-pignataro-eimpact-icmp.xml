@@ -384,10 +384,10 @@
           </t>
 
           <t>
-            Node Throughput Sub-Object
+            Node Throughput Short Sub-Object
             
             <figure anchor="ctype-2" 
-                    title="Node Throughput Sub-Object">
+                    title="Node Throughput Short Sub-Object">
               <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -435,7 +435,7 @@
             between power and traffic load.
             <vspace blankLines="1" />
             There's an in-depth discussion on why there are two formats,
-            a 32-bit regular and a 64-bit wide, and when will one be 
+            a 32-bit "short" and a 64-bit "wide", and when will one be 
             chosen over the other, in Section <xref target="subobject-formats" />.
           </t>
 
@@ -512,9 +512,9 @@
           </t>
 
           <t>
-            Component-level Throughput Sub-Object
+            Component-level Throughput Short Sub-Object
             <figure anchor="ctype-6" 
-                    title="Component-level Throughput Element">
+                    title="Component-level Throughput Short Element">
               <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -581,7 +581,7 @@
             and traffic load.
             <vspace blankLines="1" />
             There's an in-depth discussion on why there are two formats,
-            a 32-bit regular and a 64-bit wide, and when will one be 
+            a 32-bit "short" and a 64-bit "wide", and when will one be 
             chosen over the other, in <xref target="subobject-formats" />.
           </t>
         </list>
@@ -626,7 +626,7 @@
 
     <section anchor="subobject-formats" title="Sub-Object Formats">
       <t>
-        As discussed in <xref target="ctype" />, apart from the 32-bit "regular" 
+        As discussed in <xref target="ctype" />, apart from the 32-bit "short" 
         sub-object, we have also defined a 64-bit "wide" format for Node and 
         Component throughput Sub-Objects.
       </t>
@@ -647,7 +647,7 @@
         choose amongst the available format options. It is recommended that the device
         chooses a format based on the size of the value that it wants to append. For 
         example, If the component/node throughput is more less than 4Gbps, the device 
-        MUST append the regular 32-bit Sub-Object. And when the component/node throughput
+        MUST append the "short" 32-bit Sub-Object. And when the component/node throughput
         exceeds 4Gbps, the device MUST append the "wide" 64-bit Sub-Object. This will 
         ensure the optimal use of the formats and make the extension object space efficient.
       </t>
