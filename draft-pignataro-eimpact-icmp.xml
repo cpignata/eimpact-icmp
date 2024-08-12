@@ -650,7 +650,7 @@
         It is recommended that the device
         chooses a format based on the size of the value that it wants to append. For 
         example, If the component/node throughput is more less than 4Gbps, the device 
-        MUST append the "short" 32-bit Sub-Object. And when the component/node throughput
+        would append the "short" 32-bit Sub-Object. When the component/node throughput
         exceeds 4Gbps, the device would append the "wide" 64-bit Sub-Object. This will 
         ensure the optimal use of the formats and make the extension object space efficient.
       </t>
