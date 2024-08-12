@@ -647,7 +647,6 @@
       </t>
       
       <t>
-        Now that we have put forward these two format options, here's how a device MUST
         choose amongst the available format options. It is recommended that the device
         chooses a format based on the size of the value that it wants to append. For 
         example, If the component/node throughput is more less than 4Gbps, the device 
