@@ -586,7 +586,7 @@
             <vspace blankLines="1" />
             A discussion on why there are two formats,
             a 32-bit "short" and a 64-bit "wide", and when will one be 
-            chosen over the other, in <xref target="subobject-formats" />.
+            chosen over the other, can be found in <xref target="subobject-formats" />.
           </t>
         </list>
 
