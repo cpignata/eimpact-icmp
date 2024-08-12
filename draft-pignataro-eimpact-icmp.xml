@@ -647,7 +647,7 @@
       </t>
       
       <t>
-        choose amongst the available format options. It is recommended that the device
+        It is recommended that the device
         chooses a format based on the size of the value that it wants to append. For 
         example, If the component/node throughput is more less than 4Gbps, the device 
         MUST append the "short" 32-bit Sub-Object. And when the component/node throughput
