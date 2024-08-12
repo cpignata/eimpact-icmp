@@ -584,7 +584,7 @@
             of the ICMP message to determine a relationship between power 
             and traffic load.
             <vspace blankLines="1" />
-            There's an in-depth discussion on why there are two formats,
+            A discussion on why there are two formats,
             a 32-bit "short" and a 64-bit "wide", and when will one be 
             chosen over the other, in <xref target="subobject-formats" />.
           </t>
