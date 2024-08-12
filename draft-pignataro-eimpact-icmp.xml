@@ -661,7 +661,7 @@
         and another has a throughput of 10Gbps and if the device would like to append
         the throughput of both the components, as discussed above, the device will be
         able to choose a Sub-object with C-Type=6 for the line card with 2Gbps throughput 
-        and also will be able to choose a Sub-Object with C-Type=7 for the line card with 
+        and will also be able to choose a Sub-Object with C-Type=7 for the line card with 
         10Gbps throughput.
       </t>
     </section>
