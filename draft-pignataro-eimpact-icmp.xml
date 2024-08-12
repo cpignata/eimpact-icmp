@@ -388,10 +388,10 @@
           </t>
 
           <t>
-            Node Throughput Sub-Object
+            Node Throughput Short Sub-Object
             
             <figure anchor="ctype-2" 
-                    title="Node Throughput Sub-Object">
+                    title="Node Throughput Short Sub-Object">
               <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -413,8 +413,39 @@
           </t>
 
           <t>
+            Node Throughput Wide Sub-Object
+            
+            <figure anchor="ctype-3" 
+                    title="Node Throughput Wide Sub-Object">
+              <artwork xml:space="preserve" >
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Throughput (32-bit unsigned word 1)               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Throughput (32-bit unsigned word 2)               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+              </artwork>
+            </figure>
+            A Class-Num of TBA and a C-Type of 3 are specified.  
+            <vspace blankLines="1" />
+            The Length is 12 if the object contains this payload.
+            A Length value of 4 indicates that it is unavailable.
+            <vspace blankLines="1" />
+            The returned value is the node-level present throughput, 
+            which is a magnitude that may be directly displayed, and 
+            is expressed in bits-per-second (BPS). This allows the 
+            recipient of the ICMP message to determine a relationship 
+            between power and traffic load.
+            <vspace blankLines="1" />
+            There's an in-depth discussion on why there are two formats,
+            a 32-bit "short" and a 64-bit "wide", and when will one be 
+            chosen over the other, in Section <xref target="subobject-formats" />.
+          </t>
+
+          <t>
             Ecolabels and Environmentally Relevant Certification (EERC) Sub-Object
-              <figure anchor="ctype-3" 
+              <figure anchor="ctype-4" 
                       title="EERC Sub-Object">
                 <artwork xml:space="preserve" >
                      1                   2                   3
@@ -425,7 +456,7 @@
                 </artwork>
               </figure>
 
-            A Class-Num of TBA and a C-Type of 3 are specified.  
+            A Class-Num of TBA and a C-Type of 4 are specified.  
             <vspace blankLines="1" />
             The Length is 8 if the object contains this payload.
             A Length value of 4 indicates that it is unavailable.
@@ -446,7 +477,7 @@
 
           <t>
             Component-level Power Draw Sub-Object
-            <figure anchor="ctype-4" 
+            <figure anchor="ctype-5" 
                     title="Component-level Power Draw Element">
               <artwork xml:space="preserve" >
                      1                   2                   3
@@ -466,7 +497,7 @@
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
               </artwork>
             </figure>
-            A Class-Num of TBA and a C-Type of 4 are specified.  
+            A Class-Num of TBA and a C-Type of 5 are specified.  
             <vspace blankLines="1" />
             The Length is 4 plus 20 times the number of 
             elements included. A Length value of 4 indicates that
@@ -485,9 +516,9 @@
           </t>
 
           <t>
-            Component-level Throughput Sub-Object
-            <figure anchor="ctype-5" 
-                    title="Component-level Throughput Element">
+            Component-level Throughput Short Sub-Object
+            <figure anchor="ctype-6" 
+                    title="Component-level Throughput Short Element">
               <artwork xml:space="preserve" >
                      1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -504,7 +535,7 @@
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
               </artwork>
             </figure>
-            A Class-Num of TBA and a C-Type of 5 are specified.  
+            A Class-Num of TBA and a C-Type of 6 are specified.  
             <vspace blankLines="1" />
             The Length is 4 plus 20 times the number of 
             elements included. A Length value of 4 indicates that
@@ -516,7 +547,47 @@
             throughput of said component in bits-per-second (BPS).
             This allows the recipient of the ICMP message to determine a
             relationship between power and traffic load.
-          </t>          
+          </t>
+
+          <t>
+            Component-level Throughput Wide Sub-Object
+            <figure anchor="ctype-7" 
+                    title="Component-level Throughput Wide Sub-Object">
+              <artwork xml:space="preserve" >
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 1                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 2                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 3                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      UUID 32-bit Word 4                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Component Throughput (32-bit word 1)              |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Component Throughput (32-bit word 2)              |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+              </artwork>
+            </figure>
+            A Class-Num of TBA and a C-Type of 7 are specified.  
+            <vspace blankLines="1" />
+            The Length is 4 plus 24 times the number of 
+            elements included. A Length value of 4 indicates that
+            this object is unavailable.
+            <vspace blankLines="1" />
+            The returned value is one or more instances of component-level 
+            throughput. Each instance is a set comprised by a UUID uniquely 
+            identifying the component, and the actual throughput of said 
+            component in bits-per-second (BPS). This allows the recipient 
+            of the ICMP message to determine a relationship between power 
+            and traffic load.
+            <vspace blankLines="1" />
+            A discussion on why there are two formats,
+            a 32-bit "short" and a 64-bit "wide", and when will one be 
+            chosen over the other, can be found in <xref target="subobject-formats" />.
+          </t>
         </list>
 
 <!--
@@ -555,6 +626,44 @@
 -->
 
       </section>
+    </section>
+
+    <section anchor="subobject-formats" title="Sub-Object Formats">
+      <t>
+        As discussed in <xref target="ctype" />, apart from the 32-bit "short" 
+        sub-object, we have also defined a 64-bit "wide" format for Node and 
+        Component throughput Sub-Objects.
+      </t>
+      
+      <t>
+        The 64-bit format was defined keeping the present trends of the industry in
+        mind. With the industry shifting towards high density ports/components and 
+        nodes, organizations now have components/interfaces/line cards with 10/40/100Gbps 
+        or even 400Gbps throughput and nodes with a combined throughput of greater than
+        10Tbps. This cannot be represented in a field which is only 32-bit long. 
+        A 32-bit field can only represent a max throughput of 4Gbps (2 ^ 32 BPS).
+        To address this, we define another format, a wider, 64-bit Sub-Object
+        format.
+      </t>
+      
+      <t>
+        It is recommended that the device
+        chooses a format based on the size of the value that it wants to append. For 
+        example, If the component/node throughput is more less than 4Gbps, the device 
+        would append the "short" 32-bit Sub-Object. When the component/node throughput
+        exceeds 4Gbps, the device would append the "wide" 64-bit Sub-Object. This will 
+        ensure the optimal use of the formats and make the extension object space efficient.
+      </t>
+
+      <t>
+        Both of these formats are interoperable and can co-exist in the same Extension 
+        Object. i.e. For example, if a device has two line cards, one with a throughput of 2Gbps 
+        and another which has a throughput of 10Gbps, and if the device would like to append
+        the throughput of both the components, as discussed above, the device will be
+        able to choose a Sub-object with C-Type=6 for the line card with 2Gbps throughput 
+        and will also be able to choose a Sub-Object with C-Type=7 for the line card with 
+        10Gbps throughput.
+      </t>
     </section>
 
     <section title="Sample Use Case">
@@ -713,18 +822,24 @@ Trace complete.
           <c>Node Power Draw</c>
           <c>This document</c>
           <c>2</c>
-          <c>Node Throughput</c>
+          <c>Node Throughput Short</c>
           <c>This document</c>
           <c>3</c>
-          <c>Ecolabels and Environmentally Relevant Certification (EERC)</c>
+          <c>Node Throughput Wide</c>
           <c>This document</c>
           <c>4</c>
-          <c>Component-level Power Draw</c>
+          <c>Ecolabels and Environmentally Relevant Certification (EERC)</c>
           <c>This document</c>
           <c>5</c>
-          <c>Component-level Throughput</c>
+          <c>Component-level Power Draw</c>
           <c>This document</c>
-          <c>6-246</c>
+          <c>6</c>
+          <c>Component-level Throughput Short</c>
+          <c>This document</c>
+          <c>7</c>
+          <c>Component-level Throughput Wide</c>
+          <c>This document</c>
+          <c>8-246</c>
           <c>Unassigned</c>
           <c>&nbsp;</c>
           <c>247-255</c>
