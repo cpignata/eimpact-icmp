@@ -636,7 +636,7 @@
         mind. With the industry shifting towards high density ports/components and 
         nodes, organizations now have components/interfaces/line cards with 10/40/100Gbps 
         or even 400Gbps throughput and nodes with a combined throughput of greater than
-        10Tbps. Now this cannot be represented in a field wihich is only 32-bit long. 
+        10Tbps. This cannot be represented in a field which is only 32-bit long. 
         Because a 32-bit field can only represent a max throughput of 4Gbps (2 ^ 32 BPS).
         So, to address this, we chose to define another format, a wider, 64-bit Sub-Object
         format.
